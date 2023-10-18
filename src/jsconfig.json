@@ -1,0 +1,18 @@
+{
+   "compilerOptions": {
+      "baseUrl": ".",
+      "paths":{
+         "@/*": ["*"],
+         "@Assets/*": ["Assets/*"],
+         "@Components/*": ["Components/*"],
+         "@Layouts/*": ["Layouts/*"],
+         "@Utils/*": ["Utils/*"],
+         "@Views/*":["Views/*"],
+      },
+   },
+//    "include": ["src"],
+//    "exclude": [
+//     "node_modules",
+//     "public"
+//   ],
+}

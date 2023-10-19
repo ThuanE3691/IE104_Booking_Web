@@ -3,9 +3,12 @@ module.exports = {
 	content: ["./src/**/*.{js,jsx,ts,tsx}"],
 	theme: {
 		extend: {
-			// color: {
-			// 	"main-bg": "#fcfcfd",
-			// }
+			colors: {
+				"main-bg": "#fcfcfd",
+			},
+			fontFamily: {
+				"inter": "Inter, sans-serif",
+			}
 		},
 	},
 	plugins: [],

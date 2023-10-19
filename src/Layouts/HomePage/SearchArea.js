@@ -9,7 +9,7 @@ const SearchArea = () => {
 				className="absolute inset-0 z-0 bg-center bg-no-repeat bg-cover rounded-2xl"
 				style={{ backgroundImage: `url(${homepage_bg2})` }}
 			></div>
-			<div className="absolute z-10 flex flex-col font-medium text-white font-vietnam-pro inset-y-20 inset-x-16">
+			<div className="absolute z-10 flex flex-col font-medium text-white select-none font-vietnam-pro inset-y-20 inset-x-16">
 				<p className="text-[64px] ">
 					Khám phá, <br /> Trải nghiệm
 				</p>

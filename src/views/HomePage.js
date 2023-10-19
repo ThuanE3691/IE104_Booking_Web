@@ -1,13 +1,13 @@
-import Navbar from "@/Layouts/HomePage/Navbar"
-import SearchBar from "@/Layouts/HomePage/SearchBar"
+import Navbar from "@/Layouts/HomePage/Navbar";
+import SearchArea from "@/Layouts/HomePage/SearchArea";
 
 const HomePage = () => {
-  return (
-    <div className="w-full min-h-full px-20 py-8 bg-main-bg">
-      <Navbar></Navbar>
-      <SearchBar></SearchBar>
-    </div>
-  )
-}
+	return (
+		<div className="w-full min-h-full px-32 py-8 bg-main-bg">
+			<Navbar></Navbar>
+			<SearchArea></SearchArea>
+		</div>
+	);
+};
 
-export default HomePage
+export default HomePage;

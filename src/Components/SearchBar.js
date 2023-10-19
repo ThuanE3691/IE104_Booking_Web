@@ -5,7 +5,7 @@ import SearchIconSVG from "@/Assets/Icons/SVG/SearchIconSVG";
 
 const SearchBar = () => {
 	return (
-		<div className="absolute flex items-center justify-between gap-8 px-16 py-12 shadow-2xl bg-main-bg -bottom-16 inset-x-16 font-vietnam-pro rounded-2xl">
+		<div className="absolute flex items-center justify-between gap-8 px-16 py-12 shadow-2xl bg-main-bg -bottom-16 inset-x-16 font-vietnam-pro rounded-2xl flex-nowrap">
 			<div className="flex items-start gap-3">
 				<NavigationSVG className="w-5 h-5 mt-1 -rotate-90 cursor-pointer fill-current text-sub-text"></NavigationSVG>
 				<div className="cursor-pointer">
@@ -16,15 +16,15 @@ const SearchBar = () => {
 			<div className="flex items-start gap-3">
 				<CalendarSVG className="w-5 h-5 mt-1 cursor-pointer fill-current text-sub-text"></CalendarSVG>
 				<div className="cursor-pointer">
-					<p className="text-2xl font-semibold">Check in</p>
-					<p className="text-sm text-sub-text">Thời gian check in</p>
+					<p className="text-2xl font-semibold">Nhận phòng</p>
+					<p className="text-sm text-sub-text">Thời gian nhận phòng</p>
 				</div>
 			</div>
 			<div className="flex items-start gap-3">
 				<CalendarSVG className="w-5 h-5 mt-1 cursor-pointer fill-current text-sub-text"></CalendarSVG>
 				<div className="cursor-pointer">
-					<p className="text-2xl font-semibold">Check out</p>
-					<p className="text-sm text-sub-text">Thời gian check out</p>
+					<p className="text-2xl font-semibold">Trả phòng</p>
+					<p className="text-sm text-sub-text">Thời gian trả phòng</p>
 				</div>
 			</div>
 			<div className="flex items-start gap-3">

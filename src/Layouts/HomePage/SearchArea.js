@@ -13,7 +13,9 @@ const SearchArea = () => {
 				<p className="text-[64px] ">
 					Khám phá, <br /> Trải nghiệm
 				</p>
-				<p className="text-[20px]">Chọn đúng nơi, trải nghiệm tốt</p>
+				<p className="text-[20px] font-medium">
+					Chọn đúng nơi, trải nghiệm tốt
+				</p>
 			</div>
 			<SearchBar></SearchBar>
 		</div>

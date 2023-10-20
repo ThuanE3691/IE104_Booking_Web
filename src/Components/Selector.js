@@ -11,7 +11,7 @@ const Selector = ({ handleSelectLocation }) => {
 	];
 	return (
 		<motion.ul
-			className="absolute left-0 z-10 grid w-[200%] grid-rows-5 px-2 py-2 shadow-2xl -top-[320px] bg-main-bg rounded-2xl text-sub-text font-vietnam-pro"
+			className="absolute left-0 z-10 grid w-[200%] grid-rows-5 px-2 py-2 shadow-2xl -top-[320px] bg-main-bg rounded-2xl text-sub-text font-nunito font-semibold"
 			initial={{ scale: 0, opacity: 0 }}
 			animate={{ scale: 1, opacity: 1 }}
 			exit={{ scale: 0, opacity: 0 }}

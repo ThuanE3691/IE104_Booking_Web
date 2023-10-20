@@ -1,6 +1,6 @@
 import homepage_bg from "@/Assets/Images/homepage_bg2.jpg";
 import homepage_bg2 from "@/Assets/Images/vietnam_crops_fields.jpg";
-import SearchBar from "@/Components/SearchBar";
+import SearchBar from "@/Layouts/HomePage/SearchBar";
 
 const SearchArea = () => {
 	return (

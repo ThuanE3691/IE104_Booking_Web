@@ -6,6 +6,7 @@ module.exports = {
 			colors: {
 				"main-bg": "#fcfcfd",
 				"sub-text": "#b7bac7",
+				"selection-active": "#f4f5f6",
 			},
 			fontFamily: {
 				inter: "Inter, sans-serif",

@@ -4,20 +4,28 @@ import TravelerSVG from "@/Assets/Icons/SVG/TravelerSVG";
 import SearchIconSVG from "@/Assets/Icons/SVG/SearchIconSVG";
 import Selector from "../../Components/Selector";
 import { useState, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 
 const SearchBar = () => {
 	const ref = useRef(null);
 
 	const [location, setLocation] = useState({
 		active: false,
-		content: null,
+		content: "",
 	});
 
-	const handleClickLocation = () => {
-		ref.current.focus();
+	const handleSelectLocation = (locationSelected) => {
 		setLocation({
 			...location,
+			active: false,
+			content: locationSelected,
+		});
+	};
+
+	const onChangeLocation = (event) => {
+		setLocation({
+			...location,
+			content: event.target.value,
 			active: true,
 		});
 	};
@@ -25,41 +33,47 @@ const SearchBar = () => {
 	return (
 		<div className="absolute flex items-center justify-between p-8 shadow-2xl bg-gradient-to-tr from-main-bg from-70% -bottom-16 inset-x-16 font-vietnam-pro rounded-2xl flex-nowrap">
 			<div
-				className={`relative flex items-start gap-3 px-8 py-8 transition-all duration-300 cursor-pointer hover:shadow-2xl rounded-2xl ${
+				className={`relative flex items-start gap-3 px-2 py-8 transition-all duration-300 cursor-pointer hover:shadow-2xl rounded-2xl ${
 					location.active && "shadow-2xl"
 				}`}
-				onClick={handleClickLocation}
 			>
-				<NavigationSVG className="w-5 h-5 mt-1 -rotate-90 cursor-pointer fill-current text-sub-text"></NavigationSVG>
+				<NavigationSVG className="w-6 h-6 mt-1 -rotate-90 cursor-pointer fill-current text-sub-text"></NavigationSVG>
 				<AnimatePresence>
-					{location.active && <Selector></Selector>}
+					{location.active && (
+						<Selector handleSelectLocation={handleSelectLocation}></Selector>
+					)}
 				</AnimatePresence>
 				<div className="cursor-pointer">
 					<input
-						className={`text-2xl w-40 font-semibold outline-none placeholder-inherit min-w-full`}
+						className={`text-2xl w-56 font-semibold outline-none placeholder-inherit min-w-full`}
 						placeholder="Địa điểm"
 						ref={ref}
+						onChange={onChangeLocation}
+						value={location.content}
+						onClick={() => setLocation({ ...location, active: true })}
 					></input>
 					<p className="text-sm text-sub-text">Nơi bạn muốn đến </p>
 				</div>
 			</div>
 
-			<div className="flex items-start gap-3 p-8 transition-all duration-300 cursor-pointer hover:shadow-2xl rounded-2xl">
-				<CalendarSVG className="w-5 h-5 mt-1 cursor-pointer fill-current text-sub-text"></CalendarSVG>
+			<div className=" w-[1.5px] h-24 bg-sub-text"></div>
+
+			<div className="flex items-start gap-3 px-3 py-8 transition-all duration-300 cursor-pointer hover:shadow-2xl rounded-2xl">
+				<CalendarSVG className="w-6 h-6 mt-1 cursor-pointer fill-current text-sub-text"></CalendarSVG>
 				<div className="cursor-pointer">
 					<p className="text-2xl font-semibold">Nhận phòng</p>
 					<p className="text-sm text-sub-text">Thời gian nhận phòng</p>
 				</div>
 			</div>
-			<div className="flex items-start gap-3 p-8 transition-all duration-300 cursor-pointer hover:shadow-2xl rounded-2xl">
-				<CalendarSVG className="w-5 h-5 mt-1 cursor-pointer fill-current text-sub-text"></CalendarSVG>
+			<div className="flex items-start gap-3 px-3 py-8 transition-all duration-300 cursor-pointer hover:shadow-2xl rounded-2xl">
+				<CalendarSVG className="w-6 h-6 mt-1 cursor-pointer fill-current text-sub-text"></CalendarSVG>
 				<div className="cursor-pointer">
 					<p className="text-2xl font-semibold">Trả phòng</p>
 					<p className="text-sm text-sub-text">Thời gian trả phòng</p>
 				</div>
 			</div>
-			<div className="flex items-start gap-3 px-8 py-8 transition-all duration-300 cursor-pointer hover:shadow-2xl rounded-2xl">
-				<TravelerSVG className="w-6 h-6 cursor-pointer fill-current text-sub-text"></TravelerSVG>
+			<div className="flex items-start gap-3 px-3 py-8 transition-all duration-300 cursor-pointer hover:shadow-2xl rounded-2xl">
+				<TravelerSVG className="cursor-pointer fill-current w-7 h-7 text-sub-text"></TravelerSVG>
 				<div className="cursor-pointer">
 					<p className="text-2xl font-semibold">Hành khách</p>
 					<p className="text-sm text-sub-text">Thêm số lượng hành khách</p>

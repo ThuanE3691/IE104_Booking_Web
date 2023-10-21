@@ -1,15 +1,20 @@
-import { useState, useRef } from "react";
-import { AnimatePresence } from "framer-motion";
+import { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import NavigationSVG from "@/Assets/Icons/SVG/NavigationSVG";
 import Selector from "@/Components/Selector";
+import getVietNamProvinces from "@/Utils/getVietNamProvinces";
+import changeLocationName from "@/Utils/changeLocationName";
 
 const LocationTab = () => {
 	const ref = useRef(null);
-
+	const [indexSelection, SetIndexSelection] = useState(0);
 	const [location, setLocation] = useState({
 		active: false,
 		content: "",
 	});
+	const [locationOptions, setLocationOptions] = useState(
+		getVietNamProvinces(location.content)
+	);
 
 	const handleSelectLocation = (locationSelected) => {
 		setLocation({
@@ -17,6 +22,7 @@ const LocationTab = () => {
 			active: false,
 			content: locationSelected,
 		});
+		ref.current.blur();
 	};
 
 	const handleOnBlur = (event) => {
@@ -43,6 +49,35 @@ const LocationTab = () => {
 		});
 	};
 
+	const handleKeyEvents = (event) => {
+		switch (event.code) {
+			case "ArrowDown":
+				event.preventDefault();
+				if (indexSelection < 4) SetIndexSelection((prev) => prev + 1);
+				break;
+			case "ArrowUp":
+				event.preventDefault();
+				if (indexSelection > 0) SetIndexSelection((prev) => prev - 1);
+				break;
+			case "Enter":
+				if (location.active && locationOptions.length > 0) {
+					const location_name = changeLocationName(
+						locationOptions[indexSelection]
+					);
+					handleSelectLocation(location_name);
+				}
+				break;
+			default:
+				break;
+		}
+	};
+
+	useEffect(() => {
+		if (location.active) {
+			setLocationOptions(getVietNamProvinces(location.content));
+		}
+	}, [location.content]);
+
 	return (
 		<div
 			className={`relative flex items-start gap-3 px-2 py-8 transition-all duration-300 cursor-pointer hover:shadow-2xl rounded-2xl ${
@@ -50,18 +85,20 @@ const LocationTab = () => {
 			}`}
 			onBlur={(event) => handleOnBlur(event)}
 			tabIndex="1"
+			layout
 		>
 			<NavigationSVG className="w-6 h-6 mt-1 -rotate-90 cursor-pointer fill-current text-sub-text"></NavigationSVG>
 			<AnimatePresence>
-				{location.active && (
+				{location.active && locationOptions.length > 0 && (
 					<Selector
 						handleSelectLocation={handleSelectLocation}
-						locationQuery={location.content}
+						locationOptions={locationOptions}
 						closeSelector={closeSelector}
+						indexSelection={indexSelection}
 					></Selector>
 				)}
 			</AnimatePresence>
-			<div className="cursor-pointer">
+			<motion.div className="cursor-pointer" layout>
 				<input
 					className={`text-2xl w-56 font-bold outline-none placeholder-inherit min-w-full`}
 					placeholder="Địa điểm"
@@ -69,9 +106,10 @@ const LocationTab = () => {
 					onChange={onChangeInputLocation}
 					value={location.content}
 					onClick={() => setLocation({ ...location, active: true })}
+					onKeyDown={(event) => handleKeyEvents(event)}
 				></input>
 				<p className="text-sm text-sub-text">Nơi bạn muốn đến </p>
-			</div>
+			</motion.div>
 		</div>
 	);
 };

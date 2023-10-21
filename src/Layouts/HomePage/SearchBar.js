@@ -5,9 +5,12 @@ import SearchIconSVG from "@/Assets/Icons/SVG/SearchIconSVG";
 import Selector from "../../Components/Selector";
 import { useState, useRef } from "react";
 import { AnimatePresence } from "framer-motion";
+import getVietNamProvinces from "@/Utils/getVietNamProvinces";
 
 const SearchBar = () => {
 	const ref = useRef(null);
+
+	getVietNamProvinces();
 
 	const [location, setLocation] = useState({
 		active: false,
@@ -58,7 +61,7 @@ const SearchBar = () => {
 
 			<div className=" w-[1.5px] h-24 bg-sub-text"></div>
 
-			<div className="flex items-start gap-3 px-3 py-8 transition-all duration-300 cursor-pointer hover:shadow-2xl rounded-2xl">
+			<div className="flex items-start gap-3 px-4 py-8 transition-all duration-300 cursor-pointer hover:shadow-2xl rounded-2xl">
 				<CalendarSVG className="w-6 h-6 mt-1 cursor-pointer fill-current text-sub-text"></CalendarSVG>
 				<div className="cursor-pointer">
 					<p className="text-2xl font-bold">Nhận phòng</p>

@@ -35,13 +35,14 @@ const LocationTab = () => {
 		});
 	};
 
-	const onChangeLocation = (event) => {
+	const onChangeInputLocation = (event) => {
 		setLocation({
 			...location,
 			content: event.target.value,
 			active: true,
 		});
 	};
+
 	return (
 		<div
 			className={`relative flex items-start gap-3 px-2 py-8 transition-all duration-300 cursor-pointer hover:shadow-2xl rounded-2xl ${
@@ -65,7 +66,7 @@ const LocationTab = () => {
 					className={`text-2xl w-56 font-bold outline-none placeholder-inherit min-w-full`}
 					placeholder="Địa điểm"
 					ref={ref}
-					onChange={onChangeLocation}
+					onChange={onChangeInputLocation}
 					value={location.content}
 					onClick={() => setLocation({ ...location, active: true })}
 				></input>

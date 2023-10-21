@@ -1,4 +1,4 @@
-import vietnam_provinces from "@/Data/vietnam_provinces.json";
+import vietnam_provinces from "@/Data/vietnam_provinces_processed.json";
 
 const toLowerCaseNonAccentVietnamese = (str) => {
 	str = str.toLowerCase();

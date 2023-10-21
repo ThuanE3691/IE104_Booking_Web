@@ -15,14 +15,14 @@ const toLowerCaseNonAccentVietnamese = (str) => {
 	return str;
 };
 
-const getVietNamProvinces = (query) => {
+const getVietNamProvinces = (query, NUM_LOCATION_DISPLAY) => {
 	if (query.length === 0) return [];
 	const location_filter = vietnam_provinces.filter((provinces) => {
 		return toLowerCaseNonAccentVietnamese(provinces.name).includes(
 			toLowerCaseNonAccentVietnamese(query)
 		);
 	});
-	return location_filter.slice(0, 5);
+	return location_filter.slice(0, NUM_LOCATION_DISPLAY);
 };
 
 export default getVietNamProvinces;

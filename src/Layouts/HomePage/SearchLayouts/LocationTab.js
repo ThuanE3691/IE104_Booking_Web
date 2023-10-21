@@ -6,6 +6,7 @@ import getVietNamProvinces from "@/Utils/getVietNamProvinces";
 import changeLocationName from "@/Utils/changeLocationName";
 
 const LocationTab = () => {
+	const NUM_LOCATION_DISPLAY = 4;
 	const ref = useRef(null);
 	const [indexSelection, SetIndexSelection] = useState(null);
 	const [location, setLocation] = useState({
@@ -13,7 +14,7 @@ const LocationTab = () => {
 		content: "",
 	});
 	const [locationOptions, setLocationOptions] = useState(
-		getVietNamProvinces(location.content)
+		getVietNamProvinces(location.content, NUM_LOCATION_DISPLAY)
 	);
 
 	const handleSelectLocation = (locationSelected) => {
@@ -61,7 +62,8 @@ const LocationTab = () => {
 		switch (event.code) {
 			case "ArrowDown":
 				event.preventDefault();
-				if (indexSelection < 4) SetIndexSelection((prev) => prev + 1);
+				if (indexSelection < NUM_LOCATION_DISPLAY)
+					SetIndexSelection((prev) => prev + 1);
 				break;
 			case "ArrowUp":
 				event.preventDefault();
@@ -83,16 +85,16 @@ const LocationTab = () => {
 
 	useEffect(() => {
 		if (location.active) {
-			setLocationOptions(getVietNamProvinces(location.content));
+			setLocationOptions(
+				getVietNamProvinces(location.content, NUM_LOCATION_DISPLAY)
+			);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [location.content]);
 
 	return (
 		<div
-			className={`relative flex items-start gap-3 px-2 py-4 transition-all duration-300 cursor-pointer hover:shadow-2xl rounded-2xl ${
-				location.active && "shadow-2xl"
-			}`}
+			className={`relative flex items-start gap-3 px-2 py-4 transition-all duration-300 cursor-pointer rounded-2xl`}
 			onBlur={(event) => handleOnBlur(event)}
 			tabIndex="-1"
 		>
@@ -104,6 +106,7 @@ const LocationTab = () => {
 						locationOptions={locationOptions}
 						closeSelector={closeSelector}
 						indexSelection={indexSelection}
+						NUM_LOCATION_DISPLAY={NUM_LOCATION_DISPLAY}
 					></Selector>
 				)}
 			</AnimatePresence>

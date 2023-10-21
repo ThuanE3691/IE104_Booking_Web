@@ -10,7 +10,7 @@ const SearchArea = () => {
 					backgroundImage: `url(${homepage_bg})`,
 				}}
 			></div>
-			<div className="absolute z-10 font-semibold text-white select-none font-vietnam-pro inset-y-32 inset-x-16">
+			<div className="absolute z-10 font-semibold text-white select-none font-vietnam-pro inset-y-36 inset-x-16">
 				<p className="text-[56px] ">
 					Khám phá, <br /> Trải nghiệm
 				</p>

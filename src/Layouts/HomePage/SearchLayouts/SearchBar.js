@@ -8,7 +8,7 @@ const SearchBar = () => {
 		<div className="absolute flex items-center justify-between px-8 py-6 shadow-2xl bg-gradient-to-tr from-main-bg from-70% -bottom-16 inset-x-16 font-nunito rounded-2xl flex-nowrap">
 			<LocationTab></LocationTab>
 
-			<div className=" w-[1.5px] h-24 bg-sub-text"></div>
+			<div className=" w-[1.5px] h-16 bg-sub-text"></div>
 
 			<div className="flex items-start gap-3 px-4 py-4 transition-all duration-300 cursor-pointer hover:shadow-2xl rounded-2xl">
 				<CalendarSVG className="w-6 h-6 mt-1 cursor-pointer fill-current text-sub-text"></CalendarSVG>

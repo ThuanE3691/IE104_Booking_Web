@@ -7,16 +7,21 @@ const Selector = ({
 	locationOptions,
 	closeSelector,
 	indexSelection,
+	NUM_LOCATION_DISPLAY,
 }) => {
 	return (
 		<motion.ul
-			className={`absolute left-0 z-10 grid w-[200%] grid-rows-5 px-2 py-2 shadow-2xl -top-[320px] bg-main-bg rounded-2xl text-sub-text font-nunito font-semibold cursor-default`}
+			className={`absolute -left-8 z-10 grid w-[200%] px-2 py-2 shadow-xl bg-main-bg rounded-2xl text-sub-text font-nunito font-semibold cursor-default `}
 			initial={{ scale: 0, opacity: 0 }}
 			animate={{ scale: 1, opacity: 1 }}
 			exit={{ scale: 0, opacity: 0 }}
 			onBlur={closeSelector}
 			tabIndex="-1"
 			key="location-selector"
+			style={{
+				top: "-" + (NUM_LOCATION_DISPLAY * 60 + 37) + "px",
+				gridTemplateRows: "repeat(" + NUM_LOCATION_DISPLAY + ", minmax(0,1fr)",
+			}}
 		>
 			{locationOptions.map((location, index) => {
 				const name_location = changeLocationName(location);

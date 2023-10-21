@@ -5,29 +5,29 @@ import LocationTab from "./LocationTab";
 
 const SearchBar = () => {
 	return (
-		<div className="absolute flex items-center justify-between p-8 shadow-2xl bg-gradient-to-tr from-main-bg from-70% -bottom-20 inset-x-16 font-nunito rounded-2xl flex-nowrap">
+		<div className="absolute flex items-center justify-between px-8 py-6 shadow-2xl bg-gradient-to-tr from-main-bg from-70% -bottom-16 inset-x-16 font-nunito rounded-2xl flex-nowrap">
 			<LocationTab></LocationTab>
 
 			<div className=" w-[1.5px] h-24 bg-sub-text"></div>
 
-			<div className="flex items-start gap-3 px-4 py-8 transition-all duration-300 cursor-pointer hover:shadow-2xl rounded-2xl">
+			<div className="flex items-start gap-3 px-4 py-4 transition-all duration-300 cursor-pointer hover:shadow-2xl rounded-2xl">
 				<CalendarSVG className="w-6 h-6 mt-1 cursor-pointer fill-current text-sub-text"></CalendarSVG>
 				<div className="cursor-pointer">
-					<p className="text-2xl font-bold">Nhận phòng</p>
+					<p className="text-xl font-bold">Nhận phòng</p>
 					<p className="text-sm text-sub-text">Thời gian nhận phòng</p>
 				</div>
 			</div>
-			<div className="flex items-start gap-3 px-3 py-8 transition-all duration-300 cursor-pointer hover:shadow-2xl rounded-2xl">
+			<div className="flex items-start gap-3 px-3 py-4 transition-all duration-300 cursor-pointer hover:shadow-2xl rounded-2xl">
 				<CalendarSVG className="w-6 h-6 mt-1 cursor-pointer fill-current text-sub-text"></CalendarSVG>
 				<div className="cursor-pointer">
-					<p className="text-2xl font-bold">Trả phòng</p>
+					<p className="text-xl font-bold">Trả phòng</p>
 					<p className="text-sm text-sub-text">Thời gian trả phòng</p>
 				</div>
 			</div>
-			<div className="flex items-start gap-3 px-3 py-8 transition-all duration-300 cursor-pointer hover:shadow-2xl rounded-2xl">
+			<div className="flex items-start gap-3 px-3 py-4 transition-all duration-300 cursor-pointer hover:shadow-2xl rounded-2xl">
 				<TravelerSVG className="cursor-pointer fill-current w-7 h-7 text-sub-text"></TravelerSVG>
 				<div className="cursor-pointer">
-					<p className="text-2xl font-bold">Hành khách</p>
+					<p className="text-xl font-bold">Hành khách</p>
 					<p className="text-sm text-sub-text">Thêm số lượng hành khách</p>
 				</div>
 			</div>

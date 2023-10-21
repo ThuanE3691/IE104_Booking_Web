@@ -7,7 +7,7 @@ import changeLocationName from "@/Utils/changeLocationName";
 
 const LocationTab = () => {
 	const ref = useRef(null);
-	const [indexSelection, SetIndexSelection] = useState(0);
+	const [indexSelection, SetIndexSelection] = useState(null);
 	const [location, setLocation] = useState({
 		active: false,
 		content: "",
@@ -22,7 +22,6 @@ const LocationTab = () => {
 			active: false,
 			content: locationSelected,
 		});
-		ref.current.blur();
 	};
 
 	const handleOnBlur = (event) => {
@@ -49,6 +48,15 @@ const LocationTab = () => {
 		});
 	};
 
+	const handleOnClick = () => {
+		setLocation({ ...location, active: true });
+		const current_index = locationOptions.findIndex(
+			(option) =>
+				changeLocationName(option) === changeLocationName(location.content, 0)
+		);
+		SetIndexSelection(current_index !== -1 ? current_index : 0);
+	};
+
 	const handleKeyEvents = (event) => {
 		switch (event.code) {
 			case "ArrowDown":
@@ -61,6 +69,7 @@ const LocationTab = () => {
 				break;
 			case "Enter":
 				if (location.active && locationOptions.length > 0) {
+					ref.current.blur();
 					const location_name = changeLocationName(
 						locationOptions[indexSelection]
 					);
@@ -76,16 +85,16 @@ const LocationTab = () => {
 		if (location.active) {
 			setLocationOptions(getVietNamProvinces(location.content));
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [location.content]);
 
 	return (
 		<div
-			className={`relative flex items-start gap-3 px-2 py-8 transition-all duration-300 cursor-pointer hover:shadow-2xl rounded-2xl ${
+			className={`relative flex items-start gap-3 px-2 py-4 transition-all duration-300 cursor-pointer hover:shadow-2xl rounded-2xl ${
 				location.active && "shadow-2xl"
 			}`}
 			onBlur={(event) => handleOnBlur(event)}
-			tabIndex="1"
-			layout
+			tabIndex="-1"
 		>
 			<NavigationSVG className="w-6 h-6 mt-1 -rotate-90 cursor-pointer fill-current text-sub-text"></NavigationSVG>
 			<AnimatePresence>
@@ -98,14 +107,14 @@ const LocationTab = () => {
 					></Selector>
 				)}
 			</AnimatePresence>
-			<motion.div className="cursor-pointer" layout>
+			<motion.div className="cursor-pointer" layout={true}>
 				<input
-					className={`text-2xl w-56 font-bold outline-none placeholder-inherit min-w-full`}
+					className={`text-xl w-56 font-bold outline-none placeholder-inherit min-w-full`}
 					placeholder="Địa điểm"
 					ref={ref}
 					onChange={onChangeInputLocation}
 					value={location.content}
-					onClick={() => setLocation({ ...location, active: true })}
+					onClick={handleOnClick}
 					onKeyDown={(event) => handleKeyEvents(event)}
 				></input>
 				<p className="text-sm text-sub-text">Nơi bạn muốn đến </p>

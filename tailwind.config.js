@@ -7,6 +7,7 @@ module.exports = {
 				"main-bg": "#fcfcfd",
 				"sub-text": "#b7bac7",
 				"selection-active": "#f4f5f6",
+				"datepicker-primary": "#33363e",
 			},
 			fontFamily: {
 				inter: "Inter, sans-serif",

@@ -94,7 +94,9 @@ const LocationTab = () => {
 
 	return (
 		<div
-			className={`relative flex items-start gap-3 px-2 py-4 transition-all duration-300 cursor-pointer rounded-2xl`}
+			className={`relative flex items-start gap-3 px-3 py-4 duration-300 cursor-pointer rounded-2xl ${
+				location.active && "ring-2 ring-sub-text"
+			} `}
 			onBlur={(event) => handleOnBlur(event)}
 			tabIndex="-1"
 		>
@@ -110,9 +112,9 @@ const LocationTab = () => {
 					></Selector>
 				)}
 			</AnimatePresence>
-			<motion.div className="cursor-pointer" layout={true}>
+			<motion.div className="cursor-pointer " layout={true}>
 				<input
-					className={`text-xl w-56 font-bold outline-none placeholder-inherit min-w-full`}
+					className={`text-xl w-56 font-bold outline-none placeholder-inherit min-w-full  `}
 					placeholder="Địa điểm"
 					ref={ref}
 					onChange={onChangeInputLocation}

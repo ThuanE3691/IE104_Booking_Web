@@ -62,7 +62,7 @@ const LocationTab = () => {
 		switch (event.code) {
 			case "ArrowDown":
 				event.preventDefault();
-				if (indexSelection < NUM_LOCATION_DISPLAY)
+				if (indexSelection < NUM_LOCATION_DISPLAY - 1)
 					SetIndexSelection((prev) => prev + 1);
 				break;
 			case "ArrowUp":

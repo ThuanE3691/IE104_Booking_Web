@@ -9,6 +9,7 @@ const Selector = ({
 	indexSelection,
 	NUM_LOCATION_DISPLAY,
 }) => {
+	const POSITION_Y_CONFIG = 15;
 	return (
 		<motion.ul
 			className={`absolute -left-8 z-10 grid w-[200%] px-2 py-2 shadow-xl bg-main-bg rounded-2xl text-sub-text font-nunito font-semibold cursor-default `}
@@ -19,7 +20,7 @@ const Selector = ({
 			tabIndex="-1"
 			key="location-selector"
 			style={{
-				top: "-" + (NUM_LOCATION_DISPLAY * 60 + 37) + "px",
+				top: "-" + (NUM_LOCATION_DISPLAY * 60 + POSITION_Y_CONFIG) + "px",
 				gridTemplateRows: "repeat(" + NUM_LOCATION_DISPLAY + ", minmax(0,1fr)",
 			}}
 		>

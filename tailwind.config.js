@@ -6,14 +6,14 @@ module.exports = {
 			colors: {
 				"main-bg": "#fcfcfd",
 				"sub-text": "#b7bac7",
+				"selection-active": "#f4f5f6",
 			},
 			fontFamily: {
 				inter: "Inter, sans-serif",
-				lato: "Lato, sans-serif",
-				outfit: "Outfit, sans-serif",
+				nunito: "Nunito sans, sans-serif",
 				"dm-sans": "DM-Sans, sans-serif",
-				poppins: "Poppins, sans-serif",
 				"vietnam-pro": "Be VietNam Pro, sans-serif",
+				roboto: "Roboto, sans-serif",
 			},
 		},
 	},

@@ -1,5 +1,5 @@
-import Navbar from "@/Layouts/HomePage/Navbar";
-import SearchArea from "@/Layouts/HomePage/SearchArea";
+import Navbar from "@/Layouts/Navbar";
+import SearchArea from "@/Layouts/HomePage/SearchLayouts/SearchArea";
 
 const HomePage = () => {
 	return (

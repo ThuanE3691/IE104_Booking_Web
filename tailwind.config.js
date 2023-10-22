@@ -7,7 +7,10 @@ module.exports = {
 				"main-bg": "#fcfcfd",
 				"sub-text": "#b7bac7",
 				"selection-active": "#f4f5f6",
-				"datepicker-primary": "#33363e",
+				datepicker: {
+					primary: "#33363e",
+					selected: "#23262f",
+				},
 			},
 			fontFamily: {
 				inter: "Inter, sans-serif",
@@ -15,6 +18,7 @@ module.exports = {
 				"dm-sans": "DM-Sans, sans-serif",
 				"vietnam-pro": "Be VietNam Pro, sans-serif",
 				roboto: "Roboto, sans-serif",
+				poppins: "Poppins, sans-serif",
 			},
 		},
 	},

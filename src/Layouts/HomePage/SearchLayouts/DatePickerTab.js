@@ -2,19 +2,37 @@ import CalendarSVG from "@/Assets/Icons/SVG/CalendarSVG";
 import DatePicker from "@/Components/DatePicker";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { startOfToday, format, addMonths, parse } from "date-fns";
+import { startOfToday, format, add, parse } from "date-fns";
 
 const DatePickerTab = () => {
 	const [showDatePicker, setShowDatePicker] = useState(false);
 	let today = startOfToday();
 	const [selectedDateArrival, setSelectedDateArrival] = useState(today);
 	const [selectedDateGo, setSelectedDateGo] = useState(null);
-	const [currentMonth, setCurrentMonth] = useState(format(today, "MMM-yyyy"));
-
-	let firstDayCurrentMonth = parse(currentMonth, "MMM-yyyy", new Date());
+	const [firstDayOfMonth, setFirstDayOfMonth] = useState(
+		parse(format(today, "MMM-yyyy"), "MMM-yyyy", new Date())
+	);
+	const [direction, setDirection] = useState(1);
 
 	const handleShowDatePicker = () => {
 		setShowDatePicker((prev) => !prev);
+	};
+
+	const handleChangeMonth = (direction) => {
+		switch (direction) {
+			case "PREVIOUS":
+				const firstDayPreviousMonth = add(firstDayOfMonth, { months: -1 });
+				setFirstDayOfMonth(firstDayPreviousMonth);
+				setDirection(-1);
+				break;
+			case "NEXT":
+				const firstDayNextMonth = add(firstDayOfMonth, { months: 1 });
+				setFirstDayOfMonth(firstDayNextMonth);
+				setDirection(1);
+				break;
+			default:
+				break;
+		}
 	};
 	return (
 		<>
@@ -29,14 +47,20 @@ const DatePickerTab = () => {
 						<DatePicker
 							selectedDate={selectedDateArrival}
 							setSelectedDate={setSelectedDateArrival}
-							firstDayOfMonth={firstDayCurrentMonth}
+							firstDayOfMonth={firstDayOfMonth}
 							isFirstDatePicker={true}
+							handleChangeMonth={handleChangeMonth}
+							direction={direction}
 						></DatePicker>
 						<DatePicker
 							selectedDate={selectedDateGo}
 							setSelectedDate={setSelectedDateGo}
-							firstDayOfMonth={addMonths(firstDayCurrentMonth, 1)}
+							firstDayOfMonth={add(firstDayOfMonth, {
+								months: 1,
+							})}
 							isFirstDatePicker={false}
+							handleChangeMonth={handleChangeMonth}
+							direction={direction}
 						></DatePicker>
 					</motion.div>
 				)}

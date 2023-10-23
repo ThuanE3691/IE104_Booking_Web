@@ -2,33 +2,79 @@ import CalendarSVG from "@/Assets/Icons/SVG/CalendarSVG";
 import DatePicker from "@/Components/DatePicker";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { startOfToday, format, add, parse } from "date-fns";
+import {
+	startOfToday,
+	format,
+	add,
+	parse,
+	isPast,
+	isToday,
+	isBefore,
+	getMonth,
+	isAfter,
+} from "date-fns";
+
+const getFirstDayOfMonth = (date) => {
+	return parse(format(date, "MMM-yyyy"), "MMM-yyyy", new Date());
+};
 
 const DatePickerTab = () => {
 	const [showDatePicker, setShowDatePicker] = useState(false);
 	let today = startOfToday();
-	const [selectedDateArrival, setSelectedDateArrival] = useState(today);
-	const [selectedDateGo, setSelectedDateGo] = useState(null);
+	const [selectedDate, setSelectedDate] = useState({
+		arrival: today,
+		go: null,
+		order: 1,
+	});
 	const [firstDayOfMonth, setFirstDayOfMonth] = useState(
-		parse(format(today, "MMM-yyyy"), "MMM-yyyy", new Date())
+		getFirstDayOfMonth(today)
 	);
 	const [direction, setDirection] = useState(1);
 
 	const handleShowDatePicker = () => {
 		setShowDatePicker((prev) => !prev);
+		if (!showDatePicker) {
+			const monthDisplay =
+				getMonth(selectedDate.arrival) % 2 !== 0
+					? selectedDate.arrival
+					: add(selectedDate.arrival, { months: -1 });
+			setFirstDayOfMonth(getFirstDayOfMonth(monthDisplay));
+		}
+	};
+
+	const handleSelectDay = (day) => {
+		if (!(isPast(day) && !isToday(day))) {
+			if (
+				(isBefore(day, selectedDate.arrival) || selectedDate.order === 1) &&
+				!(selectedDate.go !== null && isAfter(day, selectedDate.go))
+			)
+				setSelectedDate({
+					...selectedDate,
+					arrival: day,
+					order: 2,
+				});
+			else {
+				setSelectedDate({
+					...selectedDate,
+					go: day,
+					order: 1,
+				});
+			}
+		}
 	};
 
 	const handleChangeMonth = (direction) => {
 		switch (direction) {
 			case "PREVIOUS":
+				if (isPast(firstDayOfMonth)) return;
 				const firstDayPreviousMonth = add(firstDayOfMonth, { months: -1 });
-				setFirstDayOfMonth(firstDayPreviousMonth);
 				setDirection(-1);
+				setFirstDayOfMonth(firstDayPreviousMonth);
 				break;
 			case "NEXT":
 				const firstDayNextMonth = add(firstDayOfMonth, { months: 1 });
-				setFirstDayOfMonth(firstDayNextMonth);
 				setDirection(1);
+				setFirstDayOfMonth(firstDayNextMonth);
 				break;
 			default:
 				break;
@@ -45,22 +91,22 @@ const DatePickerTab = () => {
 						exit={{ scale: 0, opacity: 0 }}
 					>
 						<DatePicker
-							selectedDate={selectedDateArrival}
-							setSelectedDate={setSelectedDateArrival}
+							selectedDate={selectedDate}
 							firstDayOfMonth={firstDayOfMonth}
 							isFirstDatePicker={true}
 							handleChangeMonth={handleChangeMonth}
 							direction={direction}
+							handleSelectDay={handleSelectDay}
 						></DatePicker>
 						<DatePicker
-							selectedDate={selectedDateGo}
-							setSelectedDate={setSelectedDateGo}
+							selectedDate={selectedDate}
 							firstDayOfMonth={add(firstDayOfMonth, {
 								months: 1,
 							})}
 							isFirstDatePicker={false}
 							handleChangeMonth={handleChangeMonth}
 							direction={direction}
+							handleSelectDay={handleSelectDay}
 						></DatePicker>
 					</motion.div>
 				)}

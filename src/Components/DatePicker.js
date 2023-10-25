@@ -126,13 +126,13 @@ const DatePicker = ({
 									selectedDate.go !== null
 										? isEqual(day, selectedDate.go)
 										: false;
+								const isBetweenMode = selectedDate.arrival && selectedDate.go;
 								const isBetWeen =
 									selectedDate.go === null
 										? false
 										: isAfter(day, selectedDate.arrival) &&
-										  isBefore(day, selectedDate.go)
-										? true
-										: isSelectedDateArrival || isSelectedDateGo;
+										  isBefore(day, selectedDate.go);
+
 								return (
 									<motion.div
 										key={day.toString()}
@@ -160,14 +160,20 @@ const DatePicker = ({
 													isSelectedDateArrival
 												) && "hover:bg-sub-text ",
 												(isSelectedDateArrival || isSelectedDateGo) &&
-													"bg-datepicker-selected text-white before:rounded-full  ",
-												isBetWeen && "",
+													"bg-datepicker-selected text-white before:rounded-full",
+												isBetWeen && " bg-datepicker-connected ",
+												isBetweenMode &&
+													((isSelectedDateArrival && "") ||
+														(isSelectedDateGo && "")),
 												"mx-auto flex w-10 h-10 items-center font-semibold justify-center rounded-full transition-colors relative z-10"
 											)}
 											key={format(day, "yyyy-MM-dd")}
 											before={format(day, "d")}
 										>
-											<time dateTime={format(day, "yyyy-MM-dd")}>
+											<time
+												dateTime={format(day, "yyyy-MM-dd")}
+												className="relative z-10"
+											>
 												{format(day, "d")}
 											</time>
 										</button>
@@ -193,3 +199,4 @@ const colStartClasses = [
 ];
 
 export default DatePicker;
+// after:absolute after:bg-datepicker-connected after:-right-3 after:w-6 after:h-full before:absolute

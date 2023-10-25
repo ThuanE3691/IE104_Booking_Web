@@ -31,7 +31,7 @@ const DatePicker = ({
 		end: endOfMonth(firstDayOfMonth),
 	});
 
-	let transition = { type: "spring", bounce: 0, duration: 0.1 };
+	let transition = { type: "easeInOut", bounce: 0, duration: 0.2 };
 
 	let variants = {
 		enter: (direction) => ({ x: `${direction * 100}%`, opacity: 0 }),
@@ -44,13 +44,13 @@ const DatePicker = ({
 	};
 
 	const ordinal_list = [
-		"CN",
 		"Thứ 2",
 		"Thứ 3",
 		"Thứ 4",
 		"Thứ 5",
 		"Thứ 6",
 		"Thứ 7",
+		"CN",
 	];
 
 	return (
@@ -99,12 +99,12 @@ const DatePicker = ({
 								</motion.button>
 							)}
 						</header>
-						<div className="grid grid-cols-7 mt-4 text-xs font-semibold text-center text-sub-text gap-x-3">
+						<div className="grid grid-cols-7 mt-4 text-xs font-semibold text-center text-sub-text ">
 							{ordinal_list.map((ordinal) => {
 								return (
 									<motion.div
 										variants={removeImmediately}
-										className="w-10"
+										className="w-[52px]"
 										key={ordinal}
 									>
 										{ordinal}
@@ -112,33 +112,29 @@ const DatePicker = ({
 								);
 							})}
 						</div>
-						<div className="z-10 grid grid-cols-7 mt-4 text-sm gap-x-3 gap-y-2">
+						<div className="z-10 grid grid-cols-7 mt-4 text-sm gap-y-2">
 							{newsDay.map((day, dayIdx) => {
 								const isInPast = isPast(day) && !isToday(day);
 								const _isToday =
 									isToday(day) &&
 									(selectedDate !== null ? !isEqual(day, selectedDate) : true);
-								const isSelectedDateArrival = isEqual(
-									day,
-									selectedDate.arrival
-								);
+								const isSelectedDateArrival =
+									selectedDate.arrival && isEqual(day, selectedDate.arrival);
 								const isSelectedDateGo =
-									selectedDate.go !== null
-										? isEqual(day, selectedDate.go)
-										: false;
-								const isBetWeen =
-									selectedDate.go === null
-										? false
-										: isAfter(day, selectedDate.arrival) &&
-										  isBefore(day, selectedDate.go)
-										? true
-										: isSelectedDateArrival || isSelectedDateGo;
+									selectedDate.go && isEqual(day, selectedDate.go);
+
+								const isBetweenMode = selectedDate.arrival && selectedDate.go;
+								const isBetween =
+									isBetweenMode &&
+									isAfter(day, selectedDate.arrival) &&
+									isBefore(day, selectedDate.go);
+
 								return (
 									<motion.div
 										key={day.toString()}
 										onClick={() => handleSelectDay(day)}
 										className={classNames(
-											dayIdx === 0 && colStartClasses[getDay(day)]
+											dayIdx === 0 && colStartClasses[getDay(day - 1)]
 										)}
 										variants={variants}
 										initial="enter"
@@ -149,25 +145,32 @@ const DatePicker = ({
 										<button
 											className={classNames(
 												isInPast && "text-sub-text cursor-default",
-												!isInPast &&
-													isBefore(day, selectedDate.arrival) &&
-													"text-sub-text hover:text-white",
-												_isToday && "bg-blue-500 text-white",
+												!isInPast && isBefore(day, selectedDate.arrival) && "",
+												_isToday && "before:bg-blue-500 text-white",
 												!(
 													isInPast ||
 													_isToday ||
 													isSelectedDateGo ||
 													isSelectedDateArrival
-												) && "hover:bg-sub-text ",
+												) && "before:hover:bg-sub-text relative z-10",
+												isBetween && " bg-datepicker-connected",
 												(isSelectedDateArrival || isSelectedDateGo) &&
-													"bg-datepicker-selected text-white before:rounded-full  ",
-												isBetWeen && "",
-												"mx-auto flex w-10 h-10 items-center font-semibold justify-center rounded-full transition-colors relative z-10"
+													"before:bg-datepicker-selected text-white",
+												isBetweenMode &&
+													isSelectedDateArrival &&
+													" bg-gradient-to-r from-transparent to-datepicker-connected to-50%",
+												isBetweenMode &&
+													isSelectedDateGo &&
+													" bg-gradient-to-l from-transparent to-datepicker-connected to-50%",
+												" flex w-[52px] h-10 items-center font-semibold justify-center before:rounded-full before:absolute before:w-10 before:h-10  transition-colors relative z-10"
 											)}
 											key={format(day, "yyyy-MM-dd")}
 											before={format(day, "d")}
 										>
-											<time dateTime={format(day, "yyyy-MM-dd")}>
+											<time
+												dateTime={format(day, "yyyy-MM-dd")}
+												className="relative z-10"
+											>
 												{format(day, "d")}
 											</time>
 										</button>
@@ -193,3 +196,4 @@ const colStartClasses = [
 ];
 
 export default DatePicker;
+// after:absolute after:bg-datepicker-connected after:-right-3 after:w-6 after:h-full before:absolute

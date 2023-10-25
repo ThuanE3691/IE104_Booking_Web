@@ -10,6 +10,7 @@ module.exports = {
 				datepicker: {
 					primary: "#33363e",
 					selected: "#23262f",
+					connected: "#eaeaeb",
 				},
 			},
 			fontFamily: {

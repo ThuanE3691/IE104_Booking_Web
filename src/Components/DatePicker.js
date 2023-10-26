@@ -10,9 +10,11 @@ import {
 	isEqual,
 	isBefore,
 	isAfter,
+	differenceInDays,
 } from "date-fns";
 import viLocale from "date-fns/locale/vi";
 import { MotionConfig, motion, AnimatePresence } from "framer-motion";
+import ResizablePanel from "./ResizablePanel";
 
 const classNames = (...classes) => {
 	return classes.filter(Boolean).join(" ");
@@ -31,7 +33,7 @@ const DatePicker = ({
 		end: endOfMonth(firstDayOfMonth),
 	});
 
-	let transition = { type: "spring", bounce: 0, duration: 0.1 };
+	let transition = { type: "easeInOut", bounce: 0, duration: 0.2 };
 
 	let variants = {
 		enter: (direction) => ({ x: `${direction * 100}%`, opacity: 0 }),
@@ -127,11 +129,6 @@ const DatePicker = ({
 										? isEqual(day, selectedDate.go)
 										: false;
 								const isBetweenMode = selectedDate.arrival && selectedDate.go;
-								const isBetWeen =
-									selectedDate.go === null
-										? false
-										: isAfter(day, selectedDate.arrival) &&
-										  isBefore(day, selectedDate.go);
 
 								return (
 									<motion.div
@@ -149,22 +146,17 @@ const DatePicker = ({
 										<button
 											className={classNames(
 												isInPast && "text-sub-text cursor-default",
-												!isInPast &&
-													isBefore(day, selectedDate.arrival) &&
-													"text-sub-text hover:text-white",
+												!isInPast && isBefore(day, selectedDate.arrival) && "",
 												_isToday && "bg-blue-500 text-white",
 												!(
 													isInPast ||
 													_isToday ||
 													isSelectedDateGo ||
 													isSelectedDateArrival
-												) && "hover:bg-sub-text ",
+												) && "hover:bg-sub-text relative z-10",
 												(isSelectedDateArrival || isSelectedDateGo) &&
 													"bg-datepicker-selected text-white before:rounded-full",
-												isBetWeen && " bg-datepicker-connected ",
-												isBetweenMode &&
-													((isSelectedDateArrival && "") ||
-														(isSelectedDateGo && "")),
+												isBetweenMode && isSelectedDateArrival && ``,
 												"mx-auto flex w-10 h-10 items-center font-semibold justify-center rounded-full transition-colors relative z-10"
 											)}
 											key={format(day, "yyyy-MM-dd")}

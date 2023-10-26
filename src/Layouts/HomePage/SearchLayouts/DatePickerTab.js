@@ -1,7 +1,7 @@
 import CalendarSVG from "@/Assets/Icons/SVG/CalendarSVG";
 import DatePicker from "@/Components/DatePicker";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
 	startOfToday,
 	format,
@@ -12,33 +12,47 @@ import {
 	isBefore,
 	getMonth,
 	isAfter,
+	getWeeksInMonth,
 } from "date-fns";
+import viLocale from "date-fns/locale/vi";
 
 const getFirstDayOfMonth = (date) => {
 	return parse(format(date, "MMM-yyyy"), "MMM-yyyy", new Date());
 };
 
+const TimeRender = ({ date }) => {
+	return (
+		<time dateTime={format(date, "yyyy-MM-dd")} className="text-xl font-bold">
+			{format(date, "dd - MM - yyyy")}
+		</time>
+	);
+};
+
 const DatePickerTab = () => {
 	const [showDatePicker, setShowDatePicker] = useState(false);
-	let today = startOfToday();
 	const [selectedDate, setSelectedDate] = useState({
-		arrival: today,
+		arrival: null,
 		go: null,
 		order: 1,
 	});
+
+	const [isChangeHeight, setIsChangeHeight] = useState(false);
+
 	const [firstDayOfMonth, setFirstDayOfMonth] = useState(
-		getFirstDayOfMonth(today)
+		getFirstDayOfMonth(startOfToday())
 	);
 	const [direction, setDirection] = useState(1);
 
 	const handleShowDatePicker = () => {
 		setShowDatePicker((prev) => !prev);
-		if (!showDatePicker) {
+		if (!showDatePicker && selectedDate.arrival) {
 			const monthDisplay =
 				getMonth(selectedDate.arrival) % 2 !== 0
 					? selectedDate.arrival
 					: add(selectedDate.arrival, { months: -1 });
 			setFirstDayOfMonth(getFirstDayOfMonth(monthDisplay));
+		} else {
+			setFirstDayOfMonth(getFirstDayOfMonth(startOfToday()));
 		}
 	};
 
@@ -80,15 +94,33 @@ const DatePickerTab = () => {
 				break;
 		}
 	};
+
+	useEffect(() => {
+		const numOfWeek_1 = getWeeksInMonth(firstDayOfMonth, { locale: viLocale });
+		const numOfWeek_2 = getWeeksInMonth(add(firstDayOfMonth, { months: 1 }), {
+			locale: viLocale,
+		});
+
+		if (numOfWeek_1 === 6 || numOfWeek_2 === 6) {
+			setIsChangeHeight(true);
+		} else {
+			setIsChangeHeight(false);
+		}
+	}, [firstDayOfMonth]);
+
 	return (
 		<>
 			<AnimatePresence>
 				{showDatePicker && (
 					<motion.div
-						className="absolute bg-main-bg px-8 gap-x-10 -top-[350px] left-[336px] shadow-xl rounded-2xl py-8 font-poppins grid grid-cols-2 z-10"
-						initial={{ scale: 0, opacity: 0 }}
-						animate={{ scale: 1, opacity: 1 }}
-						exit={{ scale: 0, opacity: 0 }}
+						className="absolute bg-main-bg px-8 gap-x-10 left-[336px] shadow-xl rounded-2xl py-8 font-poppins grid grid-cols-2 z-10"
+						initial={{ scale: 0, opacity: 0, top: "-350px" }}
+						animate={{
+							scale: 1,
+							opacity: 1,
+							top: !isChangeHeight ? "-350px" : "-398px",
+						}}
+						exit={{ scale: 0, opacity: 0, top: "-350px" }}
 					>
 						<DatePicker
 							selectedDate={selectedDate}
@@ -117,7 +149,11 @@ const DatePickerTab = () => {
 			>
 				<CalendarSVG className="w-6 h-6 mt-1 cursor-pointer fill-current text-sub-text"></CalendarSVG>
 				<div className="cursor-pointer">
-					<p className="text-xl font-bold">Nhận phòng</p>
+					{selectedDate.arrival !== null ? (
+						<TimeRender date={selectedDate.arrival}></TimeRender>
+					) : (
+						<p className="text-xl font-bold">Nhận Phòng</p>
+					)}
 					<p className="text-sm text-sub-text">Thời gian nhận phòng</p>
 				</div>
 			</div>
@@ -127,7 +163,11 @@ const DatePickerTab = () => {
 			>
 				<CalendarSVG className="w-6 h-6 mt-1 cursor-pointer fill-current text-sub-text"></CalendarSVG>
 				<div className="cursor-pointer">
-					<p className="text-xl font-bold">Trả phòng</p>
+					{selectedDate.go !== null ? (
+						<TimeRender date={selectedDate.go}></TimeRender>
+					) : (
+						<p className="text-xl font-bold">Trả Phòng</p>
+					)}
 					<p className="text-sm text-sub-text">Thời gian trả phòng</p>
 				</div>
 			</div>

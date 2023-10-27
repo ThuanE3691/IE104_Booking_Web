@@ -114,13 +114,21 @@ const DatePickerTab = () => {
 				{showDatePicker && (
 					<motion.div
 						className="absolute bg-main-bg px-8 gap-x-10 left-[336px] shadow-xl rounded-2xl py-8 font-poppins grid grid-cols-2 z-10"
-						initial={{ scale: 0, opacity: 0, top: "-350px" }}
+						initial={{
+							scale: 0,
+							opacity: 0,
+							top: !isChangeHeight ? "-350px" : "-398px",
+						}}
 						animate={{
 							scale: 1,
 							opacity: 1,
 							top: !isChangeHeight ? "-350px" : "-398px",
 						}}
-						exit={{ scale: 0, opacity: 0, top: "-350px" }}
+						exit={{
+							scale: 0,
+							opacity: 0,
+							top: !isChangeHeight ? "-350px" : "-398px",
+						}}
 					>
 						<DatePicker
 							selectedDate={selectedDate}

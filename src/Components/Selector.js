@@ -9,7 +9,7 @@ const Selector = ({
 	indexSelection,
 	NUM_LOCATION_DISPLAY,
 }) => {
-	const POSITION_Y_CONFIG = 15;
+	const POSITION_Y_CONFIG = 20;
 	return (
 		<motion.ul
 			className={`absolute -left-8 z-10 grid w-[200%] px-2 py-2 shadow-xl bg-main-bg rounded-2xl text-sub-text font-nunito font-semibold cursor-default `}

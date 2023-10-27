@@ -38,6 +38,7 @@ const Selector = ({
 							className={`p-2 border-2 rounded-full border-selection-active group-hover:bg-main-bg ${
 								index === indexSelection && "bg-main-bg"
 							}`}
+							key={index + "-" + location.name}
 						>
 							<PathSVG className="w-4 h-4"></PathSVG>
 						</div>

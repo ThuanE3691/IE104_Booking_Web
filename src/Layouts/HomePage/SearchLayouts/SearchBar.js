@@ -5,11 +5,9 @@ import DatePickerTab from "./DatePickerTab";
 
 const SearchBar = () => {
 	return (
-		<div className="absolute flex items-center justify-between px-8 py-6 shadow-2xl bg-gradient-to-tr from-main-bg from-70% -bottom-16 inset-x-16 font-nunito rounded-2xl flex-nowrap">
+		<div className="absolute flex items-center justify-between px-8 py-6 shadow-2xl bg-gradient-to-tr from-main-bg from-70% -bottom-16 inset-x-16 font-nunito rounded-2xl flex-nowrap select-none">
 			<LocationTab></LocationTab>
-
 			<div className=" w-[1.5px] h-16 bg-sub-text"></div>
-
 			<DatePickerTab></DatePickerTab>
 			<div className="flex items-start gap-3 px-3 py-4 transition-all duration-300 cursor-pointer hover:shadow-2xl rounded-2xl">
 				<TravelerSVG className="cursor-pointer fill-current w-7 h-7 text-sub-text"></TravelerSVG>

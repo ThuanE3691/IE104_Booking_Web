@@ -2,7 +2,6 @@ import TravelerSVG from "@/Assets/Icons/SVG/TravelerSVG";
 import SearchIconSVG from "@/Assets/Icons/SVG/SearchIconSVG";
 import LocationTab from "./LocationTab";
 import DatePickerTab from "./DatePickerTab";
-import DatePickerTab from "./DatePickerTab";
 
 const SearchBar = () => {
 	return (

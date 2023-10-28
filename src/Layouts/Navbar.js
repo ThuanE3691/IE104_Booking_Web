@@ -35,7 +35,7 @@ const Navbar = () => {
 					<div className="px-3 py-2 m-1 font-semibold text-center transition-colors bg-white cursor-pointer hover:text-text-primary ">
 						Đăng nhập
 					</div>
-					<div className="px-3 py-2 m-1 font-semibold text-center text-white transition-colors rounded-lg cursor-pointer bg-button-primary hover:bg-slate-200 hover:text-black hover:border-black ">
+					<div className="px-3 py-2 m-1 font-semibold text-center text-white transition-colors rounded-lg cursor-pointer bg-button-primary hover-button ">
 						Đăng ký
 					</div>
 				</div>

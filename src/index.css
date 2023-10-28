@@ -23,4 +23,8 @@ code {
 	.content-header {
 		@apply text-3xl font-semibold;
 	}
+
+	.hover-button {
+		@apply hover:text-black hover:bg-slate-200;
+	}
 }

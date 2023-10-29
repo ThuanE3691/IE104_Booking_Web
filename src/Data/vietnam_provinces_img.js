@@ -5,7 +5,7 @@ const images_store = [
 	},
 	{
 		name: "ThuaThienHue",
-		image: require("@/Assets/Images/Location/ThuaThienHue.jpg"),
+		image: require("@/Assets/Images/Location/ThuaThienHue2.jpg"),
 	},
 	{
 		name: "BaRia-VungTau",
@@ -37,11 +37,11 @@ const images_store = [
 	},
 	{
 		name: "QuangNinh",
-		image: require("@/Assets/Images/Location/QuangNinh.png"),
+		image: require("@/Assets/Images/Location/QuangNinh.jpg"),
 	},
 	{
 		name: "QuangNam",
-		image: require("@/Assets/Images/Location/QuangNam.png"),
+		image: require("@/Assets/Images/Location/QuangNam2.png"),
 	},
 	{
 		name: "LaoCai",

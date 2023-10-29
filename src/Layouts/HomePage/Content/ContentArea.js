@@ -3,7 +3,7 @@ import SaleSection from "./SaleSection";
 
 const ContentArea = () => {
 	return (
-		<div className="flex flex-col mt-40 gap-y-10">
+		<div className="flex flex-col my-40 gap-y-10">
 			<SaleSection></SaleSection>
 			<DiscoverSection></DiscoverSection>
 		</div>

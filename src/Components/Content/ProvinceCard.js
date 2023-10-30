@@ -15,8 +15,8 @@ export const ProvinceCard = ({ province_name, province_img }) => {
 					boxShadow:
 						"rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;",
 					transition: {
-						duration: 1.5,
-						ease: "easeInOut",
+						duration: 3,
+						ease: "linear",
 					},
 				}}
 			/>

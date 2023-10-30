@@ -129,7 +129,12 @@ const DatePickerTab = () => {
 							opacity: 0,
 							top: !isChangeHeight ? "-350px" : "-398px",
 						}}
-						transition={{ top: { duration: 0.1 } }}
+						transition={{
+							top: { duration: 0.1 },
+							type: "spring",
+							bounce: 0.2,
+							duration: 0.5,
+						}}
 					>
 						<DatePicker
 							selectedDate={selectedDate}

@@ -70,15 +70,16 @@ const DiscoverSection = () => {
 	return (
 		<div className="relative font-vietnam-pro">
 			<h3 className=" content-header">Khám phá Việt Nam</h3>
-			<div
+			<motion.div
 				className={classNames(
 					sliderIndex === 0 && " cursor-default pointer-events-none opacity-50",
 					"absolute left-0 p-2 -translate-x-4 rounded-full top-[146px] z-10 bg-[#f2f2f2] shadow-2xl cursor-pointer transition-all hover-button group"
 				)}
+				animate={{ opacity: sliderIndex === 0 ? 0 : 1 }}
 				onClick={() => handleClickSliderNavigation("left")}
 			>
 				<LeftArrowSVG className="w-5 h-5 text-black fill-current group-hover:text-black"></LeftArrowSVG>
-			</div>
+			</motion.div>
 			<motion.div className="relative overflow-x-hidden scroll-smooth h-[200px] mt-6 bg-main-bg ">
 				<motion.div
 					className="absolute top-0 left-0 flex flex-nowrap gap-x-8"
@@ -102,16 +103,17 @@ const DiscoverSection = () => {
 					})}
 				</motion.div>
 			</motion.div>
-			<div
+			<motion.div
 				className={classNames(
 					sliderIndex === list_provinces.length - 4 &&
 						"opacity-50 cursor-default pointer-events-none",
 					"absolute right-0 translate-x-4 p-2 rounded-full top-[146px] z-10 bg-[#f2f2f2] shadow-xl cursor-pointer transition-all hover-button group"
 				)}
 				onClick={() => handleClickSliderNavigation("right")}
+				animate={{ opacity: sliderIndex === list_provinces.length - 4 ? 0 : 1 }}
 			>
 				<RightArrowSVG className="w-5 h-5 text-black fill-current group-hover:text-black"></RightArrowSVG>
-			</div>
+			</motion.div>
 			<DotSlider
 				length={list_provinces.length - 3}
 				dotIndex={sliderIndex}

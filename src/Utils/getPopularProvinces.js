@@ -1,4 +1,3 @@
-import toLowerCaseNonAccentVietnamese from "./toLowerCaseNonAccentVietnamese";
 import vietnam_provinces from "@/Data/vietnam_provinces_processed.json";
 
 const getPopularProvinces = (list_provinces) => {

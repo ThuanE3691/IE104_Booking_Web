@@ -9,6 +9,8 @@ import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import classNames from "@/Utils/classNames";
 import DotSlider from "@/Components/DotSlider";
+import TabSlider from "@/Components/TabSlider";
+import provinceType from "@/Data/tab_type_provinces";
 
 const getImgName = (name) => {
 	const img_name = toLowerCaseNonAccentVietnamese(name)
@@ -47,15 +49,6 @@ const DiscoverSection = () => {
 	const [isAnimate, setIsAnimate] = useState(false);
 	const [tabActive, setTabActive] = useState(0);
 
-	const provinceType = [
-		"Yêu Thích",
-		"Bãi Biển",
-		"Thiên Nhiên",
-		"Thành Phố",
-		"Lãng Mạn",
-		"Thư Giản",
-	];
-
 	const handleClickSliderNavigation = (direction) => {
 		switch (direction) {
 			case "left":
@@ -77,36 +70,15 @@ const DiscoverSection = () => {
 	return (
 		<div className="relative font-vietnam-pro">
 			<h3 className=" content-header">Khám phá Việt Nam</h3>
-			<motion.ul className="flex items-center gap-5 mt-4">
-				{provinceType.map((type, index) => {
-					return (
-						<motion.li
-							className="relative px-4 py-2 font-semibold rounded-lg cursor-pointer hover-button bg-slate-200 mix-blend-darken"
-							onClick={() => setTabActive(index)}
-							key={index}
-						>
-							{tabActive === index && (
-								<motion.div
-									className="absolute inset-0 w-full h-full text-white rounded-lg bg-button-primary"
-									layoutId="bg-tab"
-									transition={{ duration: 0.3 }}
-								></motion.div>
-							)}
-							<span
-								className={`relative ${
-									tabActive === index ? "text-white" : "text-black"
-								} transition-colors delay-100`}
-							>
-								{type}
-							</span>
-						</motion.li>
-					);
-				})}
-			</motion.ul>
+			<TabSlider
+				listItem={provinceType}
+				tabActive={tabActive}
+				setTabActive={setTabActive}
+			></TabSlider>
 			<motion.div
 				className={classNames(
 					sliderIndex === 0 && " cursor-default pointer-events-none opacity-50",
-					"absolute left-0 p-2 -translate-x-4 rounded-full top-[146px] z-10 bg-[#f2f2f2] shadow-2xl cursor-pointer transition-all hover-button group"
+					"absolute left-0 p-2 -translate-x-4 rounded-full top-[199px] z-10 bg-[#f2f2f2] shadow-2xl cursor-pointer transition-all hover-button group"
 				)}
 				animate={{ opacity: sliderIndex === 0 ? 0 : 1 }}
 				onClick={() => handleClickSliderNavigation("left")}
@@ -140,7 +112,7 @@ const DiscoverSection = () => {
 				className={classNames(
 					sliderIndex === list_provinces.length - 4 &&
 						"opacity-50 cursor-default pointer-events-none",
-					"absolute right-0 translate-x-4 p-2 rounded-full top-[146px] z-10 bg-[#f2f2f2] shadow-xl cursor-pointer transition-all hover-button group"
+					"absolute right-0 translate-x-4 p-2 rounded-full top-[199px] z-10 bg-[#f2f2f2] shadow-xl cursor-pointer transition-all hover-button group"
 				)}
 				onClick={() => handleClickSliderNavigation("right")}
 				animate={{ opacity: sliderIndex === list_provinces.length - 4 ? 0 : 1 }}

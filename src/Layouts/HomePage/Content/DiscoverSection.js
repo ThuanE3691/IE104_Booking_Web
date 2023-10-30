@@ -45,6 +45,16 @@ const DiscoverSection = () => {
 
 	const [sliderIndex, setSliderIndex] = useState(0);
 	const [isAnimate, setIsAnimate] = useState(false);
+	const [tabActive, setTabActive] = useState(0);
+
+	const provinceType = [
+		"Yêu Thích",
+		"Bãi Biển",
+		"Thiên Nhiên",
+		"Thành Phố",
+		"Lãng Mạn",
+		"Thư Giản",
+	];
 
 	const handleClickSliderNavigation = (direction) => {
 		switch (direction) {
@@ -52,24 +62,47 @@ const DiscoverSection = () => {
 				if (!isAnimate) {
 					setSliderIndex((prev) => prev - 1);
 				}
-				setIsAnimate(true);
-
 				break;
 			case "right":
 				if (!isAnimate) {
 					setSliderIndex((prev) => prev + 1);
 				}
-				setIsAnimate(true);
-
 				break;
 			default:
 				break;
 		}
+		setIsAnimate(true);
 	};
 
 	return (
 		<div className="relative font-vietnam-pro">
 			<h3 className=" content-header">Khám phá Việt Nam</h3>
+			<motion.ul className="flex items-center gap-5 mt-4">
+				{provinceType.map((type, index) => {
+					return (
+						<motion.li
+							className="relative px-4 py-2 font-semibold rounded-lg cursor-pointer hover-button bg-slate-200 mix-blend-darken"
+							onClick={() => setTabActive(index)}
+							key={index}
+						>
+							{tabActive === index && (
+								<motion.div
+									className="absolute inset-0 w-full h-full text-white rounded-lg bg-button-primary"
+									layoutId="bg-tab"
+									transition={{ duration: 0.3 }}
+								></motion.div>
+							)}
+							<span
+								className={`relative ${
+									tabActive === index ? "text-white" : "text-black"
+								} transition-colors delay-100`}
+							>
+								{type}
+							</span>
+						</motion.li>
+					);
+				})}
+			</motion.ul>
 			<motion.div
 				className={classNames(
 					sliderIndex === 0 && " cursor-default pointer-events-none opacity-50",

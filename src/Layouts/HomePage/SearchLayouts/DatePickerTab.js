@@ -1,4 +1,4 @@
-import CalendarSVG from "@/Assets/Icons/SVG/CalendarSVG";
+import CalendarSVG from "@/Assets/Icons/SVG/SearchBar/CalendarSVG";
 import DatePicker from "@/Components/DatePicker";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
@@ -22,8 +22,11 @@ const getFirstDayOfMonth = (date) => {
 
 const TimeRender = ({ date }) => {
 	return (
-		<time dateTime={format(date, "yyyy-MM-dd")} className="text-xl font-bold">
-			{format(date, "dd - MM - yyyy")}
+		<time
+			dateTime={format(date, "dd MMMM, yyyy")}
+			className="text-xl font-bold"
+		>
+			{format(date, "dd MMMM, yyyy", { locale: viLocale })}
 		</time>
 	);
 };
@@ -166,7 +169,7 @@ const DatePickerTab = () => {
 					{selectedDate.arrival !== null ? (
 						<TimeRender date={selectedDate.arrival}></TimeRender>
 					) : (
-						<p className="text-xl font-bold">Nhận Phòng</p>
+						<p className="text-xl font-bold">Nhận phòng</p>
 					)}
 					<p className="text-sm text-sub-text">Thời gian nhận phòng</p>
 				</div>
@@ -180,7 +183,7 @@ const DatePickerTab = () => {
 					{selectedDate.go !== null ? (
 						<TimeRender date={selectedDate.go}></TimeRender>
 					) : (
-						<p className="text-xl font-bold">Trả Phòng</p>
+						<p className="text-xl font-bold">Trả phòng</p>
 					)}
 					<p className="text-sm text-sub-text">Thời gian trả phòng</p>
 				</div>

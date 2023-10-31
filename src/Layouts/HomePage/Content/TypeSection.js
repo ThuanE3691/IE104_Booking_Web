@@ -7,12 +7,22 @@ import Camping from "@/Assets/Images/HotelType/Camping.jpg";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const ImageCard = ({ styleContainer, styleImg, img, type, numsType }) => {
+const ImageCard = ({
+	styleContainer,
+	styleImg,
+	img,
+	type,
+	numsType,
+	minPrice,
+	isLarge,
+}) => {
 	const [isHover, setIsHover] = useState(false);
 
 	return (
 		<motion.div
-			className={styleContainer + " overflow-hidden relative cursor-pointer"}
+			className={
+				styleContainer + " overflow-hidden relative cursor-pointer group"
+			}
 			onMouseEnter={() => setIsHover(true)}
 			onMouseLeave={() => setIsHover(false)}
 			initial={{ opacity: 0, scale: 0 }}
@@ -23,19 +33,32 @@ const ImageCard = ({ styleContainer, styleImg, img, type, numsType }) => {
 			<AnimatePresence>
 				{isHover && (
 					<motion.div
-						className="absolute left-0 flex flex-col justify-end w-full h-full px-4 py-4 bg-black pointer-events-none bg-opacity-70 rounded-xl"
+						className="absolute left-0 flex flex-col justify-end w-full h-full px-4 py-4 bg-black pointer-events-none bg-opacity-70 rounded-xl group"
 						initial={{ top: "100%" }}
-						animate={{ top: "0" }}
-						exit={{ top: "100%" }}
-						transition={{
-							duration: 1,
-							type: "spring",
-							bounce: 0,
-							ease: "easeInOut",
+						animate={{
+							top: "0",
+							transition: {
+								duration: 0.8,
+								type: "spring",
+								bounce: 0,
+								ease: "easeInOut",
+							},
 						}}
+						exit={{
+							top: "100%",
+							transition: {
+								duration: 0.2,
+							},
+						}}
+						data-isLarge={isLarge}
 					>
 						<p className="text-2xl font-semibold text-white ">{type}</p>
-						<p className="text-white ">{numsType} chỗ nghỉ</p>
+						<p className="mt-1 group-data-[isLarge=true]:mt-1.5 text-white">
+							{numsType} chỗ nghỉ
+						</p>
+						<p className="mt-0.5 group-data-[isLarge=true]:mt-1 text-white ">
+							{minPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}đ/đêm
+						</p>
 					</motion.div>
 				)}
 			</AnimatePresence>
@@ -52,8 +75,10 @@ const TypeSection = () => {
 					styleContainer="row-span-2 row-start-1 shadow-xl rounded-xl"
 					styleImg="object-cover w-full h-full rounded-xl"
 					img={Resort}
-					type="Resort"
+					type="Khu nghỉ dưỡng"
 					numsType={21420}
+					isLarge={true}
+					minPrice={"3500000"}
 				></ImageCard>
 				<div className="grid grid-cols-1 grid-rows-[repeat(2,250px)] row-span-2 gap-4">
 					<div className="grid grid-cols-[4.5fr,5.5fr] gap-x-4 grid-rows-1">
@@ -61,15 +86,17 @@ const TypeSection = () => {
 							styleContainer="rounded-xl shadow-xl"
 							styleImg="object-cover w-full h-full shadow-xl rounded-xl"
 							img={KhachSan}
-							type="Khách Sạn"
+							type="Khách sạn"
 							numsType={40291}
+							minPrice={"400000"}
 						></ImageCard>
 						<ImageCard
 							styleContainer="rounded-xl shadow-xl"
 							styleImg="object-cover w-full h-full shadow-xl rounded-xl"
 							img={Camping}
-							type="Camping"
+							type="Khu cắm trại"
 							numsType={2052}
+							minPrice={"1000000"}
 						></ImageCard>
 					</div>
 					<div className="grid grid-cols-[5.5fr,4.5fr] gap-4 grid-rows-1">
@@ -77,15 +104,17 @@ const TypeSection = () => {
 							styleContainer="rounded-xl shadow-xl"
 							styleImg="object-cover w-full h-full shadow-xl rounded-xl"
 							img={Villa}
-							type="Villa"
+							type="Biệt thự"
 							numsType={5102}
+							minPrice={"15000000"}
 						></ImageCard>
 						<ImageCard
 							styleContainer="rounded-xl shadow-xl"
 							styleImg="object-cover w-full h-full shadow-xl rounded-xl"
 							img={CanHo}
-							type="Căn Hộ"
+							type="Căn hộ"
 							numsType={12312}
+							minPrice={"2000000"}
 						></ImageCard>
 					</div>
 				</div>

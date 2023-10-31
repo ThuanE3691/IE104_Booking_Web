@@ -1,36 +1,32 @@
-import BeachSVG from "@/Assets/Icons/SVG/BeachSVG";
-import NatureSVG from "@/Assets/Icons/SVG/NatureSVG";
-import CitySVG from "@/Assets/Icons/SVG/CitySVG";
-import LoveSVG from "@/Assets/Icons/SVG/LoveSVG";
-import RelaxSVG from "@/Assets/Icons/SVG/RelaxSVG";
-import FavoriteSVG from "@/Assets/Icons/SVG/FavoriteSVG";
+import BeachSVG from "@/Assets/Icons/SVG/TypeProvince/BeachSVG";
+import NatureSVG from "@/Assets/Icons/SVG/TypeProvince/NatureSVG";
+import LoveSVG from "@/Assets/Icons/SVG/TypeProvince/LoveSVG";
+import MountainSVG from "@/Assets/Icons/SVG/TypeProvince/MountainSVG";
+import AncientSVG from "@/Assets/Icons/SVG/TypeProvince/AncientSVG";
 
-const className = "relative z-10 w-5 h-5 text-black fill-current";
+const className =
+	"relative z-10 w-5 h-5 text-black fill-current group-data-[isActive=true]:text-white transition-colors delay-100";
 
 const provinceType = [
 	{
 		name: "Yêu thích",
-		image: <FavoriteSVG className={className}></FavoriteSVG>,
+		image: <LoveSVG className={className}></LoveSVG>,
 	},
 	{
 		name: "Bãi biển",
 		image: <BeachSVG className={className}></BeachSVG>,
 	},
 	{
-		name: "Thiên nhiên",
+		name: "Rừng núi",
+		image: <MountainSVG className={className}></MountainSVG>,
+	},
+	{
+		name: "Di tích",
+		image: <AncientSVG className={className}></AncientSVG>,
+	},
+	{
+		name: "Sinh thái",
 		image: <NatureSVG className={className}></NatureSVG>,
-	},
-	{
-		name: "Thành phố",
-		image: <CitySVG className={className}></CitySVG>,
-	},
-	{
-		name: "Lãng mạn",
-		image: <LoveSVG className={className}></LoveSVG>,
-	},
-	{
-		name: "Thư giãn",
-		image: <RelaxSVG className={className}></RelaxSVG>,
 	},
 ];
 

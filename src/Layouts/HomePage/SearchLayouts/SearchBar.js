@@ -1,5 +1,5 @@
-import TravelerSVG from "@/Assets/Icons/SVG/TravelerSVG";
-import SearchIconSVG from "@/Assets/Icons/SVG/SearchIconSVG";
+import TravelerSVG from "@/Assets/Icons/SVG/SearchBar/TravelerSVG";
+import SearchIconSVG from "@/Assets/Icons/SVG/SearchBar/SearchIconSVG";
 import LocationTab from "./LocationTab";
 import DatePickerTab from "./DatePickerTab";
 

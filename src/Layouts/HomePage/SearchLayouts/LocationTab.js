@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import NavigationSVG from "@/Assets/Icons/SVG/NavigationSVG";
+import NavigationSVG from "@/Assets/Icons/SVG/SearchBar/NavigationSVG";
 import Selector from "@/Components/Selector";
 import getVietNamProvinces from "@/Utils/getVietNamProvinces";
 import changeLocationName from "@/Utils/changeLocationName";

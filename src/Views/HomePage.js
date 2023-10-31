@@ -1,6 +1,7 @@
 import Navbar from "@/Layouts/Navbar";
 import SearchArea from "@/Layouts/HomePage/SearchLayouts/SearchArea";
 import ContentArea from "@/Layouts/HomePage/Content/ContentArea";
+import Footer from "@/Layouts/HomePage/Footer";
 
 const HomePage = () => {
 	return (
@@ -8,6 +9,7 @@ const HomePage = () => {
 			<Navbar></Navbar>
 			<SearchArea></SearchArea>
 			<ContentArea></ContentArea>
+			<Footer></Footer>
 		</div>
 	);
 };

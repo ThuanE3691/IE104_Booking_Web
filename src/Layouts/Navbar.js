@@ -3,12 +3,23 @@ import DarkModeSVG from "@/Assets/Icons/SVG/Navbar/DarkModeSVG";
 
 import language_icon from "@/Assets/Icons/internet.png";
 import logo from "@/Assets/Icons/travel.png";
-import currency from "@/Assets/Icons/currency.png";
 import dark_mode from "@/Assets/Icons/night-mode.png";
 import partners from "@/Assets/Icons/partners.png";
+import light_mode from "@/Assets/Icons/sun.png";
 
+import { motion } from "framer-motion";
 import vnimg from "@/Assets/Images/vietnam.png";
+
+import { useState } from "react";
+
+const spring = {
+	type: "spring",
+	stiffness: 700,
+	damping: 30,
+};
+
 const Navbar = () => {
+	const [onDarkMode, setOnDarkMode] = useState(false);
 	return (
 		<header className="flex flex-row items-center gap-8 font-vietnam-pro">
 			<nav className="flex flex-col w-full">
@@ -23,9 +34,27 @@ const Navbar = () => {
 							<CurrencySVG className="w-5 h-5"></CurrencySVG>
 							<p>VNĐ</p>
 						</div>
-						<div className="flex items-center w-16 h-8 px-1 py-1 cursor-pointer select-none bg-slate-200 rounded-2xl">
-							<div className="w-6 h-full bg-white rounded-full"></div>
-							<img src={dark_mode} alt="" className="w-4 h-4 ml-auto mr-1" />
+
+						<div
+							data-ison={onDarkMode}
+							className="flex items-center w-16 h-8 px-1 py-1 cursor-pointer justify-start select-none bg-slate-200 rounded-2xl data-[ison=true]:justify-end relative"
+							onClick={() => setOnDarkMode(!onDarkMode)}
+						>
+							<motion.div
+								className="relative z-10 w-6 h-full bg-white rounded-full"
+								transition={spring}
+								layout
+							></motion.div>
+							<img
+								src={dark_mode}
+								alt=""
+								className="absolute z-0 w-4 h-4 ml-auto mr-1 right-1"
+							/>
+							<img
+								src={light_mode}
+								alt=""
+								className="absolute z-0 w-4 h-4 ml-1 ml-auto left-1"
+							/>
 						</div>
 					</li>
 					<li className="flex items-center gap-6 ml-auto">

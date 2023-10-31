@@ -1,5 +1,5 @@
-import TravelerSVG from "@/Assets/Icons/SVG/TravelerSVG";
-import SearchIconSVG from "@/Assets/Icons/SVG/SearchIconSVG";
+import TravelerSVG from "@/Assets/Icons/SVG/SearchBar/TravelerSVG";
+import SearchIconSVG from "@/Assets/Icons/SVG/SearchBar/SearchIconSVG";
 import LocationTab from "./LocationTab";
 import DatePickerTab from "./DatePickerTab";
 
@@ -16,8 +16,8 @@ const SearchBar = () => {
 					<p className="text-sm text-sub-text">Thêm số lượng hành khách</p>
 				</div>
 			</div>
-			<button className=" bg-[#3b71fe] p-4 rounded-full hover:opacity-60 transition-opacity duration-200">
-				<SearchIconSVG className="w-5 h-5 text-white fill-current"></SearchIconSVG>
+			<button className="p-4 transition-colors duration-200 rounded-full group bg-button-primary hover-button">
+				<SearchIconSVG className="w-5 h-5 text-white fill-current group-hover:text-black"></SearchIconSVG>
 			</button>
 		</div>
 	);

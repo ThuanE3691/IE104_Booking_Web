@@ -7,8 +7,9 @@ module.exports = {
 				"main-bg": "#fcfcfd",
 				"sub-text": "#b7bac7",
 				"selection-active": "#f4f5f6",
-				"button-primary": "#0081C9",
+				"button-primary": "#2492B7",
 				"text-primary": "#1D5D9B",
+				"search-button": "#31A8D1",
 				datepicker: {
 					primary: "#33363e",
 					selected: "#23262f",

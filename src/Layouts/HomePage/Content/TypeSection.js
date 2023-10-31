@@ -27,6 +27,7 @@ const ImageCard = ({
 			onMouseLeave={() => setIsHover(false)}
 			initial={{ opacity: 0, scale: 0 }}
 			whileInView={{ opacity: 1, scale: 1 }}
+			viewport={{ once: true, margin: "200px" }}
 			transition={{ duration: 0.5, type: "spring" }}
 		>
 			<img src={img} alt="" className={styleImg} />
@@ -50,13 +51,13 @@ const ImageCard = ({
 								duration: 0.2,
 							},
 						}}
-						data-isLarge={isLarge}
+						data-islarge={isLarge}
 					>
 						<p className="text-2xl font-semibold text-white ">{type}</p>
-						<p className="mt-1 group-data-[isLarge=true]:mt-1.5 text-white">
+						<p className="mt-1 group-data-[islarge=true]:mt-1.5 text-white">
 							{numsType} chỗ nghỉ
 						</p>
-						<p className="mt-0.5 group-data-[isLarge=true]:mt-1 text-white ">
+						<p className="mt-0.5 group-data-[islarge=true]:mt-1 text-white ">
 							{minPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}đ/đêm
 						</p>
 					</motion.div>

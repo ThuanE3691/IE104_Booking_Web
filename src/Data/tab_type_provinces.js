@@ -11,22 +11,27 @@ const provinceType = [
 	{
 		name: "Yêu thích",
 		image: <LoveSVG className={className}></LoveSVG>,
+		tag: "favorite",
 	},
 	{
 		name: "Bãi biển",
 		image: <BeachSVG className={className}></BeachSVG>,
+		tag: "beach",
 	},
 	{
 		name: "Rừng núi",
 		image: <MountainSVG className={className}></MountainSVG>,
+		tag: "mountain",
 	},
 	{
 		name: "Di tích",
 		image: <AncientSVG className={className}></AncientSVG>,
+		tag: "ancient",
 	},
 	{
 		name: "Sinh thái",
 		image: <NatureSVG className={className}></NatureSVG>,
+		tag: "nature",
 	},
 ];
 

@@ -1,15 +1,15 @@
 import { motion } from "framer-motion";
 
-const TabSlider = ({ listItem, tabActive, setTabActive }) => {
+const TabSlider = ({ listItem, tabActive, handleOnChangeTab }) => {
 	return (
 		<motion.ul className="flex items-center gap-5 mt-4">
 			{listItem.map((type, index) => {
 				return (
 					<motion.li
 						className="relative flex items-center px-4 py-2 font-semibold transition-colors duration-200 cursor-pointer rounded-xl group hover-button mix-blend-darken gap-x-2"
-						onClick={() => setTabActive(index)}
+						onClick={() => handleOnChangeTab(index)}
 						key={index}
-						data-isActive={tabActive === index}
+						data-isactive={tabActive === index}
 					>
 						{tabActive === index && (
 							<motion.div
@@ -20,7 +20,7 @@ const TabSlider = ({ listItem, tabActive, setTabActive }) => {
 						)}
 						{type.image}
 						<span
-							className={`relative transition-colors delay-100 group-data-[isActive=true]:text-white  text-black`}
+							className={`relative transition-colors delay-100 group-data-[isactive=true]:text-white  text-black`}
 						>
 							{type.name}
 						</span>

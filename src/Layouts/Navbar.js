@@ -1,15 +1,10 @@
 import CurrencySVG from "@/Assets/Icons/SVG/Navbar/CurrencySVG";
-import DarkModeSVG from "@/Assets/Icons/SVG/Navbar/DarkModeSVG";
-
 import language_icon from "@/Assets/Icons/internet.png";
 import logo from "@/Assets/Icons/travel.png";
 import dark_mode from "@/Assets/Icons/night-mode.png";
 import partners from "@/Assets/Icons/partners.png";
 import light_mode from "@/Assets/Icons/sun.png";
-
 import { motion } from "framer-motion";
-import vnimg from "@/Assets/Images/vietnam.png";
-
 import { useState } from "react";
 
 const spring = {
@@ -21,7 +16,7 @@ const spring = {
 const Navbar = () => {
 	const [onDarkMode, setOnDarkMode] = useState(false);
 	return (
-		<header className="flex flex-row items-center gap-8 font-vietnam-pro">
+		<header className="flex flex-row items-center gap-8 px-32 mt-4 font-vietnam-pro">
 			<nav className="flex flex-col w-full">
 				<ul className="flex items-center">
 					<li className="flex items-center gap-6">

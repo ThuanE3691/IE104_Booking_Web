@@ -1,73 +1,86 @@
+import HaNoi from "@/Assets/Images/Location/HaNoi.png";
+import Hue from "@/Assets/Images/Location/ThuaThienHue2.jpg";
+import VungTau from "@/Assets/Images/Location/BaRia-VungTau.png";
+import NhaTrang from "@/Assets/Images/Location/NhaTrang.png";
+import AnGiang from "@/Assets/Images/Location/AnGiang.png";
+import DaLat from "@/Assets/Images/Location/DaLat.png";
+import DaNang from "@/Assets/Images/Location/DaNang.png";
+import HoChiMinh from "@/Assets/Images/Location/HoChiMinh.png";
+import CaMau from "@/Assets/Images/Location/CaMau.png";
+import HaLong from "@/Assets/Images/Location/HaLong.jpg";
+import QuangNam from "@/Assets/Images/Location/QuangNam.png";
+import SaPa from "@/Assets/Images/Location/SaPa.png";
+
 const images_store = [
 	{
 		name: "HaNoi",
-		image: require("@/Assets/Images/Location/HaNoi.png"),
+		image: HaNoi,
 		tag: ["favorite"],
 		id: 0,
 	},
 	{
 		name: "ThuaThienHue",
-		image: require("@/Assets/Images/Location/ThuaThienHue2.jpg"),
+		image: Hue,
 		tag: ["favorite", "ancient"],
 		id: 330,
 	},
 	{
 		name: "BaRia-VungTau",
-		image: require("@/Assets/Images/Location/BaRia-VungTau.png"),
+		image: VungTau,
 		tag: ["favorite", "beach", "mountain"],
 		id: 536,
 	},
 	{
 		name: "AnGiang",
-		image: require("@/Assets/Images/Location/AnGiang.png"),
+		image: AnGiang,
 		tag: ["favorite"],
 		id: 616,
 	},
 	{
 		name: "DaNang",
-		image: require("@/Assets/Images/Location/DaNang.png"),
+		image: DaNang,
 		tag: ["favorite", "beach", "mountain"],
 		id: 340,
 	},
 	{
 		name: "CaMau",
-		image: require("@/Assets/Images/Location/CaMau.png"),
+		image: CaMau,
 		tag: ["favorite", "nature"],
 		id: 674,
 	},
 	{
 		name: "HoChiMinh",
-		image: require("@/Assets/Images/Location/HoChiMinh.png"),
+		image: HoChiMinh,
 		tag: ["favorite"],
 		id: 545,
 	},
 	{
 		name: "NhaTrang",
-		image: require("@/Assets/Images/Location/KhanhHoa.png"),
+		image: NhaTrang,
 		tag: ["favorite", "beach", "ancient"],
 		id: 397,
 	},
 	{
 		name: "DaLat",
-		image: require("@/Assets/Images/Location/DaLat.png"),
+		image: DaLat,
 		tag: ["favorite", "mountain"],
 		id: 480,
 	},
 	{
 		name: "HaLong",
-		image: require("@/Assets/Images/Location/QuangNinh.jpg"),
+		image: HaLong,
 		tag: ["favorite", "beach", "ancient"],
 		id: 128,
 	},
 	{
 		name: "QuangNam",
-		image: require("@/Assets/Images/Location/QuangNam2.png"),
+		image: QuangNam,
 		tag: ["favorite", "ancient"],
 		id: 341,
 	},
 	{
 		name: "SaPa",
-		image: require("@/Assets/Images/Location/LaoCai.png"),
+		image: SaPa,
 		tag: ["favorite", "mountain"],
 		id: 49,
 	},

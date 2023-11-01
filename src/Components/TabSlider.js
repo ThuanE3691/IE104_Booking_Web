@@ -6,14 +6,14 @@ const TabSlider = ({ listItem, tabActive, handleOnChangeTab }) => {
 			{listItem.map((type, index) => {
 				return (
 					<motion.li
-						className="relative flex items-center px-4 py-2 font-semibold transition-colors duration-200 cursor-pointer rounded-xl group hover-button mix-blend-darken gap-x-2"
+						className="relative flex items-center px-4 py-2 font-semibold transition-colors duration-200 cursor-pointer rounded-2xl group hover-button mix-blend-darken gap-x-2"
 						onClick={() => handleOnChangeTab(index)}
 						key={index}
 						data-isactive={tabActive === index}
 					>
 						{tabActive === index && (
 							<motion.div
-								className="absolute inset-0 w-full h-full text-white rounded-xl bg-button-primary"
+								className="absolute inset-0 w-full h-full text-white rounded-2xl bg-button-primary"
 								layoutId="bg-tab"
 								transition={{ duration: 0.3 }}
 							></motion.div>

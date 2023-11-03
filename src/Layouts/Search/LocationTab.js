@@ -4,8 +4,9 @@ import NavigationSVG from "@/Assets/Icons/SVG/SearchBar/NavigationSVG";
 import Selector from "@/Components/Selector";
 import getVietNamProvinces from "@/Utils/getVietNamProvinces";
 import changeLocationName from "@/Utils/changeLocationName";
+import classNames from "@/Utils/classNames";
 
-const LocationTab = () => {
+const LocationTab = ({ overrides }) => {
 	const NUM_LOCATION_DISPLAY = 4;
 	const ref = useRef(null);
 	const [indexSelection, SetIndexSelection] = useState(null);
@@ -94,9 +95,10 @@ const LocationTab = () => {
 
 	return (
 		<div
-			className={`relative flex items-start gap-3 px-3 py-4 duration-300 cursor-pointer rounded-2xl ${
+			className={classNames(
+				"relative flex items-start gap-3 px-3 py-4 duration-300 cursor-pointer rounded-2xl",
 				location.active && "ring-2 ring-sub-text"
-			} `}
+			)}
 			onBlur={(event) => handleOnBlur(event)}
 			tabIndex="-1"
 		>
@@ -109,6 +111,7 @@ const LocationTab = () => {
 						closeSelector={closeSelector}
 						indexSelection={indexSelection}
 						NUM_LOCATION_DISPLAY={NUM_LOCATION_DISPLAY}
+						overrides={overrides}
 					></Selector>
 				)}
 			</AnimatePresence>

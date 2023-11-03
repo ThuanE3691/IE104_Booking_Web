@@ -15,6 +15,7 @@ import {
 	getWeeksInMonth,
 } from "date-fns";
 import viLocale from "date-fns/locale/vi";
+import classNames from "@/Utils/classNames";
 
 const getFirstDayOfMonth = (date) => {
 	return parse(format(date, "MMM-yyyy"), "MMM-yyyy", new Date());
@@ -31,7 +32,7 @@ const TimeRender = ({ date }) => {
 	);
 };
 
-const DatePickerTab = () => {
+const DatePickerTab = ({ overrides }) => {
 	const [showDatePicker, setShowDatePicker] = useState(false);
 	const [selectedDate, setSelectedDate] = useState({
 		arrival: null,
@@ -116,21 +117,30 @@ const DatePickerTab = () => {
 			<AnimatePresence>
 				{showDatePicker && (
 					<motion.div
-						className="absolute bg-main-bg px-8 gap-x-10 left-[336px] shadow-xl rounded-2xl py-8 font-poppins grid grid-cols-2 z-10"
+						className={classNames(
+							"absolute bg-main-bg px-8 gap-x-10 shadow-xl rounded-2xl py-8 font-poppins grid grid-cols-2 z-10",
+							overrides?.defaultPosition
+						)}
 						initial={{
 							scale: 0,
 							opacity: 0,
-							top: !isChangeHeight ? "-350px" : "-398px",
+							top: !isChangeHeight
+								? overrides?.defaultTop
+								: overrides?.handleChangeHeight,
 						}}
 						animate={{
 							scale: 1,
 							opacity: 1,
-							top: !isChangeHeight ? "-350px" : "-398px",
+							top: !isChangeHeight
+								? overrides?.defaultTop
+								: overrides?.handleChangeHeight,
 						}}
 						exit={{
 							scale: 0,
 							opacity: 0,
-							top: !isChangeHeight ? "-350px" : "-398px",
+							top: !isChangeHeight
+								? overrides?.defaultTop
+								: overrides?.handleChangeHeight,
 						}}
 						transition={{
 							top: { duration: 0.1 },

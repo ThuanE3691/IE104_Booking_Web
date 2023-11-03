@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import PathSVG from "@/Assets/Icons/SVG/SearchBar/PathSVG";
 import changeLocationName from "@/Utils/changeLocationName";
+import classNames from "@/Utils/classNames";
 
 const Selector = ({
 	handleSelectLocation,
@@ -8,11 +9,13 @@ const Selector = ({
 	closeSelector,
 	indexSelection,
 	NUM_LOCATION_DISPLAY,
+	overrides,
 }) => {
-	const POSITION_Y_CONFIG = 20;
 	return (
 		<motion.ul
-			className={`absolute -left-8 z-10 grid w-[200%] px-2 py-2 shadow-xl bg-main-bg rounded-2xl text-sub-text font-nunito font-semibold cursor-default `}
+			className={classNames(
+				"absolute -left-8 z-10 grid w-[200%] px-2 py-2 shadow-xl bg-main-bg rounded-2xl text-sub-text font-nunito font-semibold cursor-default"
+			)}
 			initial={{ scale: 0, opacity: 0 }}
 			animate={{ scale: 1, opacity: 1 }}
 			exit={{ scale: 0, opacity: 0 }}
@@ -20,7 +23,10 @@ const Selector = ({
 			tabIndex="-1"
 			key="location-selector"
 			style={{
-				top: "-" + (NUM_LOCATION_DISPLAY * 60 + POSITION_Y_CONFIG) + "px",
+				top:
+					(overrides?.isOnTop === true ? "-" : "") +
+					(NUM_LOCATION_DISPLAY * 60 + overrides.yPosition) +
+					"px",
 				gridTemplateRows: "repeat(" + NUM_LOCATION_DISPLAY + ", minmax(0,1fr)",
 			}}
 		>

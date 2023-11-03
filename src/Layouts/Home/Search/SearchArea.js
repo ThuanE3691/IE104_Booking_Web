@@ -1,5 +1,5 @@
 import homepage_bg from "@/Assets/Images/villa.jpg";
-import SearchBar from "@/Layouts/Home/Search/SearchBar";
+import SearchBar from "@/Layouts/Search/SearchBar";
 
 const SearchArea = () => {
 	return (
@@ -18,7 +18,16 @@ const SearchArea = () => {
 					Chọn đúng nơi, trải nghiệm tốt
 				</p>
 			</div>
-			<SearchBar></SearchBar>
+			<SearchBar
+				overrides={{
+					container: "absolute -bottom-16 inset-x-16",
+					dateTab: {
+						defaultPosition: "left-[336px]",
+						defaultTop: "-350px",
+						handleChangeHeight: "-398px",
+					},
+				}}
+			></SearchBar>
 		</div>
 	);
 };

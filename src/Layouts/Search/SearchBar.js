@@ -2,13 +2,19 @@ import TravelerSVG from "@/Assets/Icons/SVG/SearchBar/TravelerSVG";
 import SearchIconSVG from "@/Assets/Icons/SVG/SearchBar/SearchIconSVG";
 import LocationTab from "./LocationTab";
 import DatePickerTab from "./DatePickerTab";
+import classNames from "@/Utils/classNames";
 
-const SearchBar = () => {
+const SearchBar = ({ overrides }) => {
 	return (
-		<div className="absolute flex items-center justify-between px-8 py-6 shadow-2xl bg-gradient-to-tr from-main-bg from-70% -bottom-16 inset-x-16 font-nunito rounded-2xl flex-nowrap select-none">
+		<div
+			className={classNames(
+				"flex items-center justify-between px-8 py-6 shadow-2xl bg-gradient-to-tr from-main-bg from-70% font-nunito rounded-2xl flex-nowrap select-none",
+				overrides?.container
+			)}
+		>
 			<LocationTab></LocationTab>
 			<div className=" w-[1.5px] h-16 bg-sub-text"></div>
-			<DatePickerTab></DatePickerTab>
+			<DatePickerTab overrides={overrides?.dateTab}></DatePickerTab>
 			<div className="flex items-start gap-3 px-3 py-4 transition-all duration-300 cursor-pointer hover:shadow-2xl rounded-2xl">
 				<TravelerSVG className="cursor-pointer fill-current w-7 h-7 text-sub-text"></TravelerSVG>
 				<div className="cursor-pointer">

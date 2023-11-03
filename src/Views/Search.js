@@ -1,7 +1,17 @@
+import SearchBar from "@/Layouts/Search/SearchBar";
+
 const Search = () => {
+	const styleSearchBar = {
+		container: "relative",
+		dateTab: {
+			defaultTop: "110%",
+			defaultPosition: "left-[370px]",
+		},
+	};
+
 	return (
-		<div className="flex flex-col w-full min-h-full px-32 bg-main-bg">
-			Search
+		<div className="flex flex-col w-full min-h-full px-32 py-8 bg-main-bg">
+			<SearchBar overrides={styleSearchBar}></SearchBar>
 		</div>
 	);
 };

@@ -3,6 +3,10 @@ import SearchBar from "@/Layouts/Search/SearchBar";
 const Search = () => {
 	const styleSearchBar = {
 		container: "relative",
+		locationTab: {
+			yPosition: -125,
+			isOnTop: false,
+		},
 		dateTab: {
 			defaultTop: "110%",
 			defaultPosition: "left-[370px]",

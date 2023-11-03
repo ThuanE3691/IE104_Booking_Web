@@ -21,6 +21,10 @@ const SearchArea = () => {
 			<SearchBar
 				overrides={{
 					container: "absolute -bottom-16 inset-x-16",
+					locationTab: {
+						yPosition: 20,
+						isOnTop: true,
+					},
 					dateTab: {
 						defaultPosition: "left-[336px]",
 						defaultTop: "-350px",

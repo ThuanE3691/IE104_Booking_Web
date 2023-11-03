@@ -12,7 +12,7 @@ const SearchBar = ({ overrides }) => {
 				overrides?.container
 			)}
 		>
-			<LocationTab></LocationTab>
+			<LocationTab overrides={overrides?.locationTab}></LocationTab>
 			<div className=" w-[1.5px] h-16 bg-sub-text"></div>
 			<DatePickerTab overrides={overrides?.dateTab}></DatePickerTab>
 			<div className="flex items-start gap-3 px-3 py-4 transition-all duration-300 cursor-pointer hover:shadow-2xl rounded-2xl">

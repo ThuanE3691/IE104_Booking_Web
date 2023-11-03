@@ -19,7 +19,7 @@ const getFilterLocation = (filterTag) => {
 const DiscoverSection = () => {
 	const [sliderIndex, setSliderIndex] = useState(0);
 	const [isAnimate, setIsAnimate] = useState(false);
-	const [tabActive, setTabActive] = useState(1);
+	const [tabActive, setTabActive] = useState(0);
 
 	const [provincesDisplay, setProvincesDisplay] = useState(
 		getFilterLocation(provinceType[tabActive].tag)

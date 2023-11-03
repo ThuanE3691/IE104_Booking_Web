@@ -1,11 +1,9 @@
-import Navbar from "@/Layouts/Navbar";
 import SearchArea from "@/Layouts/HomePage/SearchLayouts/SearchArea";
 import ContentArea from "@/Layouts/HomePage/Content/ContentArea";
 
 const HomePage = () => {
 	return (
-		<div className="flex flex-col w-full min-h-full px-32 py-8 bg-main-bg">
-			<Navbar></Navbar>
+		<div className="flex flex-col w-full min-h-full px-32 bg-main-bg">
 			<SearchArea></SearchArea>
 			<ContentArea></ContentArea>
 		</div>

@@ -1,45 +1,101 @@
 import CurrencySVG from "@/Assets/Icons/SVG/Navbar/CurrencySVG";
-import DarkModeSVG from "@/Assets/Icons/SVG/Navbar/DarkModeSVG";
+import language_icon from "@/Assets/Icons/internet.png";
+import logo from "@/Assets/Icons/travel.png";
+import dark_mode from "@/Assets/Icons/night-mode.png";
+import partners from "@/Assets/Icons/partners.png";
+import light_mode from "@/Assets/Icons/sun.png";
+import { motion } from "framer-motion";
+import { useState } from "react";
+import { set } from "date-fns";
 
-import vnimg from "@/Assets/Images/vietnam.png";
-// flex flex-row mx-14 gap-x-5
-const Navbar = () => {
+const spring = {
+	type: "spring",
+	stiffness: 700,
+	damping: 30,
+};
+
+const Logo = () => {
 	return (
-		<div className="flex flex-row items-center mx-14 font-vietnam-pro">
-			<div className="flex flex-row gap-x-8">
-				<div className="text-center cursor-pointer w-36">Logo</div>
-				<div className="text-center transition-all cursor-pointer hover:text-text-primary hover:font-semibold">
-					Về chúng tôi
-				</div>
-				<div className="text-center transition-all cursor-pointer hover:text-text-primary hover:font-semibold">
-					Liên hệ
-				</div>
-				<div className="ml-3 font-bold text-center transition-all cursor-pointer hover:text-text-primary">
-					Trở Thành Đối Tác
-				</div>
-			</div>
+		<figure className="flex flex-col items-center cursor-pointer">
+			<img src={logo} alt="Logo" className="w-10 h-10" />
+			<figcaption className="mt-1 text-lg font-semibold text-blue-600">
+				Travel
+			</figcaption>
+		</figure>
+	);
+};
 
-			<div className="flex flex-row items-center justify-between w-2/5 ml-auto">
-				<div className="flex flex-row gap-x-1.5">
-					<div className="mx-3 cursor-pointer fill-current w-9 h-9 hover:text-slate-500">
-						<DarkModeSVG></DarkModeSVG>
-					</div>
-					<div className="flex flex-row items-center gap-x-2 ">
-						<img src={vnimg} alt="Vietnam" className="cursor-pointer h-9 w-9" />
-						<div className="w-0.5 h-6 mx-2.5 bg-black"></div>
-						<CurrencySVG className="h-6 cursor-pointer fill-current hover:text-slate-500"></CurrencySVG>
-					</div>
-				</div>
-				<div className="flex flex-row gap-x-2">
-					<div className="px-3 py-2 m-1 font-semibold text-center transition-colors bg-white cursor-pointer hover:text-text-primary ">
-						Đăng nhập
-					</div>
-					<div className="px-3 py-2 m-1 font-semibold text-center text-white transition-colors rounded-lg cursor-pointer bg-button-primary hover-button ">
-						Đăng ký
-					</div>
-				</div>
-			</div>
+const DarkModeButton = ({ onDarkMode, setOnDarkMode }) => {
+	return (
+		<div
+			data-ison={onDarkMode}
+			className="flex items-center w-16 h-8 px-1 py-1 cursor-pointer justify-start select-none bg-slate-200 rounded-2xl data-[ison=true]:justify-end relative"
+			onClick={() => setOnDarkMode(!onDarkMode)}
+		>
+			<motion.div
+				className="relative z-10 w-6 h-full bg-white rounded-full"
+				transition={spring}
+				layout
+			></motion.div>
+			<img
+				src={dark_mode}
+				alt=""
+				className="absolute z-0 w-4 h-4 ml-auto mr-1 right-1"
+			/>
+			<img
+				src={light_mode}
+				alt=""
+				className="absolute z-0 w-4 h-4 ml-1 ml-auto left-1"
+			/>
 		</div>
+	);
+};
+
+const Navbar = () => {
+	const [onDarkMode, setOnDarkMode] = useState(false);
+	return (
+		<header className="flex flex-row items-center gap-8 px-32 mt-4 font-vietnam-pro">
+			<Logo></Logo>
+			<nav className="flex items-center w-full">
+				<div className="flex items-center gap-10 ml-12">
+					<span className="text-lg font-medium transition-colors cursor-pointer hover:text-text-primary">
+						Về chúng tôi
+					</span>
+					<span className="text-lg font-medium transition-colors cursor-pointer hover:text-text-primary">
+						Liên hệ
+					</span>
+				</div>
+				<div className="flex items-center gap-6 ml-auto">
+					<div className="flex items-center gap-1 cursor-pointer">
+						<img src={language_icon} alt="" className="w-5 h-5" />
+						<p>Tiếng Việt</p>
+					</div>
+					<div className="flex items-center gap-2 cursor-pointer">
+						<CurrencySVG className="w-5 h-5"></CurrencySVG>
+						<p>VNĐ</p>
+					</div>
+					<DarkModeButton
+						onDarkMode={onDarkMode}
+						setOnDarkMode={setOnDarkMode}
+					></DarkModeButton>
+				</div>
+				<div className="flex items-center gap-6 ml-auto">
+					<button className="px-4 py-2 font-semibold transition-colors hover-button rounded-xl">
+						Đăng nhập
+					</button>
+					<button className="px-4 py-2 font-semibold text-white transition-colors bg-button-primary rounded-xl hover-button">
+						Đăng ký
+					</button>
+				</div>
+
+				{/* <li className="flex items-center gap-3 ml-auto cursor-pointer group">
+					<img src={partners} alt="" className="w-8 h-8" />
+					<p className="font-semibold transition-colors group-hover:text-text-primary">
+						Trở thành đối tác
+					</p>
+				</li> */}
+			</nav>
+		</header>
 	);
 };
 

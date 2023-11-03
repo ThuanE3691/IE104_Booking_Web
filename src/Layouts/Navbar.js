@@ -2,11 +2,10 @@ import CurrencySVG from "@/Assets/Icons/SVG/Navbar/CurrencySVG";
 import language_icon from "@/Assets/Icons/internet.png";
 import logo from "@/Assets/Icons/travel.png";
 import dark_mode from "@/Assets/Icons/night-mode.png";
-import partners from "@/Assets/Icons/partners.png";
+// import partners from "@/Assets/Icons/partners.png";
 import light_mode from "@/Assets/Icons/sun.png";
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { set } from "date-fns";
 
 const spring = {
 	type: "spring",

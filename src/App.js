@@ -1,22 +1,33 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import HomePage from "@/Views/HomePage";
-import Navbar from "./Layouts/Navbar";
-import Footer from "./Layouts/HomePage/Footer";
+import routes from "./Routes/routes";
+import DefaultLayout from "./Layouts/DefaultLayout/DefaultLayout";
+import { Fragment } from "react";
 
 function App() {
 	return (
 		<Router>
 			<Routes>
-				<Route
-					path="/"
-					element={
-						<>
-							<Navbar></Navbar>
-							<HomePage />
-							<Footer></Footer>
-						</>
+				{routes.map((route, index) => {
+					const Page = route.component;
+					let Layout = DefaultLayout;
+
+					if (route.layout) {
+						Layout = route.layout;
+					} else if (route.layout === null) {
+						Layout = Fragment;
 					}
-				></Route>
+					return (
+						<Route
+							path={route.path}
+							key={index}
+							element={
+								<Layout>
+									<Page></Page>
+								</Layout>
+							}
+						></Route>
+					);
+				})}
 			</Routes>
 		</Router>
 	);

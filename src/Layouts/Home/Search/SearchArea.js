@@ -1,5 +1,5 @@
 import homepage_bg from "@/Assets/Images/villa.jpg";
-import SearchBar from "@/Layouts/HomePage/SearchLayouts/SearchBar";
+import SearchBar from "@/Layouts/Home/Search/SearchBar";
 
 const SearchArea = () => {
 	return (

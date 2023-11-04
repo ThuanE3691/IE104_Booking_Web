@@ -1,5 +1,5 @@
-import sale_img1 from "@/Assets/Images/sale_img1.jpeg";
-import sale_img2 from "@/Assets/Images/sale_img2.jpeg";
+import sale_img1 from "@SiteAssets/Home/Sale/sale_img1.jpeg";
+import sale_img2 from "@SiteAssets/Home/Sale/sale_img2.jpeg";
 
 const SaleSection = () => {
 	return (

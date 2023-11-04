@@ -1,20 +1,20 @@
-import logo from "@/Assets/Icons/travel.png";
-import address from "@/Assets/Icons/location.png";
-import phone_call from "@/Assets/Icons/phone-call.png";
-import mail from "@/Assets/Icons/mail.png";
-import youtube from "@/Assets/Icons/youtube.png";
-import facebook from "@/Assets/Icons/facebook.png";
-import instagram from "@/Assets/Icons/instagram.png";
-import github from "@/Assets/Icons/github.png";
-import visa from "@/Assets/Icons/visa.png";
-import paypal from "@/Assets/Icons/paypal.png";
-import momo from "@/Assets/Icons/MoMo_Logo.png";
-import mastercard from "@/Assets/Icons/mastercard.png";
-import booking from "@/Assets/Icons/booking.png";
-import trivago from "@/Assets/Icons/trivago.png";
-import traveloka from "@/Assets/Icons/Traveloka_Logo.webp";
-import agoda from "@/Assets/Icons/agoda.jpg";
-import partners from "@/Assets/Icons/partners.png";
+import logo from "@IconCommon/Logo/travel.png";
+import address from "@IconCommon/Static/location.png";
+import phone_call from "@IconCommon/Static/phone-call.png";
+import mail from "@IconCommon/Static/mail.png";
+import youtube from "@IconCommon/Brands/youtube.png";
+import facebook from "@IconCommon/Brands/facebook.png";
+import instagram from "@IconCommon/Brands/instagram.png";
+import github from "@IconCommon/Brands/github.png";
+import visa from "@IconCommon/Brands/visa.png";
+import paypal from "@IconCommon/Brands/paypal.png";
+import momo from "@IconCommon/Brands/MoMo_Logo.png";
+import mastercard from "@IconCommon/Brands/mastercard.png";
+import booking from "@IconCommon/Brands/booking.png";
+import trivago from "@IconCommon/Brands/trivago.png";
+import traveloka from "@IconCommon/Brands/Traveloka_Logo.webp";
+import agoda from "@IconCommon/Brands/agoda.jpg";
+import partners from "@IconCommon/Static/partners.png";
 
 const Footer = () => {
 	return (

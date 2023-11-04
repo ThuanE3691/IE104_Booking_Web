@@ -1,8 +1,8 @@
-import BeachSVG from "@/Assets/Icons/SVG/TypeProvince/BeachSVG";
-import NatureSVG from "@/Assets/Icons/SVG/TypeProvince/NatureSVG";
-import LoveSVG from "@/Assets/Icons/SVG/TypeProvince/LoveSVG";
-import MountainSVG from "@/Assets/Icons/SVG/TypeProvince/MountainSVG";
-import AncientSVG from "@/Assets/Icons/SVG/TypeProvince/AncientSVG";
+import BeachSVG from "@SVGComponent/TypeProvince/BeachSVG";
+import NatureSVG from "@SVGComponent/TypeProvince/NatureSVG";
+import LoveSVG from "@SVGComponent/TypeProvince/LoveSVG";
+import MountainSVG from "@SVGComponent/TypeProvince/MountainSVG";
+import AncientSVG from "@SVGComponent/TypeProvince/AncientSVG";
 
 const className =
 	"relative z-10 w-5 h-5 text-black fill-current group-data-[isActive=true]:text-white transition-colors delay-100";

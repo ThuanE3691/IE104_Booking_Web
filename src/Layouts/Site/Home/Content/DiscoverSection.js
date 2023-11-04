@@ -1,13 +1,13 @@
-import LeftArrowSVG from "@/Assets/Icons/SVG/LeftArrowSVG";
-import RightArrowSVG from "@/Assets/Icons/SVG/RightArrowSVG";
-import { ProvinceCard } from "@/Components/Content/ProvinceCard";
+import LeftArrowSVG from "@SVGComponent/Shared/LeftArrowSVG";
+import RightArrowSVG from "@SVGComponent/Shared/RightArrowSVG";
+import { ProvinceCard } from "@/Components/Layout/ProvinceCard";
 import getFilterProvinces from "@/Utils/getFilterProvinces";
 import images_store from "@/Data/vietnam_provinces_img";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import classNames from "@/Utils/classNames";
-import DotSlider from "@/Components/DotSlider";
-import TabSlider from "@/Components/TabSlider";
+import DotSlider from "@/Components/Feature/Slider/DotSlider";
+import TabSlider from "@/Components/Feature/Slider/TabSlider";
 import provinceType from "@/Data/tab_type_provinces";
 
 const getFilterLocation = (filterTag) => {

@@ -1,4 +1,4 @@
-import homepage_bg from "@/Assets/Images/villa.jpg";
+import homepage_bg from "@SiteAssets/Home/Search/villa.jpg";
 import SearchBar from "@/Layouts/Shared/Search/SearchBar";
 
 const SearchArea = () => {

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import PathSVG from "@/Assets/Icons/SVG/SearchBar/PathSVG";
+import PathSVG from "@SVGComponent/SearchBar/PathSVG";
 import changeLocationName from "@/Utils/changeLocationName";
 import classNames from "@/Utils/classNames";
 

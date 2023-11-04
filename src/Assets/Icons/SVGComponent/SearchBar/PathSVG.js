@@ -1,4 +1,4 @@
-import SVGRender from "@/Components/SVGRender";
+import SVGRender from "@/Components/Feature/Layout/SVGRender";
 
 const PathSVG = ({ className }) => {
 	return (

@@ -4,7 +4,10 @@
 			"module-resolver",
 			{
 				"alias": {
-					"@": "./src"
+					"@": "./src",
+					"@IconCommon": "./src/Assets/Icons/Common",
+					"@SVGComponent": "./src/Assets/Icons/SVGComponent",
+					"@SiteAssets": "./src/Assets/Images/Site"
 				}
 			}
 		]

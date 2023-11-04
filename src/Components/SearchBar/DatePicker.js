@@ -1,5 +1,5 @@
-import LeftArrowSVG from "@/Assets/Icons/SVG/LeftArrowSVG";
-import RightArrowSVG from "@/Assets/Icons/SVG/RightArrowSVG";
+import LeftArrowSVG from "@SVGComponent/Shared/LeftArrowSVG";
+import RightArrowSVG from "@SVGComponent/Shared/RightArrowSVG";
 import {
 	eachDayOfInterval,
 	format,

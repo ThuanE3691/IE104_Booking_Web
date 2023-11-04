@@ -1,8 +1,11 @@
 {
-   "compilerOptions": {
-      "baseUrl": ".",
-      "paths":{
-         "@/*": ["src/*"]
-      }
-   }
+	"compilerOptions": {
+		"baseUrl": ".",
+		"paths": {
+			"@/*": ["src/*"],
+			"@IconCommon/*": ["src/Assets/Icons/Common/*"],
+			"@SVGComponent/*": ["src/Assets/Icons/SVGComponent/*"],
+			"@SiteAssets/*": ["src/Assets/Images/Site/*"]
+		}
+	}
 }

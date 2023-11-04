@@ -1,5 +1,5 @@
-import CalendarSVG from "@/Assets/Icons/SVG/SearchBar/CalendarSVG";
-import DatePicker from "@/Components/DatePicker";
+import CalendarSVG from "@SVGComponent/SearchBar/CalendarSVG";
+import DatePicker from "@/Components/SearchBar/DatePicker";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import {

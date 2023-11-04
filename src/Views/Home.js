@@ -1,5 +1,5 @@
-import SearchArea from "@/Layouts/Home/Search/SearchArea";
-import ContentArea from "@/Layouts/Home/Content/ContentArea";
+import SearchArea from "@/Layouts/Site/Home/Search/SearchArea";
+import ContentArea from "@/Layouts/Site/Home/Content/ContentArea";
 
 const Home = () => {
 	return (

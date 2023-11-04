@@ -1,4 +1,4 @@
-import SearchBar from "@/Layouts/Search/SearchBar";
+import SearchBar from "@/Layouts/Shared/Search/SearchBar";
 
 const Search = () => {
 	const styleSearchBar = {

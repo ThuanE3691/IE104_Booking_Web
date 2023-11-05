@@ -7,6 +7,25 @@ import Camping from "@/Assets/Images/HotelType/Camping.jpg";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
+const hoverCardVariants = {
+	mouseOut: { top: "100%" },
+	mouseEnter: {
+		top: "0",
+		transition: {
+			duration: 0.8,
+			type: "spring",
+			bounce: 0,
+			ease: "easeInOut",
+		},
+	},
+	mouseLeave: {
+		top: "100%",
+		transition: {
+			duration: 0.2,
+		},
+	},
+};
+
 const ImageCard = ({
 	styleContainer,
 	styleImg,
@@ -35,22 +54,10 @@ const ImageCard = ({
 				{isHover && (
 					<motion.div
 						className="absolute left-0 flex flex-col justify-end w-full h-full px-4 py-4 bg-black pointer-events-none bg-opacity-70 rounded-xl group"
-						initial={{ top: "100%" }}
-						animate={{
-							top: "0",
-							transition: {
-								duration: 0.8,
-								type: "spring",
-								bounce: 0,
-								ease: "easeInOut",
-							},
-						}}
-						exit={{
-							top: "100%",
-							transition: {
-								duration: 0.2,
-							},
-						}}
+						initial="mouseOut"
+						animate="mouseEnter"
+						exit="mouseLeave"
+						variants={hoverCardVariants}
 						data-islarge={isLarge}
 					>
 						<p className="text-2xl font-semibold text-white ">{type}</p>

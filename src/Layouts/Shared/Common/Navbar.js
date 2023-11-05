@@ -1,6 +1,6 @@
 import CurrencySVG from "@SVGComponent/Navbar/CurrencySVG";
 import language_icon from "@IconCommon/Feature/internet.png";
-import logo from "@IconCommon/Logo/travel.png";
+import logo from "@IconCommon/Logo/travor.png";
 import dark_mode from "@IconCommon/Feature/night-mode.png";
 // import partners from "@IconCommon/Static/partners.png";
 import light_mode from "@IconCommon/Feature/sun.png";
@@ -16,10 +16,7 @@ const spring = {
 const Logo = () => {
 	return (
 		<figure className="flex flex-col items-center cursor-pointer">
-			<img src={logo} alt="Logo" className="w-10 h-10" />
-			<figcaption className="mt-1 text-lg font-semibold text-blue-600">
-				Travel
-			</figcaption>
+			<img src={logo} alt="Logo" className="h-24 w-28" />
 		</figure>
 	);
 };
@@ -56,7 +53,10 @@ const Navbar = () => {
 		<header className="flex flex-row items-center gap-8 px-32 mt-4 font-vietnam-pro">
 			<Logo></Logo>
 			<nav className="flex items-center w-full">
-				<div className="flex items-center gap-10 ml-12">
+				<div className="flex items-center gap-10">
+					<span className="text-lg font-medium transition-colors cursor-pointer hover:text-text-primary">
+						Dịch vụ
+					</span>
 					<span className="text-lg font-medium transition-colors cursor-pointer hover:text-text-primary">
 						Về chúng tôi
 					</span>
@@ -64,7 +64,7 @@ const Navbar = () => {
 						Liên hệ
 					</span>
 				</div>
-				<div className="flex items-center gap-6 ml-auto">
+				<div className="flex items-center ml-auto gap-7">
 					<div className="flex items-center gap-1 cursor-pointer">
 						<img src={language_icon} alt="" className="w-5 h-5" />
 						<p>Tiếng Việt</p>

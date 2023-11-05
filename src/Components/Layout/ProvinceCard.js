@@ -1,6 +1,20 @@
 import { AnimatePresence, motion } from "framer-motion";
 
-export const ProvinceCard = ({ province_name, province_img }) => {
+const hoverAnimate = {
+	scale: 1.3,
+	boxShadow:
+		"rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;",
+	transition: {
+		duration: 0.3,
+		ease: "linear",
+	},
+};
+
+export const ProvinceCard = ({
+	type_province,
+	province_name,
+	province_img,
+}) => {
 	return (
 		<AnimatePresence>
 			<motion.div
@@ -15,15 +29,7 @@ export const ProvinceCard = ({ province_name, province_img }) => {
 					src={province_img}
 					alt=""
 					className="absolute  rounded-lg brightness-[95%] w-[290px] h-[200px] overflow-hidden "
-					whileHover={{
-						scale: 1.3,
-						boxShadow:
-							"rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;",
-						transition: {
-							duration: 3,
-							ease: "linear",
-						},
-					}}
+					whileHover={hoverAnimate}
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
 					exit={{ opacity: 0 }}

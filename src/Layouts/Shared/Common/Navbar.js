@@ -4,6 +4,8 @@ import logo from "@IconCommon/Logo/travor.png";
 import dark_mode from "@IconCommon/Feature/night-mode.png";
 // import partners from "@IconCommon/Static/partners.png";
 import light_mode from "@IconCommon/Feature/sun.png";
+import user from "@IconCommon/Feature/user.png";
+import arrow_down from "@IconCommon/Feature/caret-down.png";
 import { motion } from "framer-motion";
 import { useState } from "react";
 
@@ -53,7 +55,7 @@ const Navbar = () => {
 		<header className="flex flex-row items-center gap-8 px-32 mt-4 font-vietnam-pro">
 			<Logo></Logo>
 			<nav className="flex items-center w-full">
-				<div className="flex items-center gap-10">
+				<div className="flex items-center gap-12 ml-auto">
 					<span className="text-lg font-medium transition-colors cursor-pointer hover:text-text-primary">
 						Dịch vụ
 					</span>
@@ -65,34 +67,30 @@ const Navbar = () => {
 					</span>
 				</div>
 				<div className="flex items-center ml-auto gap-7">
-					<div className="flex items-center gap-1 cursor-pointer">
-						<img src={language_icon} alt="" className="w-5 h-5" />
-						<p>Tiếng Việt</p>
+					<div className="flex items-center gap-2">
+						<div className="flex items-center gap-2 px-2 py-2 transition-colors rounded-full cursor-pointer hover:bg-slate-200">
+							<img src={language_icon} alt="" className="w-5 h-5" />
+						</div>
+						<div className="flex items-center gap-2 px-2 py-2 transition-colors rounded-full cursor-pointer hover:bg-slate-200">
+							<CurrencySVG className="w-5 h-5 "></CurrencySVG>
+						</div>
 					</div>
-					<div className="flex items-center gap-2 cursor-pointer">
-						<CurrencySVG className="w-5 h-5"></CurrencySVG>
-						<p>VNĐ</p>
+
+					<div className="flex items-center gap-3 cursor-pointer">
+						<img src={user} alt="" className="w-8 h-8" />
+						<img src={arrow_down} alt="" className="w-3 h-3" />
 					</div>
-					<DarkModeButton
+					{/* <DarkModeButton
 						onDarkMode={onDarkMode}
 						setOnDarkMode={setOnDarkMode}
-					></DarkModeButton>
-				</div>
-				<div className="flex items-center gap-6 ml-auto">
-					<button className="px-4 py-2 font-semibold transition-colors hover-button rounded-xl">
+					></DarkModeButton> */}
+					{/* <button className="px-4 py-2 font-semibold transition-colors hover-button rounded-xl">
 						Đăng nhập
 					</button>
 					<button className="px-4 py-2 font-semibold text-white transition-colors bg-button-primary rounded-xl hover-button">
 						Đăng ký
-					</button>
+					</button> */}
 				</div>
-
-				{/* <li className="flex items-center gap-3 ml-auto cursor-pointer group">
-					<img src={partners} alt="" className="w-8 h-8" />
-					<p className="font-semibold transition-colors group-hover:text-text-primary">
-						Trở thành đối tác
-					</p>
-				</li> */}
 			</nav>
 		</header>
 	);

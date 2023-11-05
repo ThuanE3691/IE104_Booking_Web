@@ -18,6 +18,101 @@ const classNames = (...classes) => {
 	return classes.filter(Boolean).join(" ");
 };
 
+const removeImmediately = {
+	exit: { visibility: "hidden" },
+};
+
+// const Header = ({
+// 	isFirstDatePicker,
+// 	handleChangeMonth,
+// 	firstDayOfMonth,
+// 	variants,
+// 	direction,
+// }) => {
+// 	return (
+
+// 	);
+// };
+
+const Day = ({
+	day,
+	dayIdx,
+	selectedDate,
+	handleSelectDay,
+	variants,
+	direction,
+	handleHoverDay,
+}) => {
+	const isInPast = isPast(day) && !isToday(day);
+	const _isToday =
+		isToday(day) &&
+		(selectedDate !== null ? !isEqual(day, selectedDate) : true);
+	const isSelectedDateArrival =
+		selectedDate.arrival && isEqual(day, selectedDate.arrival);
+	const isSelectedDateGo =
+		(selectedDate.go && isEqual(day, selectedDate.go)) ||
+		(selectedDate.temp && isEqual(day, selectedDate.temp));
+
+	const isBetweenMode =
+		selectedDate.arrival && (selectedDate.go || selectedDate.temp);
+	const isBetween =
+		isBetweenMode &&
+		isAfter(day, selectedDate.arrival) &&
+		(isBefore(day, selectedDate.go) || isBefore(day, selectedDate.temp));
+
+	const style = {
+		base: " flex w-[52px] h-10 items-center font-semibold justify-center before:rounded-full before:absolute before:w-10 before:h-10 before:transition-colors transition-colors relative z-10",
+		past: "text-sub-text cursor-default",
+		today: "before:bg-blue-500 text-white",
+		normalHover: "before:hover:bg-sub-text relative z-10",
+		inBetween: "bg-datepicker-connected",
+		selected: " before:bg-button-primary text-white",
+		startRange:
+			"bg-gradient-to-r from-transparent to-datepicker-connected to-50%",
+		endRange:
+			"bg-gradient-to-l from-transparent to-datepicker-connected to-50%",
+	};
+
+	return (
+		<motion.div
+			key={day.toString()}
+			onClick={() => handleSelectDay(day)}
+			className={classNames(dayIdx === 0 && colStartClasses[getDay(day - 1)])}
+			variants={variants}
+			initial="enter"
+			animate="middle"
+			exit="exit"
+			custom={direction}
+			onMouseEnter={() => handleHoverDay(day, "enter")}
+			onMouseLeave={() => handleHoverDay(day, "leave")}
+		>
+			<button
+				className={classNames(
+					isInPast && style.past,
+					_isToday && style.today,
+					!(
+						isInPast ||
+						_isToday ||
+						isSelectedDateGo ||
+						isSelectedDateArrival
+					) && style.normalHover,
+					isBetween && style.inBetween,
+					(isSelectedDateArrival || isSelectedDateGo) && style.selected,
+					isBetweenMode && isSelectedDateArrival && style.startRange,
+					isBetweenMode && isSelectedDateGo && style.endRange,
+					style.base
+				)}
+				key={format(day, "yyyy-MM-dd")}
+				before={format(day, "d")}
+			>
+				<time dateTime={format(day, "yyyy-MM-dd")} className="relative z-10">
+					{format(day, "d")}
+				</time>
+			</button>
+		</motion.div>
+	);
+};
+
 const DatePicker = ({
 	selectedDate,
 	firstDayOfMonth,
@@ -25,6 +120,7 @@ const DatePicker = ({
 	handleChangeMonth,
 	direction,
 	handleSelectDay,
+	handleHoverDay,
 }) => {
 	let newsDay = eachDayOfInterval({
 		start: firstDayOfMonth,
@@ -37,10 +133,6 @@ const DatePicker = ({
 		enter: (direction) => ({ x: `${direction * 100}%`, opacity: 0 }),
 		middle: (direction) => ({ x: 0, opacity: 1 }),
 		exit: (direction) => ({ x: `${-direction * 100}%`, opacity: 0 }),
-	};
-
-	let removeImmediately = {
-		exit: { visibility: "hidden" },
 	};
 
 	const ordinal_list = [
@@ -57,49 +149,50 @@ const DatePicker = ({
 		<MotionConfig transition={transition}>
 			<div className="flex flex-col items-center text-datepicker-primary">
 				<AnimatePresence mode="popLayout" initial={false} custom={direction}>
-					<motion.div
+					<header className="flex items-center justify-center w-full text-center">
+						<motion.button
+							onClick={() => handleChangeMonth("PREVIOUS")}
+							variants={removeImmediately}
+							exit="exit"
+							data-ishidden={!isFirstDatePicker}
+							className=" data-[ishidden=true]:hidden"
+						>
+							<LeftArrowSVG
+								className={classNames(
+									isPast(firstDayOfMonth) && "cursor-default text-sub-text",
+									"w-5 h-5 fill-current stroke-current stroke-2 text-datepicker-primary"
+								)}
+							></LeftArrowSVG>
+						</motion.button>
+
+						<motion.time
+							className="mx-auto font-semibold first-letter:uppercase"
+							variants={variants}
+							initial="enter"
+							animate="middle"
+							exit="exit"
+							custom={direction}
+							key={firstDayOfMonth}
+						>
+							{format(firstDayOfMonth, "MMMM - yyyy", { locale: viLocale })}
+						</motion.time>
+
+						<motion.button
+							onClick={() => handleChangeMonth("NEXT")}
+							variants={removeImmediately}
+							data-ishidden={isFirstDatePicker}
+							exit="exit"
+							className=" data-[ishidden=true]:hidden"
+						>
+							<RightArrowSVG className="w-5 h-5 cursor-pointer fill-current stroke-2 text-datepicker-primary"></RightArrowSVG>
+						</motion.button>
+					</header>
+					<motion.section
 						key={format(firstDayOfMonth, "MMMM - yyyy", {
 							locale: viLocale,
 						}).toString()}
 					>
-						<header className="flex items-center justify-center w-full text-center">
-							{isFirstDatePicker && (
-								<motion.button
-									onClick={() => handleChangeMonth("PREVIOUS")}
-									variants={removeImmediately}
-									exit="exit"
-								>
-									<LeftArrowSVG
-										className={classNames(
-											isPast(firstDayOfMonth) && "cursor-default text-sub-text",
-											"w-5 h-5 fill-current stroke-current stroke-2 text-datepicker-primary"
-										)}
-									></LeftArrowSVG>
-								</motion.button>
-							)}
-
-							<motion.time
-								className="mx-auto font-semibold first-letter:uppercase"
-								variants={variants}
-								initial="enter"
-								animate="middle"
-								exit="exit"
-								custom={direction}
-								key={firstDayOfMonth}
-							>
-								{format(firstDayOfMonth, "MMMM - yyyy", { locale: viLocale })}
-							</motion.time>
-							{!isFirstDatePicker && (
-								<motion.button
-									onClick={() => handleChangeMonth("NEXT")}
-									variants={removeImmediately}
-									exit="exit"
-								>
-									<RightArrowSVG className="w-5 h-5 cursor-pointer fill-current stroke-2 text-datepicker-primary"></RightArrowSVG>
-								</motion.button>
-							)}
-						</header>
-						<div className="grid grid-cols-7 mt-4 text-xs font-semibold text-center text-sub-text ">
+						<section className="grid grid-cols-7 mt-4 text-xs font-semibold text-center text-sub-text ">
 							{ordinal_list.map((ordinal) => {
 								return (
 									<motion.div
@@ -111,74 +204,24 @@ const DatePicker = ({
 									</motion.div>
 								);
 							})}
-						</div>
-						<div className="z-10 grid grid-cols-7 mt-4 text-sm gap-y-2">
+						</section>
+						<section className="z-10 grid grid-cols-7 mt-4 text-sm gap-y-2">
 							{newsDay.map((day, dayIdx) => {
-								const isInPast = isPast(day) && !isToday(day);
-								const _isToday =
-									isToday(day) &&
-									(selectedDate !== null ? !isEqual(day, selectedDate) : true);
-								const isSelectedDateArrival =
-									selectedDate.arrival && isEqual(day, selectedDate.arrival);
-								const isSelectedDateGo =
-									selectedDate.go && isEqual(day, selectedDate.go);
-
-								const isBetweenMode = selectedDate.arrival && selectedDate.go;
-								const isBetween =
-									isBetweenMode &&
-									isAfter(day, selectedDate.arrival) &&
-									isBefore(day, selectedDate.go);
-
 								return (
-									<motion.div
-										key={day.toString()}
-										onClick={() => handleSelectDay(day)}
-										className={classNames(
-											dayIdx === 0 && colStartClasses[getDay(day - 1)]
-										)}
+									<Day
+										day={day}
+										dayIdx={dayIdx}
+										selectedDate={selectedDate}
+										handleSelectDay={handleSelectDay}
 										variants={variants}
-										initial="enter"
-										animate="middle"
-										exit="exit"
-										custom={direction}
-									>
-										<button
-											className={classNames(
-												isInPast && "text-sub-text cursor-default",
-												!isInPast && isBefore(day, selectedDate.arrival) && "",
-												_isToday && "before:bg-blue-500 text-white",
-												!(
-													isInPast ||
-													_isToday ||
-													isSelectedDateGo ||
-													isSelectedDateArrival
-												) && "before:hover:bg-sub-text relative z-10",
-												isBetween && " bg-datepicker-connected",
-												(isSelectedDateArrival || isSelectedDateGo) &&
-													"before:bg-datepicker-selected text-white",
-												isBetweenMode &&
-													isSelectedDateArrival &&
-													" bg-gradient-to-r from-transparent to-datepicker-connected to-50%",
-												isBetweenMode &&
-													isSelectedDateGo &&
-													" bg-gradient-to-l from-transparent to-datepicker-connected to-50%",
-												" flex w-[52px] h-10 items-center font-semibold justify-center before:rounded-full before:absolute before:w-10 before:h-10  transition-colors relative z-10"
-											)}
-											key={format(day, "yyyy-MM-dd")}
-											before={format(day, "d")}
-										>
-											<time
-												dateTime={format(day, "yyyy-MM-dd")}
-												className="relative z-10"
-											>
-												{format(day, "d")}
-											</time>
-										</button>
-									</motion.div>
+										direction={direction}
+										handleHoverDay={handleHoverDay}
+										key={day}
+									></Day>
 								);
 							})}
-						</div>
-					</motion.div>
+						</section>
+					</motion.section>
 				</AnimatePresence>
 			</div>
 		</MotionConfig>

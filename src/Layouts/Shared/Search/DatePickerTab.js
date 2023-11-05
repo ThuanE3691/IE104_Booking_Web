@@ -37,6 +37,7 @@ const DatePickerTab = ({ overrides }) => {
 	const [selectedDate, setSelectedDate] = useState({
 		arrival: null,
 		go: null,
+		temp: null,
 		order: 1,
 	});
 
@@ -99,6 +100,24 @@ const DatePickerTab = ({ overrides }) => {
 		}
 	};
 
+	const handleHoverDay = (day, action) => {
+		if (
+			selectedDate.go === null &&
+			selectedDate.arrival !== null &&
+			action === "enter"
+		) {
+			setSelectedDate({
+				...selectedDate,
+				temp: day,
+			});
+		} else if (action === "leave" || selectedDate.temp !== null) {
+			setSelectedDate({
+				...selectedDate,
+				temp: null,
+			});
+		}
+	};
+
 	useEffect(() => {
 		const numOfWeek_1 = getWeeksInMonth(firstDayOfMonth, { locale: viLocale });
 		const numOfWeek_2 = getWeeksInMonth(add(firstDayOfMonth, { months: 1 }), {
@@ -156,6 +175,7 @@ const DatePickerTab = ({ overrides }) => {
 							handleChangeMonth={handleChangeMonth}
 							direction={direction}
 							handleSelectDay={handleSelectDay}
+							handleHoverDay={handleHoverDay}
 						></DatePicker>
 						<DatePicker
 							selectedDate={selectedDate}
@@ -166,6 +186,7 @@ const DatePickerTab = ({ overrides }) => {
 							handleChangeMonth={handleChangeMonth}
 							direction={direction}
 							handleSelectDay={handleSelectDay}
+							handleHoverDay={handleHoverDay}
 						></DatePicker>
 					</motion.div>
 				)}

@@ -18,7 +18,7 @@ import partners from "@IconCommon/Static/partners.png";
 
 const Footer = () => {
 	return (
-		<footer className="flex items-center justify-between px-32 py-16 text-lg border-t-2 border-slate-200 font-vietnam-pro">
+		<footer className="flex items-center justify-between px-32 py-16 text-lg border-t-2  border-slate-200 font-vietnam-pro">
 			<div className="flex flex-col gap-y-3">
 				<figure className="flex flex-col items-center cursor-pointer">
 					<img src={logo} alt="Logo" className="w-16 h-16 select-none" />

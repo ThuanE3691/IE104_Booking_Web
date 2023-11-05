@@ -1,4 +1,4 @@
-import CheckBox from "@/Components/CheckBox";
+import CheckBox from "@/Components/Layout/CheckBox";
 
 const SideBar = () => {
 	const hotelType = [

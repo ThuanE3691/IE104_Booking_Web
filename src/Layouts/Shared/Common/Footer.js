@@ -1,4 +1,4 @@
-import logo from "@IconCommon/Logo/travel.png";
+import logo from "@IconCommon/Logo/travor.png";
 import address from "@IconCommon/Static/location.png";
 import phone_call from "@IconCommon/Static/phone-call.png";
 import mail from "@IconCommon/Static/mail.png";
@@ -18,13 +18,10 @@ import partners from "@IconCommon/Static/partners.png";
 
 const Footer = () => {
 	return (
-		<footer className="flex items-center justify-between px-32 py-16 text-lg border-t-2 border-slate-200 font-vietnam-pro">
-			<div className="flex flex-col gap-y-3">
+		<footer className="relative flex items-center gap-24 px-32 py-12 text-lg border-t-2 border-slate-200 font-vietnam-pro">
+			<section className="flex flex-col gap-y-3">
 				<figure className="flex flex-col items-center cursor-pointer">
-					<img src={logo} alt="Logo" className="w-16 h-16 select-none" />
-					<figcaption className="mt-1 text-xl font-semibold text-blue-600">
-						Travel
-					</figcaption>
+					<img src={logo} alt="Logo" className="w-32 h-32 select-none" />
 				</figure>
 				<div className="flex items-center gap-6">
 					<img src={address} alt="" className="w-6 h-6 select-none " /> Sân bay
@@ -52,80 +49,82 @@ const Footer = () => {
 						<img src={github} alt="" className="h-6 select-none w -6" />
 					</a>
 				</div>
-				<div className="text-sm translate-y-10 ">
-					Bản quyền &copy;2023 Travel. Bảo lưu mọi quyền
-				</div>
-			</div>
-			<ul className="flex flex-col gap-4">
-				<li className="font-semibold ">Về Travel</li>
-				<li className="cursor-pointer">Làm sao đặt khách sạn</li>
-				<li className="cursor-pointer">Liên hệ</li>
-				<li className="cursor-pointer">Trung tâm giúp đỡ</li>
-				<li className="cursor-pointer">Về chúng tôi</li>
-			</ul>
-			<ul className="flex flex-col gap-4">
-				<li className="font-semibold ">Dịch vụ</li>
-				<li className="cursor-pointer">Đặt khách sạn</li>
-				<li className="cursor-pointer">Blog</li>
-				<li className="cursor-pointer">Đặt xe</li>
-				<li className="cursor-pointer">Đặt vé máy bay</li>
-			</ul>
-			<div className="flex flex-col items-center gap-y-6">
-				<div className="flex flex-col items-center font-semibold gap-y-4">
-					<p>Đối tác thanh toán</p>
-					<ul className="flex items-center justify-center gap-4">
-						<li className="px-4 py-2 bg-white border-2">
-							<img src={visa} alt="" className="w-6 h-6 select-none " />
-						</li>
-						<li className="px-4 py-2 border-2">
-							<img src={mastercard} alt="" className="w-6 h-6 select-none " />
-						</li>
-						<li className="px-4 py-2 border-2">
-							<img src={paypal} alt="" className="w-6 h-6 select-none " />
-						</li>
-						<li className="px-4 py-2 border-2">
-							<img src={momo} alt="" className="w-6 h-6 select-none " />
-						</li>
-					</ul>
-				</div>
-				<div className="flex flex-col items-center font-semibold">
-					<p>Đối tác dịch vụ</p>
-					<div className="flex items-center mt-4">
-						<div className="px-4 py-2 text-center">
-							<img
-								src={booking}
-								alt=""
-								className="object-contain w-24 select-none "
-							/>
-						</div>
-						<div className="px-4 py-2 ">
-							<img
-								src={trivago}
-								alt=""
-								className=" select-none object-contain w-[54px]"
-							/>
-						</div>
-						<div className="px-4 py-0.5">
-							<img
-								src={traveloka}
-								alt=""
-								className="object-contain w-16 select-none "
-							/>
-						</div>
-						<div className="px-4 py-[7px]">
-							<img
-								src={agoda}
-								alt=""
-								className=" select-none object-contain w-[52px]"
-							/>
+			</section>
+			<section className="flex justify-between w-full mt-8">
+				<ul className="flex flex-col gap-4">
+					<li className="font-semibold ">Về Travor</li>
+					<li className="cursor-pointer">Làm sao đặt khách sạn</li>
+					<li className="cursor-pointer">Liên hệ</li>
+					<li className="cursor-pointer">Trung tâm giúp đỡ</li>
+					<li className="cursor-pointer">Về chúng tôi</li>
+				</ul>
+				<ul className="flex flex-col gap-4">
+					<li className="font-semibold ">Dịch vụ</li>
+					<li className="cursor-pointer">Đặt khách sạn</li>
+					<li className="cursor-pointer">Blog</li>
+					<li className="cursor-pointer">Đặt xe</li>
+					<li className="cursor-pointer">Đặt vé máy bay</li>
+				</ul>
+				<div className="flex flex-col items-center gap-y-8">
+					<div className="flex flex-col items-center font-semibold gap-y-4">
+						<p>Đối tác thanh toán</p>
+						<ul className="flex items-center justify-center gap-4">
+							<li className="px-4 py-2 bg-white border-2">
+								<img src={visa} alt="" className="w-6 h-6 select-none " />
+							</li>
+							<li className="px-4 py-2 border-2">
+								<img src={mastercard} alt="" className="w-6 h-6 select-none " />
+							</li>
+							<li className="px-4 py-2 border-2">
+								<img src={paypal} alt="" className="w-6 h-6 select-none " />
+							</li>
+							<li className="px-4 py-2 border-2">
+								<img src={momo} alt="" className="w-6 h-6 select-none " />
+							</li>
+						</ul>
+					</div>
+					<div className="flex flex-col items-center font-semibold">
+						<p>Đối tác dịch vụ</p>
+						<div className="flex items-center mt-4">
+							<div className="px-4 py-2 text-center">
+								<img
+									src={booking}
+									alt=""
+									className="object-contain w-24 select-none "
+								/>
+							</div>
+							<div className="px-4 py-2 ">
+								<img
+									src={trivago}
+									alt=""
+									className=" select-none object-contain w-[54px]"
+								/>
+							</div>
+							<div className="px-4 py-0.5">
+								<img
+									src={traveloka}
+									alt=""
+									className="object-contain w-16 select-none "
+								/>
+							</div>
+							<div className="px-4 py-[7px]">
+								<img
+									src={agoda}
+									alt=""
+									className=" select-none object-contain w-[52px]"
+								/>
+							</div>
 						</div>
 					</div>
+					<div className="flex items-center gap-4 px-4 py-2 transition-colors border-2 border-dashed rounded-xl hover:border-blue-600">
+						<img src={partners} alt="" className="w-8 h-8 select-none " />
+						<span className="font-semibold">Hợp tác với chúng tôi</span>
+					</div>
 				</div>
-				<div className="flex items-center gap-4 px-4 py-2 transition-colors border-2 border-dashed rounded-xl hover:border-blue-600">
-					<img src={partners} alt="" className="w-8 h-8 select-none " />
-					<span className="font-semibold">Hợp tác với chúng tôi</span>
-				</div>
-			</div>
+			</section>
+			<span className="absolute bottom-0 pb-4 text-sm text-center translate-y-6 left-[calc(2/5*100%)]">
+				Bản quyền &copy;2023 Travor. Bảo lưu mọi quyền
+			</span>
 		</footer>
 	);
 };

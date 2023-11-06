@@ -3,6 +3,8 @@ import SearchIconSVG from "@SVGComponent/SearchBar/SearchIconSVG";
 import LocationTab from "./LocationTab";
 import DatePickerTab from "./DatePickerTab";
 import classNames from "@/Utils/classNames";
+import config from "@/Config";
+import { Link } from "react-router-dom";
 
 const SearchBar = ({ overrides }) => {
 	return (
@@ -22,9 +24,11 @@ const SearchBar = ({ overrides }) => {
 					<p className="text-sm text-sub-text">Thêm số lượng hành khách</p>
 				</div>
 			</div>
-			<button className="p-4 transition-colors duration-200 rounded-full group bg-button-primary hover-button">
-				<SearchIconSVG className="w-5 h-5 text-white fill-current group-hover:text-black"></SearchIconSVG>
-			</button>
+			<Link to={config.routes.search}>
+				<button className="p-4 transition-colors duration-200 rounded-full group bg-button-primary hover-button">
+					<SearchIconSVG className="w-5 h-5 text-white fill-current group-hover:text-black"></SearchIconSVG>
+				</button>
+			</Link>
 		</div>
 	);
 };

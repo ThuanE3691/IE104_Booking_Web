@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import CurrencySVG from "@SVGComponent/Navbar/CurrencySVG";
 import language_icon from "@IconCommon/Feature/internet.png";
 import logo from "@IconCommon/Logo/travor.png";
@@ -8,6 +9,8 @@ import user from "@IconCommon/Feature/user.png";
 import arrow_down from "@IconCommon/Feature/caret-down.png";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import config from "@/Config";
 
 const spring = {
 	type: "spring",
@@ -17,9 +20,11 @@ const spring = {
 
 const Logo = () => {
 	return (
-		<figure className="flex flex-col items-center cursor-pointer">
-			<img src={logo} alt="Logo" className="h-24 w-28" />
-		</figure>
+		<Link to={config.routes.home}>
+			<figure className="flex flex-col items-center cursor-pointer">
+				<img src={logo} alt="Logo" className="h-24 w-28" />
+			</figure>
+		</Link>
 	);
 };
 

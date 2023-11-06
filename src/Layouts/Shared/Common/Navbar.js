@@ -6,11 +6,11 @@ import dark_mode from "@IconCommon/Feature/night-mode.png";
 // import partners from "@IconCommon/Static/partners.png";
 import light_mode from "@IconCommon/Feature/sun.png";
 import user from "@IconCommon/Feature/user.png";
-import arrow_down from "@IconCommon/Feature/caret-down.png";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import config from "@/Config";
+import CaretDownSVG from "@/Assets/Icons/SVGComponent/Navbar/CaretDownSVG";
 
 const spring = {
 	type: "spring",
@@ -55,9 +55,9 @@ const DarkModeButton = ({ onDarkMode, setOnDarkMode }) => {
 };
 
 const Navbar = () => {
-	const [onDarkMode, setOnDarkMode] = useState(false);
+	const [showLogin, setShowLogin] = useState(false);
 	return (
-		<header className="flex flex-row items-center gap-8 px-32 mt-4 font-vietnam-pro">
+		<header className="flex flex-row items-center gap-8 mt-4 px-52 font-vietnam-pro">
 			<Logo></Logo>
 			<nav className="flex items-center w-full">
 				<div className="flex items-center gap-12 ml-auto">
@@ -81,20 +81,32 @@ const Navbar = () => {
 						</div>
 					</div>
 
-					<div className="flex items-center gap-3 cursor-pointer">
+					{/* <div
+						className="relative flex items-center gap-3 cursor-pointer"
+						onClick={() => setShowLogin(!showLogin)}
+					>
 						<img src={user} alt="" className="w-8 h-8" />
-						<img src={arrow_down} alt="" className="w-3 h-3" />
-					</div>
+						<CaretDownSVG
+							className={`w-3 h-3 transition-all ${
+								showLogin ? "rotate-0" : "rotate-180"
+							}`}
+						></CaretDownSVG>
+
+						{showLogin && <section className="absolute"></section>}
+					</div> */}
+
 					{/* <DarkModeButton
 						onDarkMode={onDarkMode}
 						setOnDarkMode={setOnDarkMode}
 					></DarkModeButton> */}
-					{/* <button className="px-4 py-2 font-semibold transition-colors hover-button rounded-xl">
-						Đăng nhập
-					</button>
-					<button className="px-4 py-2 font-semibold text-white transition-colors bg-button-primary rounded-xl hover-button">
-						Đăng ký
-					</button> */}
+					<div className="flex items-center gap-2">
+						<button className="px-4 py-2 font-semibold transition-colors duration-200 hover-button rounded-xl">
+							Đăng ký
+						</button>
+						<button className="px-4 py-2 font-semibold text-white transition-colors bg-button-primary rounded-xl hover-button">
+							Đăng nhập
+						</button>
+					</div>
 				</div>
 			</nav>
 		</header>

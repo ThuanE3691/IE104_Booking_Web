@@ -7,11 +7,16 @@ import dark_mode from "@IconCommon/Feature/night-mode.png";
 import light_mode from "@IconCommon/Feature/sun.png";
 import user from "@IconCommon/Feature/user.png";
 import { AnimatePresence, motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import config from "@/Config";
 import CaretDownSVG from "@/Assets/Icons/SVGComponent/Navbar/CaretDownSVG";
 import avatar from "@/Assets/Images/User/avatar_1.jpg";
+import LogOutSVG from "@/Assets/Icons/SVGComponent/Navbar/LogOutSVG";
+import PartnersSVG from "@/Assets/Icons/SVGComponent/Navbar/PartnersSVG";
+import EditSVG from "@/Assets/Icons/SVGComponent/Navbar/EditSVG";
+import InformationSVG from "@/Assets/Icons/SVGComponent/Navbar/InformationSVG";
+import PointSVG from "@/Assets/Icons/SVGComponent/Navbar/PointSVG";
 
 const spring = {
 	type: "spring",
@@ -55,11 +60,11 @@ const DarkModeButton = ({ darkMode, setDarkMode }) => {
 	);
 };
 
-const UserService = () => {
+const UserService = ({ handleLogOut }) => {
 	const [darkMode, setDarkMode] = useState(false);
 	return (
 		<motion.section
-			className="absolute top-0 translate-y-12 rounded-xl min-w-[200px] px-4 py-3 bg-white z-50 drop-shadow-2xl font-inter cursor-default"
+			className="absolute top-0 translate-y-16 -left-12 rounded-xl min-w-[200px] px-4 py-3 bg-white z-50 drop-shadow-2xl font-inter cursor-default"
 			onClick={(e) => e.stopPropagation()}
 			key="user-service"
 			initial={{ opacity: 0 }}
@@ -68,17 +73,24 @@ const UserService = () => {
 		>
 			<ul className="flex flex-col gap-1.5">
 				<li className="mb-1 font-semibold">Tài khoản của tôi</li>
-				<li className="text-sm transition-colors cursor-pointer hover:text-text-primary w-fit">
+				<li className="flex gap-2 text-sm transition-colors cursor-pointer hover:text-text-primary w-fit">
+					<EditSVG className="w-4 h-4 fill-current group-hover:text-text-primary"></EditSVG>
 					Chỉnh sửa hồ sơ
 				</li>
-				<li className="text-sm transition-colors cursor-pointer hover:text-text-primary w-fit">
+				<li className="flex gap-2 text-sm transition-colors cursor-pointer hover:text-text-primary w-fit">
+					<InformationSVG className="w-4 h-4 fill-current group-hover:text-text-primary"></InformationSVG>
 					Chỗ ở của tôi
 				</li>
-				<li className="text-sm transition-colors cursor-pointer hover:text-text-primary w-fit">
+				<li className="flex gap-2 text-sm transition-colors cursor-pointer hover:text-text-primary w-fit">
+					<PointSVG className="w-4 h-4 fill-current group-hover:text-text-primary"></PointSVG>
 					Điểm thưởng
 				</li>
+				<li className="flex items-center gap-2 text-sm transition-colors cursor-pointer hover:text-text-primary group">
+					<PartnersSVG className="w-4 h-4 fill-current group-hover:text-text-primary"></PartnersSVG>
+					Trở thành đối tác
+				</li>
 			</ul>
-			<div className="w-full h-0.5 bg-slate-200 my-2"></div>
+			<div className="w-full h-0.5 bg-slate-200 rounded my-2"></div>
 			<ul className="flex flex-col gap-1.5">
 				<li className="mb-1 font-semibold">Cài đặt của tôi</li>
 				<li className="flex items-center gap-2 text-sm transition-colors cursor-pointer hover:text-text-primary w-fit">
@@ -87,7 +99,7 @@ const UserService = () => {
 				</li>
 				<li className="flex items-center gap-2 text-sm transition-colors cursor-pointer hover:text-text-primary w-fit">
 					<CurrencySVG className="w-4 h-4 "></CurrencySVG>
-					VNĐ
+					Tiền tệ: VNĐ
 				</li>
 				<li className="flex items-center gap-2 text-sm transition-colors cursor-pointer hover:text-text-primary w-fit">
 					<span>Chế độ </span>
@@ -97,6 +109,13 @@ const UserService = () => {
 					></DarkModeButton>
 				</li>
 			</ul>
+			<div
+				className="flex items-center justify-center gap-2 px-2 py-2 mt-3 mb-2 font-semibold transition-colors rounded-lg cursor-pointer hover:bg-button-primary hover:text-white bg-slate-200 group"
+				onClick={handleLogOut}
+			>
+				<LogOutSVG className="w-5 h-5 fill-current group-hover:text-white"></LogOutSVG>
+				Đăng xuất
+			</div>
 		</motion.section>
 	);
 };
@@ -105,10 +124,27 @@ const Navbar = () => {
 	const [isLogin, setLogin] = useState(false);
 	const [showService, setShowService] = useState(false);
 
+	const handleLogIn = () => {
+		localStorage.setItem("isLogin", "true");
+		setLogin(true);
+	};
+
+	const handleLogOut = () => {
+		localStorage.setItem("isLogin", "false");
+		setShowService(false);
+		setLogin(false);
+	};
+
+	useEffect(() => {
+		const loginState = localStorage.getItem("isLogin");
+		if (loginState === "true") handleLogIn();
+		else handleLogOut();
+	}, []);
+
 	return (
 		<header className="z-10 flex flex-row items-center w-full gap-8 pt-4 bg-white px-52 font-vietnam-pro">
 			<Logo></Logo>
-			<nav className="flex items-center w-full" layout>
+			<nav className="flex items-center w-full">
 				<div className="flex items-center gap-12 ml-auto">
 					<span className="text-lg font-medium transition-colors cursor-pointer hover:text-text-primary">
 						Dịch vụ
@@ -120,7 +156,7 @@ const Navbar = () => {
 						Liên hệ
 					</span>
 				</div>
-				<div className="flex items-center ml-auto gap-7" layout>
+				<div className="flex items-center ml-auto gap-7">
 					<div className="flex items-center gap-2">
 						<div className="flex items-center gap-2 px-2 py-2 transition-colors rounded-full cursor-pointer hover:bg-slate-200">
 							<img src={language_icon} alt="" className="w-5 h-5" />
@@ -131,23 +167,25 @@ const Navbar = () => {
 					</div>
 					{isLogin && (
 						<div
-							className="relative flex items-center gap-3 cursor-pointer"
+							className="relative flex items-center gap-3 cursor-pointer "
 							onClick={() => setShowService(!showService)}
 						>
 							<img
 								src={avatar}
 								alt=""
-								className="object-contain w-8 h-8 rounded-full"
+								className="object-contain w-10 h-10 rounded-full"
 							/>
-							<span>Thư</span>
+							<span className="font-semibold">Anh Thư</span>
 							<CaretDownSVG
-								className={`w-3 h-3 transition-all ${
+								className={`w-3 h-3 transition-[transform] ${
 									!showService ? "rotate-0" : "rotate-180"
 								}`}
 							></CaretDownSVG>
 
 							<AnimatePresence>
-								{showService && <UserService></UserService>}
+								{showService && (
+									<UserService handleLogOut={handleLogOut}></UserService>
+								)}
 							</AnimatePresence>
 						</div>
 					)}
@@ -159,7 +197,7 @@ const Navbar = () => {
 							</button>
 							<button
 								className="px-4 py-2 font-semibold text-white transition-colors bg-button-primary rounded-xl hover-button"
-								onClick={() => setLogin(true)}
+								onClick={handleLogIn}
 							>
 								Đăng nhập
 							</button>

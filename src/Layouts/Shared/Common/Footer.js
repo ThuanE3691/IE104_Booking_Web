@@ -15,14 +15,18 @@ import trivago from "@IconCommon/Brands/trivago.png";
 import traveloka from "@IconCommon/Brands/Traveloka_Logo.webp";
 import agoda from "@IconCommon/Brands/agoda.jpg";
 import partners from "@IconCommon/Static/partners.png";
+import { Link } from "react-router-dom";
+import config from "@/Config";
 
 const Footer = () => {
 	return (
 		<footer className="relative flex items-center gap-24 px-32 py-12 text-lg border-t-2 border-slate-200 font-vietnam-pro">
 			<section className="flex flex-col gap-y-3">
-				<figure className="flex flex-col items-center cursor-pointer">
-					<img src={logo} alt="Logo" className="w-32 h-32 select-none" />
-				</figure>
+				<Link to={config.routes.home}>
+					<figure className="flex flex-col items-center cursor-pointer">
+						<img src={logo} alt="Logo" className="w-32 h-32 select-none" />
+					</figure>
+				</Link>
 				<div className="flex items-center gap-6">
 					<img src={address} alt="" className="w-6 h-6 select-none " /> Sân bay
 					Tân Sơn Nhất

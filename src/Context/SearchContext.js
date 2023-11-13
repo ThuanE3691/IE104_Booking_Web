@@ -19,6 +19,7 @@ const SearchContextProvider = ({ children }) => {
 		MIN_RANGE: 100000,
 		MAX_RANGE: 5000000,
 	};
+	// eslint-disable-next-line no-unused-vars
 	const [freqPrice, setFreqPrice] = useState(
 		generateRandomData(
 			NUMS_SAMPLE,

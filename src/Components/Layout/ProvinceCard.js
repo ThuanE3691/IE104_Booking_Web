@@ -10,11 +10,7 @@ const hoverAnimate = {
 	},
 };
 
-export const ProvinceCard = ({
-	type_province,
-	province_name,
-	province_img,
-}) => {
+export const ProvinceCard = ({ province_name, province_img }) => {
 	return (
 		<AnimatePresence>
 			<motion.div

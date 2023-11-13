@@ -1,6 +1,7 @@
 import { useRef, useEffect } from "react";
+import formatNumber from "./../../../Utils/formatNumber";
 
-const RangeSlider = ({ range, filterMethod, minSlider, maxSlider }) => {
+const RangeSlider = ({ range, filterMethod, minSlider, maxSlider, step }) => {
 	const progressRef = useRef(null);
 	const minSliderRef = useRef(null);
 	const maxSliderRef = useRef(null);
@@ -11,9 +12,9 @@ const RangeSlider = ({ range, filterMethod, minSlider, maxSlider }) => {
 		const progressBar = progressRef.current;
 
 		progressBar.style.left =
-			((parseInt(minValue) - 35000) / maxSlider) * 100 + "%";
+			((parseInt(minValue) - step / 2) / maxSlider) * 100 + "%";
 		progressBar.style.right =
-			100 - ((parseInt(maxValue) + 35000) / maxSlider) * 100 + "%";
+			100 - ((parseInt(maxValue) + step / 2) / maxSlider) * 100 + "%";
 	};
 
 	const handleDrag = (e) => {
@@ -43,7 +44,7 @@ const RangeSlider = ({ range, filterMethod, minSlider, maxSlider }) => {
 	}, [range.min, range.max]);
 
 	return (
-		<div className="relative z-10 w-full h-1 my-32 rounded cursor-pointer pointer-events-auto bg-slate-200">
+		<div className="relative z-10 w-full h-1 rounded cursor-pointer pointer-events-auto bg-slate-200">
 			<div
 				ref={progressRef}
 				className="absolute left-0 right-0 h-1 rounded pointer-events-none bg-button-primary"
@@ -57,7 +58,7 @@ const RangeSlider = ({ range, filterMethod, minSlider, maxSlider }) => {
 				max={maxSlider}
 				ref={minSliderRef}
 				onChange={handleDrag}
-				step={70000}
+				step={step}
 			/>
 			<input
 				type="range"
@@ -68,8 +69,14 @@ const RangeSlider = ({ range, filterMethod, minSlider, maxSlider }) => {
 				max={maxSlider}
 				ref={maxSliderRef}
 				onChange={handleDrag}
-				step={70000}
+				step={step}
 			/>
+			<span className="absolute inset-0 mt-4 -translate-x-6 select-none text-md font-vietnam-pro">
+				{formatNumber(minSlider)}đ
+			</span>
+			<span className="absolute right-0 mt-4 translate-x-10 select-none text-md font-vietnam-pro">
+				{formatNumber(maxSlider)}đ
+			</span>
 		</div>
 	);
 };

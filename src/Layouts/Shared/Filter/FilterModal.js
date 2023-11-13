@@ -1,6 +1,11 @@
 import Modal from "@/Components/Feature/Layout/Modal";
 import { motion } from "framer-motion";
 import close from "@/Assets/Icons/Common/Feature/close.png";
+import RangeSlider from "@/Components/Feature/Slider/RangeSlider";
+import BarPlot from "@/Components/Feature/Plot/BarPlot";
+import { useEffect } from "react";
+import { SearchContext } from "@/Context/SearchContext";
+import { useContext } from "react";
 
 const modalVariants = {
 	hidden: {
@@ -29,6 +34,14 @@ const FilterModal = ({ isShowFilter, setShowFilter }) => {
 		event.stopPropagation();
 	};
 
+	const { filters, filterMethod, freqPrice, SLIDER } =
+		useContext(SearchContext);
+
+	useEffect(() => {
+		filterMethod.setPrice(filterMethod.maxPrice, SLIDER.MAX_RANGE);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
 	return (
 		<Modal isOpen={isShowFilter} onClose={() => setShowFilter(false)}>
 			<motion.div
@@ -52,6 +65,19 @@ const FilterModal = ({ isShowFilter, setShowFilter }) => {
 				</header>
 				<section>
 					<h3 className="text-xl font-semibold">Giá tiền (mỗi đêm)</h3>
+					<div className="relative ">
+						<BarPlot
+							freq={freqPrice}
+							range={filters.price}
+							maxRange={SLIDER.MAX_RANGE}
+						></BarPlot>
+						<RangeSlider
+							range={filters.price}
+							filterMethod={filterMethod}
+							maxSlider={SLIDER.MAX_RANGE}
+							minSlider={SLIDER.MIN_RANGE}
+						></RangeSlider>
+					</div>
 				</section>
 			</motion.div>
 		</Modal>

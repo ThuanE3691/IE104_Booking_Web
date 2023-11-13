@@ -1,6 +1,6 @@
 import classNames from "@/Utils/classNames";
 
-const BarPlot = ({ freq, range }) => {
+const BarPlot = ({ freq, range, step }) => {
 	const MAX_HEIGHT = 80;
 
 	const maxCount = freq.reduce(
@@ -21,7 +21,7 @@ const BarPlot = ({ freq, range }) => {
 					<div
 						className={classNames(
 							"w-3 transition-colors rounded-b-sm ",
-							item.min >= range.min - 70000 && item.max <= range.max - 70000
+							item.min >= range.min && item.max <= range.max
 								? "bg-button-primary"
 								: "bg-slate-300"
 						)}

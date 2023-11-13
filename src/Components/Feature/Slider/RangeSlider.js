@@ -1,12 +1,11 @@
 import { useRef, useEffect } from "react";
-import formatNumber from "./../../../Utils/formatNumber";
 
 const RangeSlider = ({ range, filterMethod, minSlider, maxSlider, step }) => {
 	const progressRef = useRef(null);
 	const minSliderRef = useRef(null);
 	const maxSliderRef = useRef(null);
 
-	const price_gap = 140000;
+	const price_gap = step * 2;
 
 	const setProgressBar = (minValue, maxValue) => {
 		const progressBar = progressRef.current;
@@ -40,7 +39,15 @@ const RangeSlider = ({ range, filterMethod, minSlider, maxSlider, step }) => {
 	}, []);
 
 	useEffect(() => {
-		setProgressBar(range.min, range.max);
+		if (range.min !== "")
+			minSliderRef.current.value =
+				range.min >= minSlider ? range.min : minSlider;
+		else minSliderRef.current.value = minSlider;
+		if (range.max !== "")
+			maxSliderRef.current.value =
+				range.max <= maxSlider ? range.max : maxSlider;
+		else maxSliderRef.current.value = maxSlider;
+		setProgressBar(minSliderRef.current.value, maxSliderRef.current.value);
 	}, [range.min, range.max]);
 
 	return (
@@ -71,12 +78,6 @@ const RangeSlider = ({ range, filterMethod, minSlider, maxSlider, step }) => {
 				onChange={handleDrag}
 				step={step}
 			/>
-			<span className="absolute inset-0 mt-4 -translate-x-6 select-none text-md font-vietnam-pro">
-				{formatNumber(minSlider)}đ
-			</span>
-			<span className="absolute right-0 mt-4 translate-x-10 select-none text-md font-vietnam-pro">
-				{formatNumber(maxSlider)}đ
-			</span>
 		</div>
 	);
 };

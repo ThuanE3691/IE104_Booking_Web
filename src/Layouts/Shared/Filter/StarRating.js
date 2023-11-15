@@ -6,7 +6,9 @@ const StarRating = ({ rating, setRating }) => {
 
 	return (
 		<section className="mt-8">
-			<h3 className="text-xl font-semibold">Xếp hạng của chỗ nghỉ</h3>
+			<h3 className="text-xl font-semibold font-vietnam-pro">
+				Xếp hạng của chỗ nghỉ
+			</h3>
 			<div className="flex items-center justify-center gap-2 my-8">
 				{[...Array(5)].map((star, index) => {
 					const currentRating = index + 1;

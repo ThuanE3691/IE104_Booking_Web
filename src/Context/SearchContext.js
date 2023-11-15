@@ -11,14 +11,17 @@ const SearchContextProvider = ({ children }) => {
 			max: null,
 		},
 		rating: null,
+		selected: [],
 	});
 
 	const NUMS_SAMPLE = 3000;
-	const BINS = 50;
+	const MIN_RANGE = 100000;
+	const MAX_RANGE = 5000000;
+	const BINS = 54;
 	const SLIDER = {
-		MIN_RANGE: 100000,
-		MAX_RANGE: 5000000,
-		STEP: Math.round(5000000 / BINS),
+		MIN_RANGE: MIN_RANGE,
+		MAX_RANGE: MAX_RANGE,
+		STEP: Math.round((MAX_RANGE - MIN_RANGE) / BINS),
 	};
 	// eslint-disable-next-line no-unused-vars
 	const [freqPrice, setFreqPrice] = useState(
@@ -49,6 +52,29 @@ const SearchContextProvider = ({ children }) => {
 		});
 	};
 
+	const setSelected = (selectItem, index) => {
+		setFilters((prevState) => {
+			const new_filters = { ...prevState };
+			new_filters.selected = [...prevState.selected];
+
+			if (prevState.selected.find((item) => item.id === index)) {
+				new_filters.selected = new_filters.selected.filter(
+					(item) => item.id !== index
+				);
+			} else {
+				new_filters.selected = [
+					...new_filters.selected,
+					{
+						item: selectItem,
+						id: index,
+					},
+				];
+			}
+
+			return new_filters;
+		});
+	};
+
 	const searchContextData = {
 		filters,
 		setFilters,
@@ -59,6 +85,7 @@ const SearchContextProvider = ({ children }) => {
 			minPrice: "min",
 			maxPrice: "max",
 			setRating,
+			setSelected,
 		},
 	};
 

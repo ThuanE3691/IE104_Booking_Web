@@ -39,7 +39,7 @@ function generateRandomData(sampleSize, totalBins, step, priceMin, priceMax) {
 		return {
 			size: size_of_bins,
 			min: bins_min,
-			max: bins_max,
+			max: bins_max > priceMax ? priceMax : bins_max,
 		};
 	});
 

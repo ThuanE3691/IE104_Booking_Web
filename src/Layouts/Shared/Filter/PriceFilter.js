@@ -14,7 +14,7 @@ const PriceFilter = ({ freqPrice, filters, SLIDER, filterMethod }) => {
 	};
 
 	return (
-		<section>
+		<section className="font-vietnam-pro">
 			<h3 className="text-xl font-semibold">Giá tiền (mỗi đêm)</h3>
 			<div className="relative mx-12 mt-32 mb-16">
 				<BarPlot
@@ -37,29 +37,29 @@ const PriceFilter = ({ freqPrice, filters, SLIDER, filterMethod }) => {
 						Giá thấp nhất
 					</p>
 					<div className="flex gap-x-1.5 items-center">
+						<p className="select-none ">VND</p>
 						<input
 							type="text"
 							className="w-64 outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
 							value={formatNumber(filters.price.min)}
 							onChange={(e) => onChangePrice(e, filterMethod.minPrice)}
 						/>
-						<p className="select-none ">đ</p>
 					</div>
 				</div>
-				<div className="w-6 h-1 mx-8 rounded-lg bg-slate-200"></div>
+				<div className="w-6 h-0.5 mx-8 rounded-lg bg-slate-200"></div>
 				<div className="px-3.5 py-1.5 transition-colors border-2 rounded-lg border-slate-200 focus-within:border-black">
 					<p className="text-sm font-semibold select-none text-slate-400 mb-0.5">
 						Giá cao nhất
 					</p>
 
 					<div className="flex gap-x-1.5">
+						<p className="select-none ">VND</p>
 						<input
 							type="text"
 							className="w-64 outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
 							value={formatNumber(filters.price.max)}
 							onChange={(e) => onChangePrice(e, filterMethod.maxPrice)}
 						/>
-						<p className="select-none ">đ</p>
 					</div>
 				</div>
 			</div>

@@ -12,6 +12,7 @@ const SearchContextProvider = ({ children }) => {
 		},
 		rating: null,
 		selected: [],
+		selectedServices: [],
 	});
 
 	const NUMS_SAMPLE = 3000;
@@ -75,6 +76,27 @@ const SearchContextProvider = ({ children }) => {
 		});
 	};
 
+	const setSelectedServices = (tag) => {
+		setFilters((prevState) => {
+			const new_filters = { ...prevState };
+			new_filters.selectedServices = [...prevState.selectedServices];
+
+			if (
+				new_filters.selectedServices.find(
+					(_service) => _service.name === tag.name
+				)
+			) {
+				new_filters.selectedServices = new_filters.selectedServices.filter(
+					(_service) => _service.name !== tag.name
+				);
+			} else {
+				new_filters.selectedServices = [...new_filters.selectedServices, tag];
+			}
+
+			return new_filters;
+		});
+	};
+
 	const searchContextData = {
 		filters,
 		setFilters,
@@ -86,6 +108,7 @@ const SearchContextProvider = ({ children }) => {
 			maxPrice: "max",
 			setRating,
 			setSelected,
+			setSelectedServices,
 		},
 	};
 

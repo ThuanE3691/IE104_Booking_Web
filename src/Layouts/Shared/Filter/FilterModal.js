@@ -84,7 +84,10 @@ const FilterModal = ({ isShowFilter, setShowFilter }) => {
 						selected={filters.selected}
 						setSelected={filterMethod.setSelected}
 					></TypeSelect>
-					<ServiceSelect></ServiceSelect>
+					<ServiceSelect
+						selectedServices={filters.selectedServices}
+						setSelectedServices={filterMethod.setSelectedServices}
+					></ServiceSelect>
 				</div>
 				<footer className="flex items-center w-full py-4 border-t-2 font-vietnam-pro">
 					<span className="relative ml-8 font-semibold cursor-pointer underline_element after:bg-black hover:after:w-full ">

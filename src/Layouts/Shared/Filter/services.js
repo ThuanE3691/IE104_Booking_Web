@@ -72,7 +72,7 @@ const advanceService = {
 		{
 			name: "Bảo vệ 24/7",
 			svg: SecureSVG,
-			className: " w-4",
+			size: 16,
 		},
 		{
 			name: "Dịch vụ là ủi",

@@ -5,6 +5,7 @@ import { FaBed } from "react-icons/fa6";
 import { FaShower } from "react-icons/fa6";
 import { FaPerson } from "react-icons/fa6";
 import { FaArrowRightLong } from "react-icons/fa6";
+import { FaLocationDot } from "react-icons/fa6";
 
 const HotelCard = () => {
 	return (
@@ -42,8 +43,10 @@ const HotelCard = () => {
 				</div>
 				<div className="flex mt-2 text-text-primary">
 					<div className="flex flex-col">
-						<span>Quận 1, TP. Hồ Chí Minh</span>
-						<div className="mt-4 ml-4">
+						<span className="flex items-center gap-x-1">
+							<FaLocationDot></FaLocationDot> Quận 1, TP. Hồ Chí Minh
+						</span>
+						<div className="mt-4">
 							<span className="font-semibold text-black ">
 								Căn hộ 1 phòng ngủ
 							</span>

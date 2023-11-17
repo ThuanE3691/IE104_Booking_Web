@@ -5,6 +5,7 @@ import FilterModal from "@/Layouts/Shared/Filter/FilterModal";
 import map_bg from "@/Assets/Images/Others/map.png";
 import LocationSVG from "@SVGComponent/Shared/LocationSVG";
 import filter from "@IconCommon/Feature/filter.png";
+import SelectorSearch from "@/Layouts/Site/Search/SelectorSearch";
 
 const Search = () => {
 	const styleSearchBar = {
@@ -20,6 +21,7 @@ const Search = () => {
 	};
 
 	const [isShowFilter, setShowFilter] = useState(false);
+	const [sortOption, setSortOption] = useState("Độ phổ biến");
 
 	const handleShowFilter = (event) => {
 		event.stopPropagation();
@@ -28,7 +30,7 @@ const Search = () => {
 
 	return (
 		<>
-			<div className="flex flex-col w-full min-h-full px-32 py-8 bg-main-bg mb-96">
+			<div className="flex flex-col w-full min-h-full px-32 py-8 bg-main-bg mb-96 font-vietnam-pro">
 				<SearchBar overrides={styleSearchBar}></SearchBar>
 
 				<FilterModal
@@ -47,18 +49,19 @@ const Search = () => {
 						</button>
 					</div>
 					<div className="flex items-center ml-8">
-						<span>Sắp xếp theo</span>
-						<select className="px-4 py-2 bg-white">
-							<option>Giá tiền</option>
-							<option>Đánh giá của khách</option>
-							<option>Được gợi ý</option>
-						</select>
 						<p className="ml-4">
 							Tìm được <span className="font-semibold">3200</span> chỗ nghỉ
 						</p>
 					</div>
+					<div className="flex items-center ml-auto mr-4 gap-x-2">
+						<span>Sắp xếp theo</span>
+						<SelectorSearch
+							sortOption={sortOption}
+							setSortOption={setSortOption}
+						></SelectorSearch>
+					</div>
 					<button
-						className="px-2 py-2 ml-auto bg-white border-2 border-slate-200 h-fit "
+						className="px-2 py-2 bg-white border-2 border-slate-200 h-fit drop-shadow-lg "
 						onClick={handleShowFilter}
 					>
 						<img src={filter} alt="" className="w-5 h-5" />

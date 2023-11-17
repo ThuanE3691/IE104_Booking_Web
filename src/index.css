@@ -30,7 +30,7 @@ code {
 	}
 
 	input[type="range"]::-webkit-slider-thumb {
-		@apply w-6 h-6 transition-transform data-[slider="min"]:-translate-x-3 data-[slider="max"]:translate-x-3 bg-white rounded-full shadow-xl appearance-none pointer-events-auto drop-shadow-lg cursor-grab active:cursor-grabbing active:scale-125 bg-opacity-50;
+		@apply w-6 h-6 transition-transform data-[slider="min"]:-translate-x-3 data-[slider="max"]:translate-x-3 bg-white rounded-full shadow-xl appearance-none pointer-events-auto drop-shadow-lg cursor-grab active:cursor-grabbing active:scale-125;
 	}
 
 	.underline_element::after {

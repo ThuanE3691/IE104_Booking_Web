@@ -39,6 +39,7 @@ const SelectorSearch = ({ sortOption, setSortOption }) => {
 									className="px-4 [&:first-child]:rounded-t-lg [&:last-child]:rounded-b-lg text-black py-2.5 bg-white select-none [&:nth-child(even)]:bg-slate-200 data-[ischecked=true]:text-blue-500 data-[ischecked=true]:hover:text-white hover:bg-button-primary hover:text-white transition-colors [&:nth-child(even)]:hover:bg-button-primary [&:nth-child(even)]:hover:text-white"
 									data-ischecked={sortOption === option}
 									onClick={() => setSortOption(option)}
+									key={option}
 								>
 									{option}
 								</div>

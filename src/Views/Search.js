@@ -8,7 +8,8 @@ import filter from "@IconCommon/Feature/filter.png";
 import SelectorSearch from "@/Layouts/Site/Search/SelectorSearch";
 import { SearchContext } from "@/Context/SearchContext";
 import FiltersArea from "@/Layouts/Site/Search/FiltersArea";
-import HotelCard from "@/Components/Layout/HotelCard";
+import PropertyCard from "@/Components/Layout/PropertyCard";
+import hotelData from "@/Data/HCM_hotels_search.json";
 
 const Search = () => {
 	const styleSearchBar = {
@@ -31,6 +32,8 @@ const Search = () => {
 		event.stopPropagation();
 		setShowFilter(true);
 	};
+
+	console.log(hotelData.result);
 
 	return (
 		<>
@@ -79,7 +82,11 @@ const Search = () => {
 						></FiltersArea>
 					</div>
 				</div>
-				<HotelCard></HotelCard>
+				<section className="flex flex-col mt-8 gap-y-8">
+					{hotelData.result.map((hotel, index) => {
+						return <PropertyCard hotel={hotel}></PropertyCard>;
+					})}
+				</section>
 			</div>
 		</>
 	);

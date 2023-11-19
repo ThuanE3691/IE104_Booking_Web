@@ -6,6 +6,7 @@ import Camping from "@/Assets/Images/HotelType/Camping.jpg";
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import formatNumber from "@/Utils/formatNumber";
 
 const hoverCardVariants = {
 	mouseOut: { top: "100%" },
@@ -65,7 +66,7 @@ const ImageCard = ({
 							{numsType} chỗ nghỉ
 						</p>
 						<p className="mt-0.5 group-data-[islarge=true]:mt-1 text-white ">
-							{minPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}đ/đêm
+							{formatNumber(minPrice)}đ/đêm
 						</p>
 					</motion.div>
 				)}

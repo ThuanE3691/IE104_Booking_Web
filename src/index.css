@@ -6,6 +6,7 @@ body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	box-sizing: border-box;
+	overflow-y: scroll;
 }
 
 code {
@@ -26,5 +27,14 @@ code {
 
 	.hover-button {
 		@apply hover:text-black hover:bg-slate-200;
+	}
+
+	input[type="range"]::-webkit-slider-thumb {
+		@apply w-6 h-6 transition-transform data-[slider="min"]:-translate-x-3 data-[slider="max"]:translate-x-3 bg-white rounded-full shadow-xl appearance-none pointer-events-auto drop-shadow-lg cursor-grab active:cursor-grabbing active:scale-125;
+	}
+
+	.underline_element::after {
+		@apply content-[''] w-0 absolute bottom-0 left-0 h-[2px] rounded ease-in-out;
+		transition: 0.3s;
 	}
 }

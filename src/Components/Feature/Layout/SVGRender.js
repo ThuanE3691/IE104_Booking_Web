@@ -1,6 +1,6 @@
-const SVGRender = ({ viewBox, className, children }) => {
+const SVGRender = ({ viewBox, children, ...parameters }) => {
 	return (
-		<svg className={className} viewBox={viewBox}>
+		<svg {...parameters} viewBox={viewBox}>
 			{children}
 		</svg>
 	);

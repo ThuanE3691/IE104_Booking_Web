@@ -10,15 +10,11 @@ const hoverAnimate = {
 	},
 };
 
-export const ProvinceCard = ({
-	type_province,
-	province_name,
-	province_img,
-}) => {
+export const ProvinceCard = ({ province_name, province_img }) => {
 	return (
 		<AnimatePresence>
 			<motion.div
-				className="relative flex flex-col justify-end text-white bg-no-repeat bg-contain rounded-xl w-[290px] h-[200px] select-none z-0 overflow-hidden"
+				className=" relative flex flex-col justify-end text-white bg-no-repeat bg-contain rounded-xl w-[290px] h-[200px] select-none z-0 overflow-hidden"
 				key={province_name}
 				initial={{ opacity: 0 }}
 				animate={{ opacity: 1 }}

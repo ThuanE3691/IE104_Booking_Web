@@ -10,6 +10,22 @@ import { SearchContext } from "@/Context/SearchContext";
 import FiltersArea from "@/Layouts/Site/Search/FiltersArea";
 import PropertyCard from "@/Components/Layout/PropertyCard";
 import hotelData from "@/Data/HCM_hotels_search.json";
+import { motion } from "framer-motion";
+
+const container = {
+	hidden: { opacity: 0 },
+	show: {
+		opacity: 1,
+		transition: {
+			staggerChildren: 0.1,
+		},
+	},
+};
+
+const item = {
+	hidden: { opacity: 0 },
+	show: { opacity: 1 },
+};
 
 const Search = () => {
 	const styleSearchBar = {
@@ -82,11 +98,16 @@ const Search = () => {
 						></FiltersArea>
 					</div>
 				</div>
-				<section className="flex flex-col mt-8 gap-y-8">
+				<motion.section
+					className="flex flex-col mt-8 gap-y-8"
+					variants={container}
+					initial="hidden"
+					animate="show"
+				>
 					{hotelData.result.map((hotel, index) => {
-						return <PropertyCard hotel={hotel}></PropertyCard>;
+						return <PropertyCard hotel={hotel} variants={item}></PropertyCard>;
 					})}
-				</section>
+				</motion.section>
 			</div>
 		</>
 	);

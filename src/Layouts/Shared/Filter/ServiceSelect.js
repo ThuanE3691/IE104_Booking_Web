@@ -33,7 +33,6 @@ const ServiceSelect = ({ selectedServices, setSelectedServices }) => {
 										selectedServices.find(
 											(services) => services.name === tag.name
 										) !== undefined;
-
 									return (
 										<div
 											className="flex items-center px-5 py-1.5 shadow-md cursor-pointer ring-1 ring-slate-200 rounded-2xl gap-x-2 w-fit hover:bg-slate-200 transition-all text-black text-opacity-70 hover:text-opacity-100 data-[ischecked=true]:text-opacity-100 data-[ischecked=true]:bg-slate-200"

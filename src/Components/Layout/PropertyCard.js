@@ -8,9 +8,16 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import { FaLocationDot } from "react-icons/fa6";
 import formatNumber from "@/Utils/formatNumber";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const HotelCard = ({ hotel, ...properties }) => {
 	const facilities = hotel.unit_configuration_label.split("</b>: ")[1];
+
+	const navigate = useNavigate();
+
+	const handleOnClick = () => {
+		navigate(`/search/hotel/${hotel.hotel_id}`);
+	};
 
 	return (
 		<motion.section
@@ -101,7 +108,10 @@ const HotelCard = ({ hotel, ...properties }) => {
 							)}
 							VND
 						</span>
-						<button className="flex items-center justify-center py-2 mt-4 text-lg font-semibold text-white transition-colors rounded-xl bg-button-primary hover-button">
+						<button
+							className="flex items-center justify-center py-2 mt-4 text-lg font-semibold text-white transition-colors rounded-xl bg-button-primary hover-button"
+							onClick={handleOnClick}
+						>
 							Xem phòng <FaArrowRightLong className="ml-2"></FaArrowRightLong>
 						</button>
 					</div>

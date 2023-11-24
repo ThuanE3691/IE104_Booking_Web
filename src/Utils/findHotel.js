@@ -1,7 +1,7 @@
-import HotelData from "@/Data/HCM_hotels_search.json";
+import HotelData from "@/Data/HCM_hotels.json";
 
-const findHotel = ({ hotelId }) => {
-	const result = HotelData.result.find((hotel) => {
+const findHotel = ({ page, hotelId }) => {
+	const result = HotelData[page].find((hotel) => {
 		return hotel.hotel_id === parseInt(hotelId);
 	});
 	return result;

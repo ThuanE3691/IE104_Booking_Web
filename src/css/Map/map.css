@@ -9,11 +9,14 @@
 
 .leaflet-popup-content-wrapper {
 	padding: 0 !important;
+	border-radius: 30px;
 }
 
 .leaflet-popup-content {
-	min-width: 600px !important;
-	min-height: 200px !important;
+	position: relative;
+	width: 300px !important;
+	min-height: 350px !important;
 	margin: 0 !important;
 	display: flex;
+	flex-direction: column;
 }

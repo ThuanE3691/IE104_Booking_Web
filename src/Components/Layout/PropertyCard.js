@@ -6,12 +6,13 @@ import { FaPerson } from "react-icons/fa6";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { FaLocationDot } from "react-icons/fa6";
 import formatNumber from "@/Utils/formatNumber";
+import { motion } from "framer-motion";
 
 const HotelCard = ({ hotel, ...properties }) => {
 	// const facilities = hotel.unit_configuration_label.split("</b>: ")[1];
 
 	return (
-		<section
+		<motion.section
 			className="flex bg-white  rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)]"
 			{...properties}
 		>
@@ -105,7 +106,7 @@ const HotelCard = ({ hotel, ...properties }) => {
 					</div>
 				</div>
 			</div>
-		</section>
+		</motion.section>
 	);
 };
 

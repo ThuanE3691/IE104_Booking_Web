@@ -3,6 +3,7 @@ import routes from "./Routes/routes";
 import DefaultLayout from "./Layouts/DefaultLayout/DefaultLayout";
 import { Fragment } from "react";
 import SearchContextProvider from "./Context/SearchContext";
+import ScrollToTop from "./Components/Feature/Event/ScrollToTop";
 
 function App() {
 	return (
@@ -24,6 +25,7 @@ function App() {
 								key={index}
 								element={
 									<Layout>
+										<ScrollToTop></ScrollToTop>
 										<Page></Page>
 									</Layout>
 								}

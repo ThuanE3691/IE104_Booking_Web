@@ -49,8 +49,6 @@ const Search = () => {
 		setShowFilter(true);
 	};
 
-	console.log(hotelData.result);
-
 	return (
 		<>
 			<div className="flex flex-col w-full min-h-full px-32 py-8 bg-main-bg mb-96 font-vietnam-pro">

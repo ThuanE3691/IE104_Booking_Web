@@ -4,6 +4,7 @@ import { MapContainer, Marker, TileLayer } from "react-leaflet";
 import { Icon } from "leaflet";
 import "@/css/Map/map.css";
 import PopupCard from "./PopupCard";
+import SmallPropertyCard from "@/Components/Layout/SmallPropertyCard";
 
 const modalVariants = {
 	hidden: {
@@ -49,7 +50,7 @@ const MapModal = ({ showMap, setShowMap, properties }) => {
 	return (
 		<Modal isOpen={showMap} onClose={handleShowOffModal}>
 			<motion.div
-				className="bg-white flex font-vietnam-pro w-[1048px] h-[544px] relative"
+				className="bg-white flex font-vietnam-pro w-[1348px] h-[544px] relative"
 				variants={modalVariants}
 				initial="hidden"
 				animate="visible"
@@ -58,6 +59,16 @@ const MapModal = ({ showMap, setShowMap, properties }) => {
 				onClick={stopPropagation}
 				key="filter-modal"
 			>
+				<section className="bg-white w-[674px] flex flex-col overflow-x-hidden overflow-y-scroll gap-y-8 py-4 px-4">
+					{properties.map((hotel) => {
+						return (
+							<SmallPropertyCard
+								hotel={hotel}
+								key={hotel.hotel_id}
+							></SmallPropertyCard>
+						);
+					})}
+				</section>
 				<MapContainer center={defaultProps.center} zoom={defaultProps.zoom}>
 					<TileLayer
 						attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

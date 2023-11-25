@@ -1,5 +1,7 @@
 import { Popup } from "react-leaflet";
 import { FaLocationDot } from "react-icons/fa6";
+import { FaStar } from "react-icons/fa";
+import { BiSolidBuildingHouse } from "react-icons/bi";
 import formatNumber from "@/Utils/formatNumber";
 
 import "@/css/Map/map.css";
@@ -10,14 +12,28 @@ const PopupCard = ({ hotel, ...properties }) => {
 			<img
 				src={hotel.max_1440_photo_url}
 				alt=""
-				className=" w-[300px] h-[220px] rounded-[30px_30px_0_0] z-[1]"
+				className=" w-[300px] h-[190px] z-[1] rounded-[32px]"
 			/>
-			<div className="absolute z-10 w-full h-[30px] left-0 top-[200px] bg-white rounded-tr-[30px]"></div>
 
-			<section className="flex flex-col w-full px-4 py-4 font-vietnam-pro">
+			<section className="flex flex-col w-full px-4 py-4 font-vietnam-pro z-[11] relative">
 				<h3 className="text-base font-semibold bg-white w-fit">
 					{hotel.hotel_name_trans}
 				</h3>
+				<div className="flex items-center mt-2 font-semibold gap-x-1 text-text-primary">
+					<BiSolidBuildingHouse size={14}></BiSolidBuildingHouse>
+					<span className="text-sm">{hotel.accommodation_type_name}</span>
+					<div className="flex items-center gap-x-1">
+						{[...Array(hotel.class)].map((value, index) => {
+							return (
+								<FaStar
+									key={index}
+									size={12}
+									className="text-yellow-400 "
+								></FaStar>
+							);
+						})}
+					</div>
+				</div>
 				{/* <div className="flex items-center justify-start mt-2 gap-x-2 w-fit">
 					<div className="p-2 font-semibold text-white rounded-[10px_10px_10px_0px] bg-button-primary w-fit text-xs">
 						{hotel.review_score.toFixed(1)}
@@ -36,7 +52,7 @@ const PopupCard = ({ hotel, ...properties }) => {
 					{formatNumber(
 						hotel.composite_price_breakdown.gross_amount_per_night.value
 					)}{" "}
-					VND/ đêm
+					VNĐ/đêm
 				</span>
 			</section>
 		</Popup>

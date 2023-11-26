@@ -5,30 +5,39 @@ import { FaLocationDot } from "react-icons/fa6";
 import formatNumber from "@/Utils/formatNumber";
 import { motion } from "framer-motion";
 
-const SmallPropertyCard = ({ hotel, isInView, setInView, ...properties }) => {
+const SmallPropertyCard = ({
+	hotel,
+	isInView,
+	setInView,
+	id,
+	index,
+	AnimateMarker,
+}) => {
 	// const facilities = hotel.unit_configuration_label.split("</b>: ")[1];
+
+	const handleInView = (hotel_id) => {
+		setInView(hotel_id);
+		AnimateMarker();
+	};
 
 	return (
 		<motion.li
-			className="flex relative bg-white rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] scroll-m-8 "
+			className={`flex relative bg-white rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] scroll-m-8 transition ease-in-out ${
+				isInView === hotel.hotel_id && " ring-2 ring-text-primary"
+			}`}
 			key={hotel.hotel_id}
-			onViewportEnter={() => setInView(hotel.hotel_id)}
-			// onClick={() => setInView(hotel.hotel_id)}
+			onViewportEnter={() => handleInView(hotel.hotel_id)}
 			viewport={{ amount: 1, margin: "0px 0px -252px 0px" }}
-			id={properties.id}
+			id={id}
+			name={"small" + id}
+			layout
 		>
-			{hotel.hotel_id === isInView && (
-				<motion.div
-					className="absolute inset-0 z-10 w-full h-full ring-2 rounded-xl ring-text-primary"
-					layoutId={"ring-properties"}
-				></motion.div>
-			)}
 			<img
 				src={hotel.max_1440_photo_url}
 				alt=""
 				className="object-cover h-[100%] w-52 rounded-l-xl"
 			/>
-			<div className="w-full px-4 py-4">
+			<div className="relative z-10 w-full px-4 py-4 cursor-pointer">
 				<div className="flex w-full mb-1">
 					<span className="mr-4 font-semibold">{hotel.hotel_name_trans}</span>
 					<div className="flex items-center ml-auto gap-x-2">

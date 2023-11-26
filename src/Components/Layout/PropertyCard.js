@@ -15,6 +15,7 @@ const PropertyCard = ({ hotel, ...properties }) => {
 		<motion.section
 			className="flex bg-white  rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)]"
 			{...properties}
+			key={hotel.hotel_id}
 		>
 			<img
 				src={hotel.max_1440_photo_url}

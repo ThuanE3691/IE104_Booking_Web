@@ -5,6 +5,7 @@ import { Icon } from "leaflet";
 import "@/css/Map/map.css";
 import PopupCard from "./PopupCard";
 import SmallPropertyCard from "@/Components/Layout/SmallPropertyCard";
+import { useState } from "react";
 
 const modalVariants = {
 	hidden: {
@@ -42,6 +43,15 @@ const MapModal = ({ showMap, setShowMap, properties }) => {
 		setShowMap(false);
 	};
 
+	const [isInView, setInView] = useState(properties[0].hotel_id);
+
+	const handleOnClickMarker = (hotelId) => {
+		const element = document.getElementById("properties-" + hotelId);
+		if (element) {
+			element.scrollIntoView({ behavior: "smooth", block: "start" });
+		}
+	};
+
 	const customIcon = new Icon({
 		iconUrl: "https://cdn-icons-png.flaticon.com/128/6153/6153497.png",
 		iconSize: [38, 38],
@@ -59,16 +69,20 @@ const MapModal = ({ showMap, setShowMap, properties }) => {
 				onClick={stopPropagation}
 				key="filter-modal"
 			>
-				<section className="bg-white w-[674px] flex flex-col overflow-x-hidden overflow-y-scroll gap-y-8 py-4 px-4">
-					{properties.map((hotel) => {
+				<motion.section className="bg-white w-[674px] flex flex-col overflow-x-hidden overflow-y-scroll gap-y-8 py-4 px-4">
+					{properties.map((hotel, index) => {
 						return (
 							<SmallPropertyCard
 								hotel={hotel}
 								key={hotel.hotel_id}
+								id={"properties-" + hotel.hotel_id}
+								isInView={isInView}
+								setInView={setInView}
+								index={index}
 							></SmallPropertyCard>
 						);
 					})}
-				</section>
+				</motion.section>
 				<MapContainer center={defaultProps.center} zoom={defaultProps.zoom}>
 					<TileLayer
 						attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -80,6 +94,9 @@ const MapModal = ({ showMap, setShowMap, properties }) => {
 								key={hotel.hotel_name_trans}
 								position={[hotel.latitude, hotel.longitude]}
 								icon={customIcon}
+								eventHandlers={{
+									click: () => handleOnClickMarker(hotel.hotel_id),
+								}}
 							>
 								<PopupCard hotel={hotel} key={hotel.hotel_name_trans} />
 							</Marker>

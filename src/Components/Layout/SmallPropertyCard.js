@@ -1,8 +1,5 @@
 import { FaStar } from "react-icons/fa";
 import { BiSolidBuildingHouse } from "react-icons/bi";
-import { FaBed } from "react-icons/fa6";
-import { FaShower } from "react-icons/fa6";
-import { FaPerson } from "react-icons/fa6";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { FaLocationDot } from "react-icons/fa6";
 import formatNumber from "@/Utils/formatNumber";
@@ -13,9 +10,19 @@ const SmallPropertyCard = ({ hotel, ...properties }) => {
 
 	return (
 		<motion.section
-			className="flex bg-white  rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)]"
-			{...properties}
+			className="flex relative bg-white  rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] scroll-m-8 "
+			key={hotel.hotel_id}
+			onViewportEnter={() => properties.setInView(hotel.hotel_id)}
+			// onClick={() => properties.setInView(hotel.hotel_id)}
+			viewport={{ amount: 1, margin: "0px 0px -252px 0px" }}
+			layout
 		>
+			{hotel.hotel_id === properties.isInView && (
+				<motion.div
+					className="absolute inset-0 z-10 w-full h-full ring-2 rounded-xl ring-text-primary"
+					layoutId="ring-properties"
+				></motion.div>
+			)}
 			<img
 				src={hotel.max_1440_photo_url}
 				alt=""
@@ -69,7 +76,7 @@ const SmallPropertyCard = ({ hotel, ...properties }) => {
 						<span className="font-semibold text-black text">
 							{formatNumber(
 								hotel.composite_price_breakdown.gross_amount_per_night.value
-							)}
+							)}{" "}
 							VND
 						</span>
 						<button className="flex items-center justify-center py-2 mt-2 text-sm font-semibold text-white transition-colors rounded-xl bg-button-primary hover-button">

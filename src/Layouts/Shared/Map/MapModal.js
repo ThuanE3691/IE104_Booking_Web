@@ -1,5 +1,5 @@
 import Modal from "@/Components/Feature/Layout/Modal";
-import { motion } from "framer-motion";
+import { LayoutGroup, motion } from "framer-motion";
 import { MapContainer, Marker, TileLayer } from "react-leaflet";
 import { Icon } from "leaflet";
 import "@/css/Map/map.css";
@@ -69,20 +69,23 @@ const MapModal = ({ showMap, setShowMap, properties }) => {
 				onClick={stopPropagation}
 				key="filter-modal"
 			>
-				<motion.section className="bg-white w-[674px] flex flex-col overflow-x-hidden overflow-y-scroll gap-y-8 py-4 px-4">
+				<motion.ul
+					className="bg-white w-[674px] flex flex-col overflow-x-hidden overflow-y-scroll gap-y-8 py-4 px-4 scroll-smooth"
+					layout
+				>
 					{properties.map((hotel, index) => {
 						return (
 							<SmallPropertyCard
 								hotel={hotel}
 								key={hotel.hotel_id}
-								id={"properties-" + hotel.hotel_id}
 								isInView={isInView}
 								setInView={setInView}
 								index={index}
+								id={"properties-" + hotel.hotel_id}
 							></SmallPropertyCard>
 						);
 					})}
-				</motion.section>
+				</motion.ul>
 				<MapContainer center={defaultProps.center} zoom={defaultProps.zoom}>
 					<TileLayer
 						attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

@@ -5,22 +5,22 @@ import { FaLocationDot } from "react-icons/fa6";
 import formatNumber from "@/Utils/formatNumber";
 import { motion } from "framer-motion";
 
-const SmallPropertyCard = ({ hotel, ...properties }) => {
+const SmallPropertyCard = ({ hotel, isInView, setInView, ...properties }) => {
 	// const facilities = hotel.unit_configuration_label.split("</b>: ")[1];
 
 	return (
-		<motion.section
-			className="flex relative bg-white  rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] scroll-m-8 "
+		<motion.li
+			className="flex relative bg-white rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] scroll-m-8 "
 			key={hotel.hotel_id}
-			onViewportEnter={() => properties.setInView(hotel.hotel_id)}
-			// onClick={() => properties.setInView(hotel.hotel_id)}
+			onViewportEnter={() => setInView(hotel.hotel_id)}
+			// onClick={() => setInView(hotel.hotel_id)}
 			viewport={{ amount: 1, margin: "0px 0px -252px 0px" }}
-			layout
+			id={properties.id}
 		>
-			{hotel.hotel_id === properties.isInView && (
+			{hotel.hotel_id === isInView && (
 				<motion.div
 					className="absolute inset-0 z-10 w-full h-full ring-2 rounded-xl ring-text-primary"
-					layoutId="ring-properties"
+					layoutId={"ring-properties"}
 				></motion.div>
 			)}
 			<img
@@ -85,7 +85,7 @@ const SmallPropertyCard = ({ hotel, ...properties }) => {
 					</div>
 				</div>
 			</div>
-		</motion.section>
+		</motion.li>
 	);
 };
 

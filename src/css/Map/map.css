@@ -7,6 +7,10 @@
 	cursor: pointer;
 }
 
+.leaflet-pane.leaflet-marker-pane img[data-isInView="true"] {
+	background-color: black;
+}
+
 .leaflet-popup-content-wrapper {
 	padding: 0 !important;
 	border-radius: 32px !important;

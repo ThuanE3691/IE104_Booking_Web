@@ -11,7 +11,14 @@ import { Fragment } from "react";
 const routes = [
 	{ path: config.routes.home, component: Home },
 	{ path: config.routes.search, component: Search },
-	{ path: config.routes.hotel, component: HotelDetails },
+	{
+		path: config.routes.hotel,
+		component: HotelDetails,
+		position: {
+			x: 0,
+			y: 244,
+		},
+	},
 	{ path: config.routes.about, component: Fragment },
 	{ path: config.routes.contact, component: Fragment },
 ];

@@ -5,14 +5,16 @@ import DatePickerTab from "./DatePickerTab";
 import classNames from "@/Utils/classNames";
 import config from "@/Config";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const SearchBar = ({ overrides }) => {
 	return (
-		<div
+		<motion.div
 			className={classNames(
 				"flex items-center justify-between px-8 py-6 shadow-2xl bg-gradient-to-tr from-main-bg from-70% font-nunito rounded-2xl flex-nowrap select-none",
 				overrides?.container
 			)}
+			layoutId="search-bar"
 		>
 			<LocationTab overrides={overrides?.locationTab}></LocationTab>
 			<div className=" w-[1.5px] h-16 bg-sub-text"></div>
@@ -29,7 +31,7 @@ const SearchBar = ({ overrides }) => {
 					<SearchIconSVG className="w-5 h-5 text-white fill-current group-hover:text-black"></SearchIconSVG>
 				</button>
 			</Link>
-		</div>
+		</motion.div>
 	);
 };
 

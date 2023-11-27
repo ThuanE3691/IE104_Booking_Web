@@ -24,16 +24,20 @@ const HotelCard = ({ hotel, ...properties }) => {
 			className="flex bg-white  rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)]"
 			{...properties}
 		>
-			<img
+			<motion.img
 				src={hotel.max_1440_photo_url}
 				alt=""
 				className="object-cover w-64 h-64 rounded-l-xl"
+				layoutId={`main-img-${hotel.hotel_id}`}
 			/>
 			<div className="w-full px-8 py-4">
 				<div className="flex w-full">
-					<span className="text-xl font-semibold">
+					<motion.h2
+						className="text-xl font-semibold"
+						layoutId={`hotel-name-${hotel.hotel_id}`}
+					>
 						{hotel.hotel_name_trans}
-					</span>
+					</motion.h2>
 					<div className="flex items-center ml-auto gap-x-2">
 						<div className="flex flex-col">
 							<span className="font-semibold text-end">

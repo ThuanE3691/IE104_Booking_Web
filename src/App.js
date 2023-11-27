@@ -13,11 +13,19 @@ function App() {
 					{routes.map((route, index) => {
 						const Page = route.component;
 						let Layout = DefaultLayout;
+						let position = {
+							x: 0,
+							y: 0,
+						};
 
 						if (route.layout) {
 							Layout = route.layout;
 						} else if (route.layout === null) {
 							Layout = Fragment;
+						}
+
+						if (route.position) {
+							position = route.position;
 						}
 						return (
 							<Route
@@ -25,7 +33,7 @@ function App() {
 								key={index}
 								element={
 									<Layout>
-										<ScrollToTop></ScrollToTop>
+										<ScrollToTop position={position}></ScrollToTop>
 										<Page></Page>
 									</Layout>
 								}

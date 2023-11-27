@@ -9,6 +9,28 @@ import { Link } from "react-router-dom";
 import { FaImages } from "react-icons/fa";
 import room_facilities from "@/Data/room_facilities.json";
 import _ from "lodash";
+import { AnimatePresence, motion } from "framer-motion";
+
+const imgVariants = {
+	enter_down: {
+		y: "-100%",
+		opacity: 0,
+	},
+	enter_up: {
+		y: "100%",
+		opacity: 0,
+	},
+	enter: {
+		y: 0,
+		opacity: 1,
+	},
+	transition: {
+		duration: 1,
+		bounce: 0,
+		type: "spring",
+		ease: "easeInOut",
+	},
+};
 
 const HotelDetails = () => {
 	const { id } = useParams();
@@ -50,29 +72,42 @@ const HotelDetails = () => {
 				<div className="grid grid-rows-[200px,200px] grid-cols-[2.5fr,1fr,1fr] gap-x-6 gap-y-4 mt-8">
 					{hotel.photos.slice(0, 5).map((photo, index) => {
 						return (
-							<div
-								className="relative  data-[isfirst=true]:row-span-2 cursor-pointer"
-								data-isfirst={index === 0}
-								key={index}
-							>
-								<img
-									src={photo.url_max}
-									className="object-cover w-full h-full rounded-md"
-									alt=""
-								/>
-								{index === 4 && (
-									<div className="absolute flex items-center justify-center px-4 py-2 text-white bg-black rounded-lg bg-opacity-30 bottom-4 right-4 w-fit h-fit gap-x-2">
-										<FaImages></FaImages>{" "}
-										<span>{hotel.photos.length - 5}+</span>
-									</div>
-								)}
-							</div>
+							<AnimatePresence>
+								<motion.div
+									className="relative data-[isfirst=true]:row-span-2 cursor-pointer"
+									data-isfirst={index === 0}
+									key={index}
+									variants={index > 0 ? imgVariants : null}
+									initial={
+										index === 2 || index === 3 ? "enter_down" : "enter_up"
+									}
+									animate="enter"
+									exit={index === 2 || index === 3 ? "enter_down" : "enter_up"}
+									transition="transition"
+								>
+									<motion.img
+										src={photo.url_max}
+										className="object-cover w-full h-full rounded-md"
+										alt=""
+										layoutId={index === 0 && `main-img-${hotel.hotel_id}`}
+									/>
+									{index === 4 && (
+										<div className="absolute flex items-center justify-center px-4 py-2 text-white bg-black rounded-lg bg-opacity-30 bottom-4 right-4 w-fit h-fit gap-x-2">
+											<FaImages></FaImages>{" "}
+											<span>{hotel.photos.length - 5}+</span>
+										</div>
+									)}
+								</motion.div>
+							</AnimatePresence>
 						);
 					})}
 				</div>
-				<h2 className="mt-8 text-3xl font-semibold">
+				<motion.h2
+					className="mt-8 text-3xl font-semibold"
+					layoutId={`hotel-name-${hotel.hotel_id}`}
+				>
 					{hotel.hotel_name_trans}
-				</h2>
+				</motion.h2>
 				<div className="flex items-center mt-4 font-semibold gap-x-2 text-text-primary">
 					<BiSolidBuildingHouse size={14}></BiSolidBuildingHouse>
 					<span className="text">{hotel.accommodation_type_name}</span>

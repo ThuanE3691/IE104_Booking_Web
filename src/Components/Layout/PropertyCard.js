@@ -50,7 +50,10 @@ const HotelCard = ({ hotel, ...properties }) => {
 						</div>
 					</div>
 				</div>
-				<div className="flex items-center font-semibold gap-x-1 text-text-primary">
+				<motion.div
+					className="flex items-center font-semibold gap-x-1 text-text-primary"
+					layoutId={`hotel-type-${hotel.hotel_id}`}
+				>
 					<BiSolidBuildingHouse size={14}></BiSolidBuildingHouse>
 					<span className="text-sm">{hotel.accommodation_type_name}</span>
 					<div className="flex items-center gap-x-1">
@@ -64,13 +67,16 @@ const HotelCard = ({ hotel, ...properties }) => {
 							);
 						})}
 					</div>
-				</div>
+				</motion.div>
 				<div className="flex mt-2 text-text-primary">
 					<div className="flex flex-col">
-						<span className="flex items-center gap-x-1">
+						<motion.span
+							className="flex items-center gap-x-1"
+							layoutId={`hotel-address-${hotel.hotel_id}`}
+						>
 							<FaLocationDot></FaLocationDot> {hotel.district},{" "}
 							{hotel.city_trans}
-						</span>
+						</motion.span>
 						<div className="mt-4">
 							<span className="font-semibold text-black ">
 								{hotel.accommodation_type_name} 1 phòng ngủ

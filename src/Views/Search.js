@@ -10,7 +10,7 @@ import { SearchContext } from "@/Context/SearchContext";
 import FiltersArea from "@/Layouts/Site/Search/FiltersArea";
 import PropertyCard from "@/Components/Layout/PropertyCard";
 import hotelData from "@/Data/HCM_hotels_search.json";
-import { motion } from "framer-motion";
+import { LayoutGroup, motion } from "framer-motion";
 
 const container = {
 	hidden: { opacity: 0 },
@@ -50,64 +50,64 @@ const Search = () => {
 	};
 
 	return (
-		<>
-			<div className="flex flex-col w-full min-h-full px-32 py-8 bg-main-bg mb-96 font-vietnam-pro">
-				<SearchBar overrides={styleSearchBar}></SearchBar>
+		<div className="flex flex-col w-full min-h-full px-32 py-8 bg-main-bg mb-96 font-vietnam-pro">
+			<SearchBar overrides={styleSearchBar}></SearchBar>
 
-				<FilterModal
-					isShowFilter={isShowFilter}
-					setShowFilter={setShowFilter}
-				></FilterModal>
+			<FilterModal
+				isShowFilter={isShowFilter}
+				setShowFilter={setShowFilter}
+			></FilterModal>
 
-				<div className="flex items-center mt-8">
-					<div
-						className=" w-[calc(544px*2/3)] h-[calc(96px+48px)] bg-no-repeat bg-cover flex items-center justify-center rounded-xl shadow-xl bg-center"
-						style={{ backgroundImage: `url(${map_bg}` }}
-					>
-						<button className="flex items-center gap-2.5 px-5 py-1.5 font-semibold transition-colors bg-white border border-black rounded-lg text-sm hover:bg-button-primary hover:text-white group">
-							<LocationSVG className="w-4 h-4 fill-current group-hover:text-white" />
-							Xem trên bản đồ
+			<div className="flex items-center mt-8">
+				<div
+					className=" w-[calc(544px*2/3)] h-[calc(96px+48px)] bg-no-repeat bg-cover flex items-center justify-center rounded-xl shadow-xl bg-center"
+					style={{ backgroundImage: `url(${map_bg}` }}
+				>
+					<button className="flex items-center gap-2.5 px-5 py-1.5 font-semibold transition-colors bg-white border border-black rounded-lg text-sm hover:bg-button-primary hover:text-white group">
+						<LocationSVG className="w-4 h-4 fill-current group-hover:text-white" />
+						Xem trên bản đồ
+					</button>
+				</div>
+				<div className="flex flex-col w-full">
+					<div className="flex items-center">
+						<div className="flex ml-8 gap-y-2">
+							<p>
+								Tìm được <span className="font-semibold">3200</span> chỗ nghỉ
+							</p>
+						</div>
+						<div className="flex items-center ml-auto mr-4 gap-x-2">
+							<span>Sắp xếp theo</span>
+							<SelectorSearch
+								sortOption={sortOption}
+								setSortOption={setSortOption}
+							></SelectorSearch>
+						</div>
+						<button
+							className="px-2 py-2 bg-white border-2 rounded-lg border-slate-200 h-fit drop-shadow-lg "
+							onClick={handleShowFilter}
+						>
+							<img src={filter} alt="" className="w-5 h-5" />
 						</button>
 					</div>
-					<div className="flex flex-col w-full">
-						<div className="flex items-center">
-							<div className="flex ml-8 gap-y-2">
-								<p>
-									Tìm được <span className="font-semibold">3200</span> chỗ nghỉ
-								</p>
-							</div>
-							<div className="flex items-center ml-auto mr-4 gap-x-2">
-								<span>Sắp xếp theo</span>
-								<SelectorSearch
-									sortOption={sortOption}
-									setSortOption={setSortOption}
-								></SelectorSearch>
-							</div>
-							<button
-								className="px-2 py-2 bg-white border-2 rounded-lg border-slate-200 h-fit drop-shadow-lg "
-								onClick={handleShowFilter}
-							>
-								<img src={filter} alt="" className="w-5 h-5" />
-							</button>
-						</div>
-						<FiltersArea
-							filters={filters}
-							filtersMethod={filtersMethod}
-						></FiltersArea>
-					</div>
+					<FiltersArea
+						filters={filters}
+						filtersMethod={filtersMethod}
+					></FiltersArea>
 				</div>
-				<motion.section
-					className="flex flex-col mt-8 gap-y-8"
-					variants={container}
-					initial="hidden"
-					animate="show"
-				>
+			</div>
+			<motion.section
+				className="flex flex-col mt-8 gap-y-8"
+				variants={container}
+				initial="hidden"
+				animate="show"
+			>
+				<LayoutGroup>
 					{hotelData.result.map((hotel, index) => {
 						return <PropertyCard hotel={hotel} variants={item}></PropertyCard>;
 					})}
-				</motion.section>
-			</div>
-		</>
+				</LayoutGroup>
+			</motion.section>
+		</div>
 	);
 };
 

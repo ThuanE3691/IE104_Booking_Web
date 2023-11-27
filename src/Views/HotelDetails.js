@@ -7,28 +7,44 @@ import { FaLocationDot } from "react-icons/fa6";
 import { BiSolidBuildingHouse } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { FaImages } from "react-icons/fa";
-import room_facilities from "@/Data/room_facilities.json";
 import _ from "lodash";
 import { AnimatePresence, motion } from "framer-motion";
+import ServiceHave from "@/Layouts/Site/HotelDetails/ServiceHave";
+import ReviewsArea from "@/Layouts/Site/HotelDetails/ReviewsArea";
 
 const imgVariants = {
 	enter_down: {
+		opacity: "0%",
 		y: "-100%",
-		opacity: 0,
 	},
 	enter_up: {
+		opacity: "0%",
 		y: "100%",
-		opacity: 0,
 	},
 	enter: {
 		y: 0,
-		opacity: 1,
+		opacity: "100%",
 	},
 	transition: {
-		duration: 1,
+		duration: 0.3,
 		bounce: 0,
 		type: "spring",
 		ease: "easeInOut",
+	},
+};
+
+const normalVariants = {
+	initial: {
+		opacity: 0,
+	},
+	animate: {
+		opacity: 1,
+	},
+	exit: {
+		opacity: 0,
+	},
+	transition: {
+		duration: 0.3,
 	},
 };
 
@@ -70,13 +86,13 @@ const HotelDetails = () => {
 					</span>
 				</span>
 				<div className="grid grid-rows-[200px,200px] grid-cols-[2.5fr,1fr,1fr] gap-x-6 gap-y-4 mt-8">
-					{hotel.photos.slice(0, 5).map((photo, index) => {
-						return (
-							<AnimatePresence>
+					<AnimatePresence>
+						{hotel.photos.slice(0, 5).map((photo, index) => {
+							return (
 								<motion.div
 									className="relative data-[isfirst=true]:row-span-2 cursor-pointer"
 									data-isfirst={index === 0}
-									key={index}
+									key={photo.photo_id}
 									variants={index > 0 ? imgVariants : null}
 									initial={
 										index === 2 || index === 3 ? "enter_down" : "enter_up"
@@ -98,9 +114,9 @@ const HotelDetails = () => {
 										</div>
 									)}
 								</motion.div>
-							</AnimatePresence>
-						);
-					})}
+							);
+						})}
+					</AnimatePresence>
 				</div>
 				<motion.h2
 					className="mt-8 text-3xl font-semibold"
@@ -108,7 +124,10 @@ const HotelDetails = () => {
 				>
 					{hotel.hotel_name_trans}
 				</motion.h2>
-				<div className="flex items-center mt-4 font-semibold gap-x-2 text-text-primary">
+				<motion.div
+					className="flex items-center mt-4 font-semibold gap-x-2 text-text-primary"
+					layoutId={`hotel-type-${hotel.hotel_id}`}
+				>
 					<BiSolidBuildingHouse size={14}></BiSolidBuildingHouse>
 					<span className="text">{hotel.accommodation_type_name}</span>
 					<div className="flex items-center gap-x-1">
@@ -122,12 +141,21 @@ const HotelDetails = () => {
 							);
 						})}
 					</div>
-				</div>
-				<span className="flex items-center mt-2 gap-x-1">
+				</motion.div>
+				<motion.span
+					className="flex items-center mt-2 gap-x-1"
+					layoutId={`hotel-address-${hotel.hotel_id}`}
+				>
 					<FaLocationDot></FaLocationDot> {hotel.address}, {hotel.district},{" "}
 					{hotel.city_trans}
-				</span>
-				<fieldset className="relative px-4 py-4 border border-gray-300 border-solid z-[1] mt-8">
+				</motion.span>
+				<motion.fieldset
+					className="relative px-4 py-4 border border-gray-300 border-solid z-[1] mt-8"
+					variants={normalVariants}
+					initial="initial"
+					animate="animate"
+					exit="exit"
+				>
 					<legend className="absolute text-lg font-semibold z-[10] inset-0 bg-main-bg w-fit h-fit -translate-y-4 pr-8 pb-8 -translate-x-1 select-none">
 						Giới thiệu
 					</legend>
@@ -136,15 +164,9 @@ const HotelDetails = () => {
 							? hotel.description.description
 							: "Khách sạn này hiện tại không có giới thiệu"}
 					</p>
-				</fieldset>
-				<div className="mt-8">
-					<span className="text-lg font-semibold">Các dịch vụ phổ biến</span>
-					<div className="flex flex-col">
-						{hotel.hotel_facilities.split(",").map((v) => {
-							return <span>{room_facilities[v]}</span>;
-						})}
-					</div>
-				</div>
+				</motion.fieldset>
+				<ServiceHave></ServiceHave>
+				<ReviewsArea></ReviewsArea>
 			</div>
 		</div>
 	);

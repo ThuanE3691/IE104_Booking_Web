@@ -11,7 +11,7 @@ const SearchBar = ({ overrides }) => {
 	return (
 		<motion.div
 			className={classNames(
-				"flex items-center justify-between px-8 py-6 shadow-2xl bg-gradient-to-tr from-main-bg from-70% font-nunito rounded-2xl flex-nowrap select-none",
+				"flex items-center justify-between px-8 py-6 shadow-2xl bg-gradient-to-tr from-main-bg from-70% font-nunito rounded-2xl flex-nowrap select-none z-10",
 				overrides?.container
 			)}
 			layoutId="search-bar"

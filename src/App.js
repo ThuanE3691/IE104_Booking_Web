@@ -1,9 +1,10 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import routes from "./Routes/routes";
-import DefaultLayout from "./Layouts/DefaultLayout/DefaultLayout";
-import { Fragment } from "react";
+import { BrowserRouter as Router } from "react-router-dom";
 import SearchContextProvider from "./Context/SearchContext";
-import ScrollToTop from "./Components/Feature/Event/ScrollToTop";
+import routes from "@/Routes/routes";
+import DefaultLayout from "@/Layouts/DefaultLayout/DefaultLayout";
+import { Fragment } from "react";
+import ScrollToTop from "@/Components/Feature/Event/ScrollToTop";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
 	return (

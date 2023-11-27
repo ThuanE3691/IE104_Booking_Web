@@ -1,4 +1,3 @@
-import HotelImg from "@/Assets/Images/HotelType/CanHo.jpg";
 import { FaStar } from "react-icons/fa";
 import { BiSolidBuildingHouse } from "react-icons/bi";
 import { FaBed } from "react-icons/fa6";
@@ -9,13 +8,14 @@ import { FaLocationDot } from "react-icons/fa6";
 import formatNumber from "@/Utils/formatNumber";
 import { motion } from "framer-motion";
 
-const HotelCard = ({ hotel, ...properties }) => {
-	const facilities = hotel.unit_configuration_label.split("</b>: ")[1];
+const PropertyCard = ({ hotel, ...properties }) => {
+	// const facilities = hotel.unit_configuration_label.split("</b>: ")[1];
 
 	return (
 		<motion.section
 			className="flex bg-white  rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)]"
 			{...properties}
+			key={hotel.hotel_id}
 		>
 			<img
 				src={hotel.max_1440_photo_url}
@@ -111,4 +111,4 @@ const HotelCard = ({ hotel, ...properties }) => {
 	);
 };
 
-export default HotelCard;
+export default PropertyCard;

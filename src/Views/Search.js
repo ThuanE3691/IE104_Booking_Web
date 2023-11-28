@@ -103,7 +103,13 @@ const Search = () => {
 			>
 				<LayoutGroup>
 					{hotelData.result.map((hotel, index) => {
-						return <PropertyCard hotel={hotel} variants={item}></PropertyCard>;
+						return (
+							<PropertyCard
+								hotel={hotel}
+								variants={item}
+								key={hotel.hotel_id}
+							></PropertyCard>
+						);
 					})}
 				</LayoutGroup>
 			</motion.section>

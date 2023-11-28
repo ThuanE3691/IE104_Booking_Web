@@ -1,4 +1,3 @@
-import HotelImg from "@/Assets/Images/HotelType/CanHo.jpg";
 import { FaStar } from "react-icons/fa";
 import { BiSolidBuildingHouse } from "react-icons/bi";
 import { FaBed } from "react-icons/fa6";
@@ -11,8 +10,6 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
 const HotelCard = ({ hotel, ...properties }) => {
-	const facilities = hotel.unit_configuration_label.split("</b>: ")[1];
-
 	const navigate = useNavigate();
 
 	const handleOnClick = () => {

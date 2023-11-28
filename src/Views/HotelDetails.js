@@ -11,6 +11,7 @@ import _ from "lodash";
 import { AnimatePresence, motion } from "framer-motion";
 import ServiceHave from "@/Layouts/Site/HotelDetails/ServiceHave";
 import ReviewsArea from "@/Layouts/Site/HotelDetails/ReviewsArea";
+import RoomAvailable from "@/Layouts/Site/HotelDetails/RoomAvailable";
 
 const imgVariants = {
 	enter_down: {
@@ -166,7 +167,12 @@ const HotelDetails = () => {
 					</p>
 				</motion.fieldset>
 				<ServiceHave></ServiceHave>
-				<ReviewsArea></ReviewsArea>
+				<ReviewsArea
+					hotel_reviews={hotel.review_list}
+					review_score={hotel.review_score}
+					review_score_word={hotel.review_score_word}
+				></ReviewsArea>
+				<RoomAvailable rooms={hotel.rooms}></RoomAvailable>
 			</div>
 		</div>
 	);

@@ -1,6 +1,28 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect } from "react";
 
+const modalVariants = {
+	hidden: {
+		y: "100vh",
+		opacity: 0,
+	},
+	visible: {
+		y: "0",
+		opacity: 1,
+		transition: {
+			duration: 0.4,
+			ease: "easeInOut",
+		},
+	},
+	exit: {
+		y: "100vh",
+		opacity: 0,
+		transition: {
+			duration: 0.3,
+		},
+	},
+};
+
 const Backdrop = ({ children, onClose }) => {
 	return (
 		<motion.div
@@ -14,6 +36,10 @@ const Backdrop = ({ children, onClose }) => {
 			{children}
 		</motion.div>
 	);
+};
+
+const stopPropagation = (e) => {
+	e.stopPropagation();
 };
 
 const Modal = ({ isOpen, onClose, children }) => {
@@ -40,3 +66,4 @@ const Modal = ({ isOpen, onClose, children }) => {
 };
 
 export default Modal;
+export { modalVariants, stopPropagation };

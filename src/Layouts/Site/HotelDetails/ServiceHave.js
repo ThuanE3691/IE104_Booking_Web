@@ -37,7 +37,7 @@ const ServiceHave = () => {
 	return (
 		<>
 			<div className="mt-8">
-				<span className="text-lg font-semibold">Các dịch vụ phổ biến</span>
+				<span className="text-xl font-semibold">Các dịch vụ phổ biến</span>
 				<ul className="grid grid-cols-[300px,300px] grid-rows-3 my-6 gap-y-8">
 					{summary_services.map((service) => {
 						const service_render =
@@ -58,7 +58,7 @@ const ServiceHave = () => {
 					})}
 				</ul>
 				<button
-					className="relative cursor-pointer text-text-primary underline_element after:bg-text-primary after:translate-y-[0.5px] hover:after:w-full"
+					className="relative cursor-pointer font-semibold text-text-primary underline_element after:bg-text-primary after:translate-y-[0.5px] hover:after:w-full"
 					onClick={() => setShowFull(true)}
 				>
 					Xem tất cả

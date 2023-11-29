@@ -54,7 +54,7 @@ const variants = {
 	},
 };
 
-const ImageGallery = ({ photos }) => {
+const ImageGallery = ({ photos, openRoomModal }) => {
 	const [[image, direction], setImage] = useState([0, 0]);
 	const imageNavigate = (newDirection) => {
 		setImage([image + newDirection, newDirection]);
@@ -130,9 +130,9 @@ const RoomCard = ({ room, block, ...properties }) => {
 		<li className="flex flex-col w-[400px] rounded-2xl" {...properties}>
 			<ImageGallery photos={room.photos}></ImageGallery>
 			<section className="flex flex-col bg-white border-2 border-t-0 border-slate-200">
-				<div className="px-3 py-2">
+				<div className="px-3 py-3">
 					<span className="font-semibold select-none">{block.room_name}</span>
-					<div className="grid grid-cols-2 mt-3 gap-y-3">
+					<div className="grid grid-cols-2 mt-4 gap-y-3">
 						<span className="flex items-center text-sm gap-x-3">
 							<TbRulerMeasure size={20}></TbRulerMeasure>
 							Diện tích - {block.room_surface_in_m2} m&sup2;
@@ -173,12 +173,12 @@ const RoomCard = ({ room, block, ...properties }) => {
 							);
 						})}
 					</div>
-					<button className="relative mt-2 underline_element hover:after:w-full text-text-primary after:bg-text-primary w-fit">
+					<button className="relative mt-3 underline_element hover:after:w-full text-text-primary after:bg-text-primary w-fit">
 						Xem chi tiết
 					</button>
 				</div>
 			</section>
-			<section className="flex items-center px-2 py-2 bg-white border-2 border-t-0 rounded-b-xl border-slate-200">
+			<section className="flex items-center px-3 py-4 bg-white border-2 border-t-0 rounded-b-xl border-slate-200">
 				<div className="flex flex-col">
 					<span className="text-xs text-red-400 line-through">
 						{block.product_price_breakdown.strikethrough_amount.amount_rounded}

@@ -24,12 +24,12 @@ const RoomAvailable = ({ rooms }) => {
 
 	return (
 		<section className="relative my-8">
-			<h2 className="text-lg font-semibold">Các phòng trống</h2>
+			<h2 className="text-xl font-semibold">Các phòng trống</h2>
 			<div>
 				<motion.div
-					className={classNames(
+					className={
 						"absolute left-0 p-2 -translate-x-12 rounded-full top-[calc(50%-16px)] z-10 bg-[#f2f2f2] shadow-2xl cursor-pointer transition-all hover-button group"
-					)}
+					}
 					animate={{
 						opacity: sliderIndex === 0 ? 0 : 1,
 						display: sliderIndex === 0 ? "none" : "block",
@@ -43,7 +43,7 @@ const RoomAvailable = ({ rooms }) => {
 					<div
 						className={classNames(
 							rooms.block.length < 3 && "flex justify-center",
-							"relative min-h-[515px] overflow-x-hidden w-full mt-4"
+							"relative min-h-[550px] overflow-x-hidden w-full mt-6"
 						)}
 					>
 						<motion.ul

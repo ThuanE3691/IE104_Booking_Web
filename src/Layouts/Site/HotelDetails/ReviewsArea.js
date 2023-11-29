@@ -5,13 +5,13 @@ import { PiSmileySadBold } from "react-icons/pi";
 const ReviewsArea = ({ review_score, review_score_word, hotel_reviews }) => {
 	return (
 		<section className="mt-8">
-			<h2 className="text-lg font-semibold">Đánh giá của khách</h2>
+			<h2 className="text-xl font-semibold">Đánh giá của khách</h2>
 			<div className="flex items-center mt-4 gap-x-2">
 				<span className="p-2 font-semibold text-white bg-button-primary w-fit rounded-[8px_8px_8px_0]">
 					{review_score.toFixed(1)}
 				</span>
 				<span className="font-semibold ">{review_score_word}</span>
-				<span className="ml-6 text-sm font-semibold">
+				<span className="ml-6 text-sm font-medium">
 					{hotel_reviews.length} đánh giá
 				</span>
 			</div>

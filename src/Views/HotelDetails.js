@@ -151,13 +151,13 @@ const HotelDetails = () => {
 					{hotel.city_trans}
 				</motion.span>
 				<motion.fieldset
-					className="relative px-4 py-4 border border-gray-300 border-solid z-[1] mt-8"
+					className="relative px-4 py-4 border border-gray-300 border-solid z-[1] mt-10"
 					variants={normalVariants}
 					initial="initial"
 					animate="animate"
 					exit="exit"
 				>
-					<legend className="absolute text-lg font-semibold z-[10] inset-0 bg-main-bg w-fit h-fit -translate-y-4 pr-8 pb-8 -translate-x-1 select-none">
+					<legend className="absolute text-xl font-semibold z-[10] inset-0 bg-main-bg w-fit h-fit -translate-y-4 pr-8 pb-8 -translate-x-1 select-none">
 						Giới thiệu
 					</legend>
 					<p className="z-[11] bg-transparent relative text-justify leading-6">

@@ -4,19 +4,17 @@ import { TbRulerMeasure } from "react-icons/tb";
 import { useState } from "react";
 import { wrap } from "popmotion";
 import { motion, AnimatePresence } from "framer-motion";
+import { IoIosBed } from "react-icons/io";
+import { LuBedSingle } from "react-icons/lu";
 import LeftArrowSVG from "@/Assets/Icons/SVGComponent/Shared/LeftArrowSVG";
 import RightArrowSVG from "@/Assets/Icons/SVGComponent/Shared/RightArrowSVG";
+import { FaImages } from "react-icons/fa";
 
 const summary_services = [
 	{
 		services_index: 0,
 		tags_index: 0,
 	},
-	{
-		services_index: 1,
-		tags_index: 0,
-	},
-
 	{
 		services_index: 2,
 		tags_index: 0,
@@ -66,7 +64,7 @@ const ImageGallery = ({ photos }) => {
 
 	return (
 		<div
-			className="relative h-[250px] border-2 border-b-0 border-slate-200 rounded-t-2xl"
+			className="relative h-[250px] border-2 border-b-0 border-slate-200 rounded-t-2xl cursor-pointer overflow-hidden"
 			onMouseEnter={() => setHover(true)}
 			onMouseLeave={() => setHover(false)}
 		>
@@ -92,7 +90,7 @@ const ImageGallery = ({ photos }) => {
 					src={photos[imageIndex].url_original}
 					custom={direction}
 					alt=""
-					className="object-cover w-full h-[250px] rounded-t-2xl select-none absolute"
+					className="object-cover w-full h-[250px] rounded-t-xl select-none absolute"
 					variants={variants}
 					initial="enter"
 					animate="center"
@@ -119,6 +117,10 @@ const ImageGallery = ({ photos }) => {
 					</motion.div>
 				)}
 			</AnimatePresence>
+			<div className="absolute z-10 flex items-center justify-center px-4 py-2 text-white bg-black rounded-lg bg-opacity-30 bottom-4 right-4 w-fit h-fit gap-x-2">
+				<FaImages></FaImages>{" "}
+				<span className="select-none">{photos.length}</span>
+			</div>
 		</div>
 	);
 };
@@ -128,9 +130,9 @@ const RoomCard = ({ room, block, ...properties }) => {
 		<li className="flex flex-col w-[400px] rounded-2xl" {...properties}>
 			<ImageGallery photos={room.photos}></ImageGallery>
 			<section className="flex flex-col bg-white border-2 border-t-0 border-slate-200">
-				<div className="px-2 py-2">
+				<div className="px-3 py-2">
 					<span className="font-semibold select-none">{block.room_name}</span>
-					<div className="flex flex-col mt-2 gap-y-3">
+					<div className="grid grid-cols-2 mt-3 gap-y-3">
 						<span className="flex items-center text-sm gap-x-3">
 							<TbRulerMeasure size={20}></TbRulerMeasure>
 							Diện tích - {block.room_surface_in_m2} m&sup2;
@@ -153,6 +155,21 @@ const RoomCard = ({ room, block, ...properties }) => {
 									)}
 									<span className="text-sm">{service_render.name}</span>
 								</li>
+							);
+						})}
+						{room.bed_configurations[0].bed_types.map((bed) => {
+							return (
+								<span
+									className="flex items-center text-sm gap-x-3"
+									key={bed.bed_type}
+								>
+									{bed.name_with_count.includes("đơn") ? (
+										<LuBedSingle size={20}></LuBedSingle>
+									) : (
+										<IoIosBed size={20}></IoIosBed>
+									)}
+									{bed.name_with_count}
+								</span>
 							);
 						})}
 					</div>

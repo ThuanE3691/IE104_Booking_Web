@@ -3,7 +3,7 @@ import Google from "@IconCommon/Brands/google.png";
 import Instagram from "@IconCommon/Brands/instagram.png";
 import { motion } from "framer-motion";
 
-const RegisterForm = ({ showLoginForm }) => {
+const RegisterForm = ({ showLoginForm, handleLogIn }) => {
 	return (
 		<motion.section
 			className="absolute w-1.2 left-0 top-0 opacity-0 z-[1] flex flex-col items-center py-12 px-28 bg-white  "
@@ -53,7 +53,10 @@ const RegisterForm = ({ showLoginForm }) => {
 					/>
 				</div>
 			</div>
-			<button className="px-6 py-2 mt-8 text-lg font-semibold text-white transition-colors rounded-xl bg-button-primary hover-button">
+			<button
+				className="px-6 py-2 mt-8 text-lg font-semibold text-white transition-colors rounded-xl bg-button-primary hover-button"
+				onClick={handleLogIn}
+			>
 				Đăng ký
 			</button>
 			<div className="flex flex-col items-center">

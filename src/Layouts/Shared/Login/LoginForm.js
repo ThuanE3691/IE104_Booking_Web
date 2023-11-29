@@ -3,7 +3,7 @@ import Facebook from "@IconCommon/Brands/facebook.png";
 import Google from "@IconCommon/Brands/google.png";
 import Instagram from "@IconCommon/Brands/instagram.png";
 
-const LoginForm = ({ showLoginForm }) => {
+const LoginForm = ({ showLoginForm, handleLogIn }) => {
 	return (
 		<motion.section
 			className="absolute top-0 left-0 w-1.2 z-[2] flex flex-col items-center h-full py-12 px-28 bg-white "
@@ -36,7 +36,10 @@ const LoginForm = ({ showLoginForm }) => {
 					Quên mật khẩu
 				</span>
 			</div>
-			<button className="px-6 py-2 mt-[72px] text-lg font-semibold text-white transition-colors rounded-xl bg-button-primary hover-button">
+			<button
+				className="px-6 py-2 mt-[72px] text-lg font-semibold text-white transition-colors rounded-xl bg-button-primary hover-button"
+				onClick={handleLogIn}
+			>
 				Đăng nhập
 			</button>
 			<div className="flex flex-col items-center">

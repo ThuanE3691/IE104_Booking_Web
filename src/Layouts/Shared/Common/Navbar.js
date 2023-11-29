@@ -131,6 +131,7 @@ const Navbar = () => {
 	};
 
 	const handleLogin = () => {
+		setShowLogin(false);
 		localStorage.setItem("isLogin", "true");
 		setLogin(true);
 	};
@@ -150,9 +151,9 @@ const Navbar = () => {
 	return (
 		<>
 			<motion.header
-			className="z-10 flex flex-row items-center w-full gap-8 pt-4 bg-white px-52 font-vietnam-pro"
-			layoutId="navbar"
-		>
+				className="z-10 flex flex-row items-center w-full gap-8 pt-4 bg-white px-52 font-vietnam-pro"
+				layoutId="navbar"
+			>
 				<Logo></Logo>
 				<nav className="flex items-center w-full">
 					<div className="flex items-center gap-12 ml-auto">
@@ -200,22 +201,28 @@ const Navbar = () => {
 							</div>
 						)}
 
-					{!isLogin && (
-						<div className="flex items-center gap-2">
-							<button className="px-4 py-2 font-semibold transition-colors duration-200 hover-button rounded-xl">
-								Đăng ký
-							</button>
-							<button
-								className="px-4 py-2 font-semibold text-white transition-colors bg-button-primary rounded-xl hover-button"
-								onClick={handleLogIn}
-							>
-								Đăng nhập
-							</button>
-						</div>
-					)}
-				</div>
-			</nav>
-		</motion.header>
+						{!isLogin && (
+							<div className="flex items-center gap-2">
+								<button className="px-4 py-2 font-semibold transition-colors duration-200 hover-button rounded-xl">
+									Đăng ký
+								</button>
+								<button
+									className="px-4 py-2 font-semibold text-white transition-colors bg-button-primary rounded-xl hover-button"
+									onClick={handleShowLogin}
+								>
+									Đăng nhập
+								</button>
+							</div>
+						)}
+					</div>
+				</nav>
+			</motion.header>
+			<LoginModal
+				isShowLogin={showLogin}
+				setShowLogin={setShowLogin}
+				handleLogIn={handleLogin}
+			></LoginModal>
+		</>
 	);
 };
 

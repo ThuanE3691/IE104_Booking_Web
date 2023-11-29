@@ -71,7 +71,7 @@ const OverlayContainer = ({ showLoginForm, setShowLoginForm }) => {
 	);
 };
 
-const LoginModal = ({ isShowLogin, setShowLogin }) => {
+const LoginModal = ({ isShowLogin, setShowLogin, handleLogIn }) => {
 	const stopPropagation = (event) => {
 		event.stopPropagation();
 	};
@@ -94,8 +94,14 @@ const LoginModal = ({ isShowLogin, setShowLogin }) => {
 				onClick={stopPropagation}
 				key="filter-modal"
 			>
-				<LoginForm showLoginForm={showLoginForm}></LoginForm>
-				<RegisterForm showLoginForm={showLoginForm}></RegisterForm>
+				<LoginForm
+					showLoginForm={showLoginForm}
+					handleLogIn={handleLogIn}
+				></LoginForm>
+				<RegisterForm
+					showLoginForm={showLoginForm}
+					handleLogIn={handleLogIn}
+				></RegisterForm>
 				<OverlayContainer
 					showLoginForm={showLoginForm}
 					setShowLoginForm={setShowLoginForm}

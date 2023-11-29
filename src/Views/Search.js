@@ -41,6 +41,7 @@ const Search = () => {
 	};
 
 	const [isShowFilter, setShowFilter] = useState(false);
+	const [showMap, setShowMap] = useState(false);
 	const [sortOption, setSortOption] = useState("Độ phổ biến");
 	const { filters, filtersMethod } = useContext(SearchContext);
 

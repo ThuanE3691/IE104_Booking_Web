@@ -17,6 +17,7 @@ import PartnersSVG from "@/Assets/Icons/SVGComponent/Navbar/PartnersSVG";
 import EditSVG from "@/Assets/Icons/SVGComponent/Navbar/EditSVG";
 import InformationSVG from "@/Assets/Icons/SVGComponent/Navbar/InformationSVG";
 import PointSVG from "@/Assets/Icons/SVGComponent/Navbar/PointSVG";
+import LoginModal from "../Login/LoginModal";
 
 const spring = {
 	type: "spring",
@@ -121,10 +122,16 @@ const UserService = ({ handleLogOut }) => {
 };
 
 const Navbar = () => {
+	const [showLogin, setShowLogin] = useState(false);
 	const [isLogin, setLogin] = useState(false);
 	const [showService, setShowService] = useState(false);
 
-	const handleLogIn = () => {
+	const handleShowLogin = () => {
+		setShowLogin(true);
+	};
+
+	const handleLogin = () => {
+		setShowLogin(false);
 		localStorage.setItem("isLogin", "true");
 		setLogin(true);
 	};
@@ -137,75 +144,85 @@ const Navbar = () => {
 
 	useEffect(() => {
 		const loginState = localStorage.getItem("isLogin");
-		if (loginState === "true") handleLogIn();
+		if (loginState === "true") handleLogin();
 		else handleLogOut();
 	}, []);
 
 	return (
-		<header className="z-10 flex flex-row items-center w-full gap-8 pt-4 bg-white px-52 font-vietnam-pro">
-			<Logo></Logo>
-			<nav className="flex items-center w-full">
-				<div className="flex items-center gap-12 ml-auto">
-					<span className="text-lg font-medium transition-colors cursor-pointer hover:text-text-primary">
-						Dịch vụ
-					</span>
-					<span className="text-lg font-medium transition-colors cursor-pointer hover:text-text-primary">
-						Về chúng tôi
-					</span>
-					<span className="text-lg font-medium transition-colors cursor-pointer hover:text-text-primary">
-						Liên hệ
-					</span>
-				</div>
-				<div className="flex items-center ml-auto gap-7">
-					<div className="flex items-center gap-2">
-						<div className="flex items-center gap-2 px-2 py-2 transition-colors rounded-full cursor-pointer hover:bg-slate-200">
-							<img src={language_icon} alt="" className="w-5 h-5" />
-						</div>
-						<div className="flex items-center gap-2 px-2 py-2 transition-colors rounded-full cursor-pointer hover:bg-slate-200">
-							<CurrencySVG className="w-5 h-5 "></CurrencySVG>
-						</div>
+		<>
+			<motion.header
+				className="z-10 flex flex-row items-center w-full gap-8 pt-4 bg-white px-52 font-vietnam-pro"
+				layoutId="navbar"
+			>
+				<Logo></Logo>
+				<nav className="flex items-center w-full">
+					<div className="flex items-center gap-12 ml-auto">
+						<span className="text-lg font-medium transition-colors cursor-pointer hover:text-text-primary">
+							Dịch vụ
+						</span>
+						<span className="text-lg font-medium transition-colors cursor-pointer hover:text-text-primary">
+							Về chúng tôi
+						</span>
+						<span className="text-lg font-medium transition-colors cursor-pointer hover:text-text-primary">
+							Liên hệ
+						</span>
 					</div>
-					{isLogin && (
-						<div
-							className="relative flex items-center gap-3 cursor-pointer "
-							onClick={() => setShowService(!showService)}
-						>
-							<img
-								src={avatar}
-								alt=""
-								className="object-contain w-10 h-10 rounded-full"
-							/>
-							<span className="font-semibold">Anh Thư</span>
-							<CaretDownSVG
-								className={`w-3 h-3 transition-[transform] ${
-									!showService ? "rotate-0" : "rotate-180"
-								}`}
-							></CaretDownSVG>
-
-							<AnimatePresence>
-								{showService && (
-									<UserService handleLogOut={handleLogOut}></UserService>
-								)}
-							</AnimatePresence>
-						</div>
-					)}
-
-					{!isLogin && (
+					<div className="flex items-center ml-auto gap-7">
 						<div className="flex items-center gap-2">
-							<button className="px-4 py-2 font-semibold transition-colors duration-200 hover-button rounded-xl">
-								Đăng ký
-							</button>
-							<button
-								className="px-4 py-2 font-semibold text-white transition-colors bg-button-primary rounded-xl hover-button"
-								onClick={handleLogIn}
-							>
-								Đăng nhập
-							</button>
+							<div className="flex items-center gap-2 px-2 py-2 transition-colors rounded-full cursor-pointer hover:bg-slate-200">
+								<img src={language_icon} alt="" className="w-5 h-5" />
+							</div>
+							<div className="flex items-center gap-2 px-2 py-2 transition-colors rounded-full cursor-pointer hover:bg-slate-200">
+								<CurrencySVG className="w-5 h-5 "></CurrencySVG>
+							</div>
 						</div>
-					)}
-				</div>
-			</nav>
-		</header>
+						{isLogin && (
+							<div
+								className="relative flex items-center gap-3 cursor-pointer "
+								onClick={() => setShowService(!showService)}
+							>
+								<img
+									src={avatar}
+									alt=""
+									className="object-contain w-10 h-10 rounded-full"
+								/>
+								<span className="font-semibold">Anh Thư</span>
+								<CaretDownSVG
+									className={`w-3 h-3 transition-[transform] ${
+										!showService ? "rotate-0" : "rotate-180"
+									}`}
+								></CaretDownSVG>
+
+								<AnimatePresence>
+									{showService && (
+										<UserService handleLogOut={handleLogOut}></UserService>
+									)}
+								</AnimatePresence>
+							</div>
+						)}
+
+						{!isLogin && (
+							<div className="flex items-center gap-2">
+								<button className="px-4 py-2 font-semibold transition-colors duration-200 hover-button rounded-xl">
+									Đăng ký
+								</button>
+								<button
+									className="px-4 py-2 font-semibold text-white transition-colors bg-button-primary rounded-xl hover-button"
+									onClick={handleShowLogin}
+								>
+									Đăng nhập
+								</button>
+							</div>
+						)}
+					</div>
+				</nav>
+			</motion.header>
+			<LoginModal
+				isShowLogin={showLogin}
+				setShowLogin={setShowLogin}
+				handleLogIn={handleLogin}
+			></LoginModal>
+		</>
 	);
 };
 

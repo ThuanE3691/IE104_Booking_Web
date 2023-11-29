@@ -73,7 +73,12 @@ const HotelDetails = () => {
 		<div className="flex flex-col w-full min-h-full px-32 bg-main-bg font-vietnam-pro">
 			<SearchBar overrides={styleSearchBar}></SearchBar>
 			<div className="mt-16 mb-32">
-				<span className="flex items-center gap-x-4">
+				<motion.span
+					className="flex items-center gap-x-4"
+					initial={{ opacity: 0 }}
+					animate={{ opacity: 1 }}
+					exit={{ opacity: 0 }}
+				>
 					<span className="transition-opacity cursor-pointer hover:opacity-70">
 						<Link to="/">Trang chủ</Link>
 					</span>
@@ -85,7 +90,7 @@ const HotelDetails = () => {
 					<span className="font-semibold transition-opacity cursor-pointer text-text-primary hover:opacity-70">
 						{hotel.district}
 					</span>
-				</span>
+				</motion.span>
 				<div className="grid grid-rows-[200px,200px] grid-cols-[2.5fr,1fr,1fr] gap-x-6 gap-y-4 mt-8">
 					<AnimatePresence>
 						{hotel.photos.slice(0, 5).map((photo, index) => {

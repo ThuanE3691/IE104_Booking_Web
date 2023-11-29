@@ -142,7 +142,10 @@ const Navbar = () => {
 	}, []);
 
 	return (
-		<header className="z-10 flex flex-row items-center w-full gap-8 pt-4 bg-white px-52 font-vietnam-pro">
+		<motion.header
+			className="z-10 flex flex-row items-center w-full gap-8 pt-4 bg-white px-52 font-vietnam-pro"
+			layoutId="navbar"
+		>
 			<Logo></Logo>
 			<nav className="flex items-center w-full">
 				<div className="flex items-center gap-12 ml-auto">
@@ -205,7 +208,7 @@ const Navbar = () => {
 					)}
 				</div>
 			</nav>
-		</header>
+		</motion.header>
 	);
 };
 

@@ -43,7 +43,7 @@ const RoomAvailable = ({ rooms }) => {
 					<div
 						className={classNames(
 							rooms.block.length < 3 && "flex justify-center",
-							"relative min-h-[550px] overflow-x-hidden w-full mt-6"
+							"relative min-h-[570px] overflow-x-hidden w-full mt-6"
 						)}
 					>
 						<motion.ul

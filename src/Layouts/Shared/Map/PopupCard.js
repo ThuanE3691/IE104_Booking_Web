@@ -34,17 +34,6 @@ const PopupCard = ({ hotel, ...properties }) => {
 						})}
 					</div>
 				</div>
-				{/* <div className="flex items-center justify-start mt-2 gap-x-2 w-fit">
-					<div className="p-2 font-semibold text-white rounded-[10px_10px_10px_0px] bg-button-primary w-fit text-xs">
-						{hotel.review_score.toFixed(1)}
-					</div>
-					<div className="flex flex-col">
-						<span className="text-xs font-semibold">
-							{hotel.review_score_word}
-						</span>
-						<span className="text-xs">{hotel.review_nr} đánh giá</span>
-					</div>
-				</div> */}
 				<span className="flex items-center mt-2 gap-x-1">
 					<FaLocationDot></FaLocationDot> {hotel.district}, {hotel.city_trans}
 				</span>

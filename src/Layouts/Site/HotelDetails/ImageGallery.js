@@ -93,25 +93,34 @@ const ImageGallery = ({
 						className="relative w-[300px] grid grid-cols-2 overflow-y-scroll gap-3 p-2 h-full scroll-smooth overflow-x-hidden new_scroll_bar"
 						ref={asideRef}
 					>
-						{photos.map((photo, index) => {
-							return (
-								<div className="relative w-full h-[125px]" key={photo.photo_id}>
-									<img
-										src={photo.url_max}
-										alt=""
-										data-onshow={activeImageIndex === index}
-										className="object-cover rounded-lg w-full h-full cursor-pointer hover:ring-[3px] hover:ring-white brightness-[0.6] transition-all select-none data-[onshow=true]:brightness-100 data-[onshow=true]:hover:ring-transparent delay-[brightness_0.3s]"
-										onClick={() => skipToImage(index)}
-									/>
-									{activeImageIndex === index && (
-										<motion.div
-											layoutId="ring-gallery"
-											className="inset-0 absolute w-full h-full ring-[3px] ring-white rounded-lg z-[10]"
-										></motion.div>
-									)}
-								</div>
-							);
-						})}
+						<AnimatePresence>
+							{photos.map((photo, index) => {
+								return (
+									<motion.div
+										className="relative w-full h-[125px]"
+										key={photo.photo_id}
+										initial={{ opacity: 0 }}
+										animate={{ opacity: 1 }}
+										exit={{ opacity: 0 }}
+									>
+										<img
+											src={photo.url_max}
+											alt=""
+											data-onshow={activeImageIndex === index}
+											className="object-cover rounded-lg w-full h-full cursor-pointer hover:ring-[3px] hover:ring-white brightness-[0.6] transition-all select-none data-[onshow=true]:brightness-100 data-[onshow=true]:hover:ring-transparent delay-[brightness_0.3s]"
+											onClick={() => skipToImage(index)}
+											loading="lazy"
+										/>
+										{activeImageIndex === index && (
+											<motion.div
+												layoutId="ring-gallery"
+												className="inset-0 absolute w-full h-full ring-[3px] ring-white rounded-lg z-[10]"
+											></motion.div>
+										)}
+									</motion.div>
+								);
+							})}
+						</AnimatePresence>
 					</aside>
 					<div className="z-0 flex flex-col items-center flex-grow px-4 py-4">
 						<header className="flex items-center w-full">

@@ -99,29 +99,35 @@ const MapModal = ({ showMap, setShowMap, properties }) => {
 						})}
 					</motion.ul>
 				</LayoutGroup>
-				<MapContainer center={defaultProps.center} zoom={defaultProps.zoom}>
-					<TileLayer
-						attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-						url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
-					></TileLayer>
-					{properties.map((hotel) => {
-						return (
-							<Marker
-								key={hotel.hotel_name_trans}
-								position={[hotel.latitude, hotel.longitude]}
-								icon={customIcon}
-								ref={hotel.hotel_id === isInView ? markerRef : null}
-								eventHandlers={{
-									click: () => {
-										handleOnClickMarker(hotel.hotel_id);
-									},
-								}}
-							>
-								<PopupCard hotel={hotel} key={hotel.hotel_name_trans} />
-							</Marker>
-						);
-					})}
-				</MapContainer>
+				<section className="w-[50%] h-full">
+					<MapContainer
+						center={defaultProps.center}
+						zoom={defaultProps.zoom}
+						className="map-modal"
+					>
+						<TileLayer
+							attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+							url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+						></TileLayer>
+						{properties.map((hotel) => {
+							return (
+								<Marker
+									key={hotel.hotel_name_trans}
+									position={[hotel.latitude, hotel.longitude]}
+									icon={customIcon}
+									ref={hotel.hotel_id === isInView ? markerRef : null}
+									eventHandlers={{
+										click: () => {
+											handleOnClickMarker(hotel.hotel_id);
+										},
+									}}
+								>
+									<PopupCard hotel={hotel} key={hotel.hotel_name_trans} />
+								</Marker>
+							);
+						})}
+					</MapContainer>
+				</section>
 			</motion.div>
 		</Modal>
 	);

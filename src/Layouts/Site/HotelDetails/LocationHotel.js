@@ -1,7 +1,7 @@
+import "@/css/Map/location.css";
 import { MapContainer, Marker, TileLayer } from "react-leaflet";
 import { Popup } from "react-leaflet";
 import { Icon } from "leaflet";
-import "@/css/Map/location.css";
 
 const LocationHotel = ({ address, district, city, position }) => {
 	const defaultProps = {
@@ -22,6 +22,7 @@ const LocationHotel = ({ address, district, city, position }) => {
 					center={defaultProps.center}
 					zoom={defaultProps.zoom}
 					scrollWheelZoom={false}
+					className="hotel-location"
 				>
 					<TileLayer
 						attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

@@ -1,22 +1,22 @@
-.leaflet-container {
-	width: 50%;
+.map-modal.leaflet-container {
+	width: 100%;
 	height: 100%;
 }
 
-.leaflet-pane.leaflet-marker-pane img:hover {
+.map-modal .leaflet-pane.leaflet-marker-pane img:hover {
 	cursor: pointer;
 }
 
-.leaflet-pane.leaflet-marker-pane img[data-isInView="true"] {
+.map-modal .leaflet-pane.leaflet-marker-pane img[data-isInView="true"] {
 	background-color: black;
 }
 
-.leaflet-popup-content-wrapper {
+.map-modal .leaflet-popup-content-wrapper {
 	padding: 0 !important;
 	border-radius: 32px !important;
 }
 
-.leaflet-popup-content {
+.map-modal .leaflet-popup-content {
 	position: relative;
 	width: 300px !important;
 	min-height: 350px !important;

@@ -4,7 +4,7 @@ import { PiSmileySadBold } from "react-icons/pi";
 
 const ReviewsArea = ({ review_score, review_score_word, hotel_reviews }) => {
 	return (
-		<section className="mt-8">
+		<section className="mt-8" name="review">
 			<h2 className="text-xl font-semibold">Đánh giá của khách</h2>
 			<div className="flex items-center mt-4 gap-x-2">
 				<span className="p-2 font-semibold text-white bg-button-primary w-fit rounded-[8px_8px_8px_0]">

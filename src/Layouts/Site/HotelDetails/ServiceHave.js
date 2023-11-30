@@ -36,7 +36,7 @@ const ServiceHave = () => {
 
 	return (
 		<>
-			<div className="mt-8">
+			<div className="mt-8" name="service">
 				<span className="text-xl font-semibold">Các dịch vụ phổ biến</span>
 				<ul className="grid grid-cols-[300px,300px] grid-rows-3 my-6 gap-y-8">
 					{summary_services.map((service) => {

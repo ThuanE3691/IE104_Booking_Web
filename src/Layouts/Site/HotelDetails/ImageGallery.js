@@ -95,13 +95,12 @@ const ImageGallery = ({
 					>
 						{photos.map((photo, index) => {
 							return (
-								<div className="relative w-full h-[125px]">
+								<div className="relative w-full h-[125px]" key={photo.photo_id}>
 									<img
 										src={photo.url_max}
 										alt=""
 										data-onshow={activeImageIndex === index}
 										className="object-cover rounded-lg w-full h-full cursor-pointer hover:ring-[3px] hover:ring-white brightness-[0.6] transition-all select-none data-[onshow=true]:brightness-100 data-[onshow=true]:hover:ring-transparent delay-[brightness_0.3s]"
-										key={photo.photo_id}
 										onClick={() => skipToImage(index)}
 									/>
 									{activeImageIndex === index && (

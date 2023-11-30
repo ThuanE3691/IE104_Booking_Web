@@ -23,7 +23,7 @@ const RoomAvailable = ({ rooms }) => {
 	};
 
 	return (
-		<section className="relative my-8">
+		<section className="relative my-8" name="book">
 			<h2 className="text-xl font-semibold">Các phòng trống</h2>
 			<div>
 				<motion.div

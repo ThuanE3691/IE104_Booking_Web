@@ -12,6 +12,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import ServiceHave from "@/Layouts/Site/HotelDetails/ServiceHave";
 import ReviewsArea from "@/Layouts/Site/HotelDetails/ReviewsArea";
 import RoomAvailable from "@/Layouts/Site/HotelDetails/RoomAvailable";
+import ImageGallery from "@/Layouts/Site/HotelDetails/ImageGallery";
+import { useState } from "react";
 
 const imgVariants = {
 	enter_down: {
@@ -56,6 +58,14 @@ const HotelDetails = () => {
 		page: 0,
 		hotelId: id,
 	});
+
+	const [showGallery, setShowGallery] = useState(false);
+	const [[imageOnShow, direction], setImageOnShow] = useState([0, 0]);
+
+	const onClickImage = (index) => {
+		setShowGallery(true);
+		setImageOnShow([index, 0]);
+	};
 
 	const styleSearchBar = {
 		container: "relative",
@@ -106,12 +116,13 @@ const HotelDetails = () => {
 									animate="enter"
 									exit={index === 2 || index === 3 ? "enter_down" : "enter_up"}
 									transition="transition"
+									onClick={() => onClickImage(index)}
+									layoutId={index === 0 && `main-img-${hotel.hotel_id}`}
 								>
 									<motion.img
 										src={photo.url_max}
 										className="object-cover w-full h-full rounded-md"
 										alt=""
-										layoutId={index === 0 && `main-img-${hotel.hotel_id}`}
 									/>
 									{index === 4 && (
 										<div className="absolute flex items-center justify-center px-4 py-2 text-white bg-black rounded-lg bg-opacity-30 bottom-4 right-4 w-fit h-fit gap-x-2">
@@ -179,6 +190,15 @@ const HotelDetails = () => {
 				></ReviewsArea>
 				<RoomAvailable rooms={hotel.rooms}></RoomAvailable>
 			</div>
+			<ImageGallery
+				show={showGallery}
+				setShow={setShowGallery}
+				hotelName={hotel.hotel_name_trans}
+				imageOnShow={imageOnShow}
+				setImageOnShow={setImageOnShow}
+				photos={hotel.photos}
+				direction={direction}
+			></ImageGallery>
 		</div>
 	);
 };

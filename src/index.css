@@ -37,4 +37,27 @@ code {
 		@apply content-[''] w-0 absolute bottom-0 left-0 h-[2px] rounded ease-in-out;
 		transition: 0.3s;
 	}
+
+	.new_scroll_bar::-webkit-scrollbar {
+		@apply w-2;
+	}
+
+	/* Track */
+	.new_scroll_bar::-webkit-scrollbar-track {
+		@apply bg-transparent;
+	}
+
+	.new_scroll_bar::-webkit-scrollbar-button {
+		@apply h-1 bg-transparent;
+	}
+
+	/* Handle */
+	.new_scroll_bar::-webkit-scrollbar-thumb {
+		@apply bg-[#878685] rounded-lg transition-all;
+	}
+
+	/* Handle on hover */
+	.new_scroll_bar::-webkit-scrollbar-thumb:hover {
+		@apply bg-white;
+	}
 }

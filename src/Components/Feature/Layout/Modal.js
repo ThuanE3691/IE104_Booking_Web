@@ -42,7 +42,7 @@ const stopPropagation = (e) => {
 	e.stopPropagation();
 };
 
-const Modal = ({ isOpen, onClose, children }) => {
+const Modal = ({ isOpen, onClose, children, ...properties }) => {
 	const showOffModal = (event) => {
 		event.stopPropagation();
 		onClose();
@@ -60,7 +60,11 @@ const Modal = ({ isOpen, onClose, children }) => {
 
 	return (
 		<AnimatePresence>
-			{isOpen && <Backdrop onClose={showOffModal}>{children}</Backdrop>}
+			{isOpen && (
+				<Backdrop onClose={showOffModal} {...properties}>
+					{children}
+				</Backdrop>
+			)}
 		</AnimatePresence>
 	);
 };

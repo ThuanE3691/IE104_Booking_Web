@@ -45,7 +45,7 @@ const FullServiceModal = ({ showModal, setShowModal }) => {
 					<ul className="flex flex-col gap-y-8">
 						{services.map((service) => {
 							return (
-								<li className="flex flex-col">
+								<li className="flex flex-col" key={service.name}>
 									<span className="text-lg font-semibold">{service.name}</span>
 									<section className="grid grid-cols-[300px,300px] grid-rows-3 mt-4 gap-y-8">
 										{service.tags.map((tag) => {

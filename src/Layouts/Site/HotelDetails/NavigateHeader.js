@@ -1,3 +1,4 @@
+import ReturnButton from "@/Components/Layout/ReturnButton";
 import { motion } from "framer-motion";
 
 const NavigateHeader = ({ positionArea }) => {
@@ -58,6 +59,7 @@ const NavigateHeader = ({ positionArea }) => {
 					</button>
 				);
 			})}
+			<ReturnButton path="/search"></ReturnButton>
 		</motion.header>
 	);
 };

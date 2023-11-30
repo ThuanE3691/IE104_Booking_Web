@@ -10,7 +10,7 @@ import { Fragment } from "react";
 
 const routes = [
 	{ path: config.routes.home, component: Home },
-	{ path: config.routes.search, component: Search },
+	{ path: config.routes.search, component: Search, isPageSave: true },
 	{
 		path: config.routes.hotel,
 		component: HotelDetails,

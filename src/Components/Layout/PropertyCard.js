@@ -9,10 +9,14 @@ import formatNumber from "@/Utils/formatNumber";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
-const HotelCard = ({ hotel, ...properties }) => {
+const HotelCard = ({ hotel, saveScrollHistory, ...properties }) => {
 	const navigate = useNavigate();
 
 	const handleOnClick = () => {
+		saveScrollHistory({
+			x: 0,
+			y: document.documentElement.scrollTop,
+		});
 		navigate(`/search/hotel/${hotel.hotel_id}`);
 	};
 
@@ -43,7 +47,7 @@ const HotelCard = ({ hotel, ...properties }) => {
 							</span>
 							<span className="text-sm">{hotel.review_nr} đánh giá</span>
 						</div>
-						<div className="p-2 font-semibold text-white rounded-[10px_10px_10px_0px] bg-button-primary w-fit">
+						<div className="font-semibold text-white rounded-[10px_10px_10px_0px] bg-button-primary w-[43px] h-[38px] flex justify-center items-center">
 							{hotel.review_score.toFixed(1)}
 						</div>
 					</div>
@@ -83,7 +87,7 @@ const HotelCard = ({ hotel, ...properties }) => {
 								<div className="flex items-center gap-x-1.5">
 									<FaPerson></FaPerson>
 									<span className="text-sm font-semibold text-black">
-										2 nguời lớn
+										2 người lớn
 									</span>
 								</div>
 								<div className="flex items-center gap-x-1.5">
@@ -113,7 +117,7 @@ const HotelCard = ({ hotel, ...properties }) => {
 						<span className="text-xl font-semibold text-black">
 							{formatNumber(
 								hotel.composite_price_breakdown.gross_amount_per_night.value
-							)}
+							)}{" "}
 							VND
 						</span>
 						<button

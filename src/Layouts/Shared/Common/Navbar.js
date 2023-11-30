@@ -18,6 +18,8 @@ import EditSVG from "@/Assets/Icons/SVGComponent/Navbar/EditSVG";
 import InformationSVG from "@/Assets/Icons/SVGComponent/Navbar/InformationSVG";
 import PointSVG from "@/Assets/Icons/SVGComponent/Navbar/PointSVG";
 import LoginModal from "../Login/LoginModal";
+import { useContext } from "react";
+import { ConfigContext } from "@/Context/ConfigContext";
 
 const spring = {
 	type: "spring",
@@ -26,8 +28,14 @@ const spring = {
 };
 
 const Logo = () => {
+	const { saveScrollHistory } = useContext(ConfigContext);
 	return (
-		<Link to={config.routes.home}>
+		<Link
+			to={config.routes.home}
+			onClick={() => {
+				saveScrollHistory({ x: 0, y: 0 });
+			}}
+		>
 			<figure className="flex flex-col items-center cursor-pointer">
 				<img src={logo} alt="Logo" className="h-24 w-28" />
 			</figure>

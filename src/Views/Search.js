@@ -11,20 +11,22 @@ import FiltersArea from "@/Layouts/Site/Search/FiltersArea";
 import PropertyCard from "@/Components/Layout/PropertyCard";
 import hotelData from "@/Data/HCM_hotels_search.json";
 import { LayoutGroup, motion } from "framer-motion";
+import { ConfigContext } from "@/Context/ConfigContext";
 
 const container = {
 	hidden: { opacity: 0 },
-	show: {
+	show: (load) => ({
 		opacity: 1,
 		transition: {
-			staggerChildren: 0.1,
+			staggerChildren: load ? 0.1 : 0,
 		},
-	},
+	}),
 };
 
 const item = {
 	hidden: { opacity: 0 },
 	show: { opacity: 1 },
+	duration: 0.2,
 };
 
 const Search = () => {
@@ -41,9 +43,9 @@ const Search = () => {
 	};
 
 	const [isShowFilter, setShowFilter] = useState(false);
-	const [showMap, setShowMap] = useState(false);
 	const [sortOption, setSortOption] = useState("Độ phổ biến");
 	const { filters, filtersMethod } = useContext(SearchContext);
+	const { scrollHistory, saveScrollHistory } = useContext(ConfigContext);
 
 	const handleShowFilter = (event) => {
 		event.stopPropagation();
@@ -101,6 +103,7 @@ const Search = () => {
 				variants={container}
 				initial="hidden"
 				animate="show"
+				custom={scrollHistory.y === 0}
 			>
 				<LayoutGroup>
 					{hotelData.result.map((hotel, index) => {
@@ -109,6 +112,7 @@ const Search = () => {
 								hotel={hotel}
 								variants={item}
 								key={hotel.hotel_id}
+								saveScrollHistory={saveScrollHistory}
 							></PropertyCard>
 						);
 					})}

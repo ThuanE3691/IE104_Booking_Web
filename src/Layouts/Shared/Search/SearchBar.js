@@ -6,8 +6,12 @@ import classNames from "@/Utils/classNames";
 import config from "@/Config";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { ConfigContext } from "@/Context/ConfigContext";
+import { useContext } from "react";
 
 const SearchBar = ({ overrides }) => {
+	const { saveScrollHistory } = useContext(ConfigContext);
+
 	return (
 		<motion.div
 			className={classNames(
@@ -26,7 +30,10 @@ const SearchBar = ({ overrides }) => {
 					<p className="text-sm text-sub-text">Thêm số lượng hành khách</p>
 				</div>
 			</div>
-			<Link to={config.routes.search}>
+			<Link
+				to={config.routes.search}
+				onClick={() => saveScrollHistory({ x: 0, y: 0 })}
+			>
 				<button className="p-4 transition-colors duration-200 rounded-full group bg-button-primary hover-button">
 					<SearchIconSVG className="w-5 h-5 text-white fill-current group-hover:text-black"></SearchIconSVG>
 				</button>

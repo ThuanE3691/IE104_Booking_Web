@@ -1,4 +1,3 @@
-import React from "react";
 import { createContext, useState } from "react";
 import generateRandomData from "./../Utils/generateRandomFreq";
 

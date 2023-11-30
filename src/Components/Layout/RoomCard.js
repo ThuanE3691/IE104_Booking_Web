@@ -126,6 +126,10 @@ const ImageGallery = ({ photos, openRoomModal }) => {
 };
 
 const RoomCard = ({ room, block, ...properties }) => {
+	const reverseCurrency = (str) => {
+		return str.split(" ").reverse().join(" ");
+	};
+
 	return (
 		<li className="flex flex-col w-[400px] rounded-2xl" {...properties}>
 			<ImageGallery photos={room.photos}></ImageGallery>
@@ -181,10 +185,14 @@ const RoomCard = ({ room, block, ...properties }) => {
 			<section className="flex items-center px-3 py-4 bg-white border-2 border-t-0 rounded-b-xl border-slate-200">
 				<div className="flex flex-col">
 					<span className="text-xs text-red-400 line-through">
-						{block.product_price_breakdown.strikethrough_amount.amount_rounded}
+						{reverseCurrency(
+							block.product_price_breakdown.strikethrough_amount.amount_rounded
+						)}
 					</span>
 					<span className="text-lg font-semibold">
-						{block.product_price_breakdown.gross_amount.amount_rounded}
+						{reverseCurrency(
+							block.product_price_breakdown.gross_amount.amount_rounded
+						)}
 					</span>
 				</div>
 				<button className="px-4 py-1.5 ml-auto font-semibold text-white transition-colors rounded-xl bg-button-primary hover-button">

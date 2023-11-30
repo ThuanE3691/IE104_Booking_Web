@@ -21,6 +21,7 @@ import ImageGallery from "@/Layouts/Site/HotelDetails/ImageGallery";
 import { useState, useMemo, useEffect } from "react";
 import NavigateHeader from "@/Layouts/Site/HotelDetails/NavigateHeader";
 import LocationHotel from "@/Layouts/Site/HotelDetails/LocationHotel";
+import ReturnButton from "@/Components/Layout/ReturnButton";
 
 const imgVariants = {
 	enter_down: {
@@ -142,7 +143,7 @@ const HotelDetails = () => {
 			<div className="flex flex-col w-full min-h-full px-32 bg-main-bg font-vietnam-pro">
 				<SearchBar overrides={styleSearchBar}></SearchBar>
 				<div className="mt-16 mb-32">
-					<motion.span
+					<motion.div
 						className="flex items-center gap-x-4"
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}
@@ -159,7 +160,8 @@ const HotelDetails = () => {
 						<span className="font-semibold transition-opacity cursor-pointer text-text-primary hover:opacity-70">
 							{hotel.district}
 						</span>
-					</motion.span>
+						<ReturnButton path="/search"></ReturnButton>
+					</motion.div>
 					<div
 						name="image-display"
 						className="grid grid-rows-[200px,200px] grid-cols-[2.5fr,1fr,1fr] gap-x-6 gap-y-4 mt-8"

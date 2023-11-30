@@ -4,7 +4,7 @@ import { useEffect } from "react";
 const Backdrop = ({ children, onClose }) => {
 	return (
 		<motion.div
-			className="fixed inset-0 z-10 flex items-center justify-center w-screen h-screen bg-black bg-opacity-70"
+			className="fixed inset-0 flex items-center justify-center w-screen h-screen bg-black bg-opacity-70 z-[1000]"
 			initial={{ opacity: 0 }}
 			animate={{ opacity: 1 }}
 			exit={{ opacity: 0 }}

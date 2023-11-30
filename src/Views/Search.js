@@ -12,6 +12,7 @@ import PropertyCard from "@/Components/Layout/PropertyCard";
 import hotelData from "@/Data/HCM_hotels_search.json";
 import { LayoutGroup, motion } from "framer-motion";
 import { ConfigContext } from "@/Context/ConfigContext";
+import MapModal from "@/Layouts/Shared/Map/MapModal";
 
 const container = {
 	hidden: { opacity: 0 },
@@ -43,6 +44,7 @@ const Search = () => {
 	};
 
 	const [isShowFilter, setShowFilter] = useState(false);
+	const [showMap, setShowMap] = useState(false);
 	const [sortOption, setSortOption] = useState("Độ phổ biến");
 	const { filters, filtersMethod } = useContext(SearchContext);
 	const { scrollHistory, saveScrollHistory } = useContext(ConfigContext);
@@ -61,12 +63,18 @@ const Search = () => {
 				setShowFilter={setShowFilter}
 			></FilterModal>
 
+			<MapModal
+				showMap={showMap}
+				setShowMap={setShowMap}
+				properties={hotelData.result}
+			></MapModal>
+
 			<div className="flex items-center mt-8">
 				<div
 					className=" w-[calc(544px*2/3)] h-[calc(96px+48px)] bg-no-repeat bg-cover flex items-center justify-center rounded-xl shadow-xl bg-center"
 					style={{ backgroundImage: `url(${map_bg}` }}
 				>
-					<button className="flex items-center gap-2.5 px-5 py-1.5 font-semibold transition-colors bg-white border border-black rounded-lg text-sm hover:bg-button-primary hover:text-white group">
+					<button className="flex items-center gap-2.5 px-5 py-1.5 font-semibold transition-colors bg-white border border-black rounded-lg text-sm hover:bg-button-primary hover:text-white group" onClick={() => setShowMap(true)}>
 						<LocationSVG className="w-4 h-4 fill-current group-hover:text-white" />
 						Xem trên bản đồ
 					</button>

@@ -1,6 +1,6 @@
 import Modal from "@/Components/Feature/Layout/Modal";
 import { LayoutGroup, motion } from "framer-motion";
-import { MapContainer, Marker, TileLayer, useMapEvents } from "react-leaflet";
+import { MapContainer, Marker, TileLayer } from "react-leaflet";
 import { Icon } from "leaflet";
 import "@/css/Map/map.css";
 import PopupCard from "./PopupCard";

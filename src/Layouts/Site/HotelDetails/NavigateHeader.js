@@ -51,7 +51,7 @@ const NavigateHeader = ({ positionArea }) => {
 				return (
 					<button
 						key={index}
-						className="relative font-semibold underline_element hover:after:w-full after:bg-black"
+						className="relative font-semibold underline_element hover:after:w-full after:bg-button-primary after:h-1 after:translate-y-2"
 						onClick={() => handleNavigate(item.area)}
 					>
 						{item.text}

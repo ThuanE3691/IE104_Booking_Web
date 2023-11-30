@@ -20,6 +20,7 @@ import RoomAvailable from "@/Layouts/Site/HotelDetails/RoomAvailable";
 import ImageGallery from "@/Layouts/Site/HotelDetails/ImageGallery";
 import { useState, useMemo, useEffect } from "react";
 import NavigateHeader from "@/Layouts/Site/HotelDetails/NavigateHeader";
+import LocationHotel from "@/Layouts/Site/HotelDetails/LocationHotel";
 
 const imgVariants = {
 	enter_down: {
@@ -253,6 +254,12 @@ const HotelDetails = () => {
 						review_score_word={hotel.review_score_word}
 					></ReviewsArea>
 					<RoomAvailable rooms={hotel.rooms}></RoomAvailable>
+					<LocationHotel
+						address={hotel.address}
+						district={hotel.district}
+						city={hotel.city_trans}
+						position={[hotel.latitude, hotel.longitude]}
+					></LocationHotel>
 				</div>
 				<ImageGallery
 					show={showGallery}

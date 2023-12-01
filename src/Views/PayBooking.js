@@ -7,6 +7,8 @@ import DetailBook from "@/Layouts/Site/PayBooking/DetailBook";
 import SpecialRequest from "@/Layouts/Site/PayBooking/SpecialRequest";
 import MultiStepProgress from "@/Layouts/Site/PayBooking/MultiStepProgress";
 import { FaArrowRightLong, FaArrowLeftLong } from "react-icons/fa6";
+import InformationPanel from "@/Layouts/Site/PayBooking/InformationPanel";
+import { motion } from "framer-motion";
 
 const PayBooking = () => {
 	const { hotelId, blockId } = useParams();
@@ -32,8 +34,22 @@ const PayBooking = () => {
 		0,
 	]);
 
+	const [information, setInformation] = useState({
+		lastName: "",
+		firstName: "",
+		email: "",
+		region: "",
+		phone: "",
+	});
+
+	const onChangeInformationForm = (e) => {
+		setInformation({ ...information, [e.target.name]: e.target.value });
+	};
+
 	const handleChangeStep = (direction) => {
 		if (current + direction >= steps.length || current + direction < 0) return;
+
+		// window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
 		let new_complete = [...complete];
 
 		if (direction > 0) {
@@ -56,15 +72,23 @@ const PayBooking = () => {
 				handleChangeStep={handleChangeStep}
 			></MultiStepProgress>
 			<section className="grid grid-cols-[1.05fr,1.95fr] mt-16 gap-x-5">
-				<aside className="flex flex-col w-full gap-y-4">
+				<motion.aside className="flex flex-col w-full gap-y-4" layout>
+					{current >= 1 && (
+						<InformationPanel information={information}></InformationPanel>
+					)}
 					<HotelBook hotel={hotel}></HotelBook>
 					<DetailBook
 						block={block}
 						room={hotel.rooms.rooms[block.room_id]}
 					></DetailBook>
-				</aside>
+				</motion.aside>
 				<div className="flex flex-col gap-y-4">
-					<InputForm></InputForm>
+					{current === 0 && (
+						<InputForm
+							information={information}
+							onChangeInformationForm={onChangeInformationForm}
+						></InputForm>
+					)}
 					<SpecialRequest></SpecialRequest>
 				</div>
 			</section>

@@ -26,7 +26,7 @@ const DetailBook = ({ room, block }) => {
 						Số khách
 					</span>
 					<span>2 khách</span>
-					{room.bed_configurations[0].bed_types.map((bed) => {
+					{room.bed_configurations[0].bed_types.map((bed, index) => {
 						return (
 							<>
 								<span
@@ -45,7 +45,7 @@ const DetailBook = ({ room, block }) => {
 									)}
 								</span>
 
-								<span>{bed.name_with_count}</span>
+								<span key={index}>{bed.name_with_count}</span>
 							</>
 						);
 					})}

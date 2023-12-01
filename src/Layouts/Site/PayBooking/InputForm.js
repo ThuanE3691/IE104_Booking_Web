@@ -6,10 +6,10 @@ const InputForm = () => {
 			<h2 className="text-xl font-semibold">Nhập thông tin chi tiết của bạn</h2>
 			<section className="grid grid-cols-2 grid-rows-3 mt-4 gap-x-4 gap-y-4">
 				{formList.map((name) => {
-					if (name === "") return <div></div>;
+					if (name === "") return <div key="empty"></div>;
 					return (
-						<div className="flex flex-col gap-y-1">
-							<label forId={name} className="font-semibold">
+						<div className="flex flex-col gap-y-1" key={name}>
+							<label htmlFor={name} className="font-semibold">
 								{name}
 							</label>
 							<input

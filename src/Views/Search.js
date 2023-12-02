@@ -10,7 +10,7 @@ import { SearchContext } from "@/Context/SearchContext";
 import FiltersArea from "@/Layouts/Site/Search/FiltersArea";
 import PropertyCard from "@/Components/Layout/PropertyCard";
 import hotelData from "@/Data/HCM_hotels_search.json";
-import { LayoutGroup, motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { ConfigContext } from "@/Context/ConfigContext";
 import MapModal from "@/Layouts/Shared/Map/MapModal";
 
@@ -54,6 +54,32 @@ const Search = () => {
 		setShowFilter(true);
 	};
 
+	const sorter = (a, b) => {
+		switch (sortOption) {
+			case "Độ phổ biến":
+				return 0;
+			case "Giá cao nhất":
+				if (
+					a.composite_price_breakdown.gross_amount_per_night.value >
+					b.composite_price_breakdown.gross_amount_per_night.value
+				)
+					return -1;
+				return 1;
+			case "Giá thấp nhất":
+				if (
+					a.composite_price_breakdown.gross_amount_per_night.value <
+					b.composite_price_breakdown.gross_amount_per_night.value
+				)
+					return -1;
+				return 1;
+			case "Điểm đánh giá":
+				if (a.review_score > b.review_score) return -1;
+				return 1;
+			default:
+				break;
+		}
+	};
+
 	return (
 		<div className="flex flex-col w-full min-h-full px-32 py-8 bg-main-bg mb-96 font-vietnam-pro">
 			<SearchBar overrides={styleSearchBar}></SearchBar>
@@ -74,7 +100,10 @@ const Search = () => {
 					className=" w-[calc(544px*2/3)] h-[calc(96px+48px)] bg-no-repeat bg-cover flex items-center justify-center rounded-xl shadow-xl bg-center"
 					style={{ backgroundImage: `url(${map_bg}` }}
 				>
-					<button className="flex items-center gap-2.5 px-5 py-1.5 font-semibold transition-colors bg-white border border-black rounded-lg text-sm hover:bg-button-primary hover:text-white group" onClick={() => setShowMap(true)}>
+					<button
+						className="flex items-center gap-2.5 px-5 py-1.5 font-semibold transition-colors bg-white border border-black rounded-lg text-sm hover:bg-button-primary hover:text-white group"
+						onClick={() => setShowMap(true)}
+					>
 						<LocationSVG className="w-4 h-4 fill-current group-hover:text-white" />
 						Xem trên bản đồ
 					</button>
@@ -113,8 +142,8 @@ const Search = () => {
 				animate="show"
 				custom={scrollHistory.y === 0}
 			>
-				<LayoutGroup>
-					{hotelData.result.map((hotel, index) => {
+				<AnimatePresence>
+					{hotelData.result.sort(sorter).map((hotel, index) => {
 						return (
 							<PropertyCard
 								hotel={hotel}
@@ -124,8 +153,18 @@ const Search = () => {
 							></PropertyCard>
 						);
 					})}
-				</LayoutGroup>
+				</AnimatePresence>
 			</motion.section>
+			<div className="flex items-center justify-center mt-8 gap-x-6">
+				{[...Array(10)].map((v, index) => (
+					<button
+						className="flex items-center justify-center text-black transition-colors bg-white rounded-md shadow-lg h-9 w-9 hover:bg-button-primary hover:text-white"
+						key={index}
+					>
+						{index + 1}
+					</button>
+				))}
+			</div>
 		</div>
 	);
 };

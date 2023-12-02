@@ -6,8 +6,10 @@ import { FaPerson } from "react-icons/fa6";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { FaLocationDot } from "react-icons/fa6";
 import formatNumber from "@/Utils/formatNumber";
-import { motion } from "framer-motion";
+import { motion, usePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+
+const transition = { type: "spring", stiffness: 500, damping: 50, mass: 1 };
 
 const HotelCard = ({ hotel, saveScrollHistory, ...properties }) => {
 	const navigate = useNavigate();
@@ -25,12 +27,16 @@ const HotelCard = ({ hotel, saveScrollHistory, ...properties }) => {
 			className="flex bg-white  rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)]"
 			{...properties}
 			key={hotel.hotel_id}
+			layoutId={`property-${hotel.hotel_id}`}
+			layout
+			transition={transition}
 		>
 			<motion.img
 				src={hotel.max_1440_photo_url}
 				alt=""
 				className="object-cover w-64 h-64 rounded-l-xl"
 				layoutId={`main-img-${hotel.hotel_id}`}
+				loading="lazy"
 			/>
 			<div className="w-full px-8 py-4">
 				<div className="flex w-full">

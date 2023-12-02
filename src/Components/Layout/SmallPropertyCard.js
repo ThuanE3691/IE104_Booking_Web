@@ -36,6 +36,7 @@ const SmallPropertyCard = ({
 				src={hotel.max_1440_photo_url}
 				alt=""
 				className="object-cover h-[100%] w-52 rounded-l-xl"
+				loading="lazy"
 			/>
 			<div className="relative z-10 w-full px-4 py-4 cursor-pointer">
 				<div className="flex w-full mb-1">

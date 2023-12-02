@@ -60,4 +60,8 @@ code {
 	.new_scroll_bar::-webkit-scrollbar-thumb:hover {
 		@apply bg-white;
 	}
+
+	.invalid-input {
+		@apply ring-2 ring-red-400;
+	}
 }

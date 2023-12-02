@@ -1,5 +1,3 @@
-import { motion } from "framer-motion";
-
 const InputForm = ({ information, onChangeInformationForm }) => {
 	const formList = [
 		{ label: "Họ", name: "lastName" },
@@ -10,22 +8,26 @@ const InputForm = ({ information, onChangeInformationForm }) => {
 		{ label: "Số điện thoại", name: "phone" },
 	];
 
+	const onChangeInput = (e) => {
+		onChangeInformationForm(e);
+
+		if (e.target.className.includes("invalid-input") && e.target.value !== "") {
+			e.target.className = e.target.className.replace("invalid-input", "");
+		}
+	};
+
 	return (
-		<motion.div
-			className="flex flex-col w-full px-5 pt-4 pb-6"
-			initial={{ opacity: 0 }}
-			animate={{ opacity: 1 }}
-			exit={{ opacity: 0 }}
-			transition={{ duration: 0.3 }}
-			key="input-form"
-		>
+		<div className="flex flex-col w-full px-5 pt-4 pb-6" key="input-form">
 			<h2 className="text-xl font-semibold">Nhập thông tin chi tiết của bạn</h2>
 			<section className="grid grid-cols-2 grid-rows-3 mt-4 gap-x-4 gap-y-4">
 				{formList.map((item) => {
 					if (item.name === "") return <div key="empty"></div>;
 					return (
 						<div className="flex flex-col gap-y-1" key={item.name}>
-							<label htmlFor={item.label} className="font-semibold">
+							<label
+								htmlFor={item.label}
+								className="font-semibold pointer-events-none"
+							>
 								{item.label}
 							</label>
 							<input
@@ -33,13 +35,13 @@ const InputForm = ({ information, onChangeInformationForm }) => {
 								id={item.label}
 								name={item.name}
 								value={information[item.name]}
-								onChange={onChangeInformationForm}
+								onChange={onChangeInput}
 							></input>
 						</div>
 					);
 				})}
 			</section>
-		</motion.div>
+		</div>
 	);
 };
 

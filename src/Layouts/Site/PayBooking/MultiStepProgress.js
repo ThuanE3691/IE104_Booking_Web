@@ -32,8 +32,9 @@ const Circle = ({
 		<div {...props} className="flex flex-col items-center gap-y-2">
 			<motion.div
 				className=" w-[48px] h-[48px] flex items-center justify-center text-lg font-semibold  rounded-full z-10 cursor-pointer border-4 "
-				initial={false}
+				initial={{ opacity: 0 }}
 				animate={{
+					opacity: 1,
 					backgroundColor:
 						!complete && !current ? "rgb(226 232 240)" : "rgb(36 146 183)",
 					color: !complete && !current ? "#000" : "#fff",
@@ -59,7 +60,7 @@ const Circle = ({
 							fill="none"
 							stroke="currentColor"
 							strokeWidth="3"
-							className="absolute w-7 h-7 text-white pointer-events-none mx-0.5 my-0.5"
+							className="absolute w-6 h-6 text-white pointer-events-none mx-0.5 my-0.5"
 							viewBox="0 0 24 24"
 							key="complete"
 						>
@@ -88,7 +89,7 @@ const Circle = ({
 };
 
 const MultiStepProgress = ({ steps, progress, handleChangeStep }) => {
-	const lengthProgress = ["0", "50%", "90%"];
+	const lengthProgress = ["0", "50%", "90%", "90%"];
 
 	const handleOnClick = (index) => {
 		if (index === progress.current) return;

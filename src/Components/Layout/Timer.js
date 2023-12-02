@@ -20,7 +20,7 @@ const Timer = ({ hour, minute }) => {
 				variants={timerVariants}
 				transition={timer_transition}
 			/>
-			<span
+			<motion.span
 				initial="initial"
 				animate="animate"
 				exit="exit"
@@ -28,7 +28,7 @@ const Timer = ({ hour, minute }) => {
 				transition={timer_transition}
 			>
 				:
-			</span>
+			</motion.span>
 			<motion.input
 				value={minute}
 				className="w-[35px] border-2 outline-none border-button-primary px-1 py-1 text-center rounded-md"

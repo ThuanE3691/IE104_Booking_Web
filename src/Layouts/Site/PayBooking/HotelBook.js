@@ -1,10 +1,14 @@
 import { BiSolidBuildingHouse } from "react-icons/bi";
 import { FaStar } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
+import { motion } from "framer-motion";
 
-const HotelBook = ({ hotel }) => {
+const HotelBook = ({ hotel, startAnimate }) => {
 	return (
-		<section className="flex flex-col w-full px-4 py-3 border-2 rounded-lg border-slate-200 gap-y-2 h-fit">
+		<motion.section
+			className="relative flex flex-col px-4 py-3 gap-y-2"
+			key="hotel-panel"
+		>
 			<span className="font-semibold">{hotel.hotel_name_trans}</span>
 			<div className="flex items-center font-semibold gap-x-2 text-text-primary">
 				<BiSolidBuildingHouse size={12}></BiSolidBuildingHouse>
@@ -34,7 +38,7 @@ const HotelBook = ({ hotel }) => {
 					{hotel.review_nr} đánh giá
 				</span>
 			</div>
-		</section>
+		</motion.section>
 	);
 };
 

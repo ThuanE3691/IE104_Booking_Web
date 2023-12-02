@@ -132,8 +132,6 @@ const RoomCard = ({ room, block, hotelId, ...properties }) => {
 		return str.split(" ").reverse().join(" ");
 	};
 
-	console.log(block);
-
 	return (
 		<li className="flex flex-col w-[400px] rounded-2xl" {...properties}>
 			<ImageGallery photos={room.photos}></ImageGallery>

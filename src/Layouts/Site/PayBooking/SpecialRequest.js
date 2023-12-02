@@ -1,7 +1,7 @@
 import ResizablePanel from "@/Components/Feature/Layout/ResizablePanel";
 import CheckBox from "@/Components/Layout/CheckBox";
 import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, usePresence } from "framer-motion";
 import Timer from "@/Components/Layout/Timer";
 
 const normalVariants = {
@@ -35,7 +35,7 @@ const OthersArea = () => {
 
 const BedOptions = () => {
 	return (
-		<div className="flex items-center mt-1 gap-x-4">
+		<div className="relative flex items-center mt-1 gap-x-4">
 			<motion.div
 				variants={normalVariants}
 				initial="initial"
@@ -57,6 +57,8 @@ const BedOptions = () => {
 		</div>
 	);
 };
+
+const transition = { type: "spring", stiffness: 500, damping: 50, mass: 1 };
 
 const SpecialRequest = () => {
 	const choiceList = [
@@ -101,8 +103,30 @@ const SpecialRequest = () => {
 		});
 	};
 
+	const [isPresent, safeToRemove] = usePresence();
+
+	const animations = {
+		layout: true,
+		initial: "out",
+		style: {
+			position: isPresent ? "relative" : "absolute",
+		},
+		animate: isPresent ? "in" : "out",
+		whileTap: "tapped",
+		variants: {
+			in: { height: "auto", opacity: 1, zIndex: 1 },
+			out: { height: 0, opacity: 0, zIndex: -1 },
+		},
+		onAnimationComplete: () => !isPresent && safeToRemove(),
+		transition,
+	};
+
 	return (
-		<div className="flex flex-col w-full px-5 pt-4 pb-6 border-2 rounded-lg border-slate-200">
+		<motion.div
+			className="flex flex-col w-full px-5 pt-4 pb-6 border-2 rounded-lg border-slate-200"
+			{...animations}
+			key="special-panel"
+		>
 			<h2 className="text-xl font-semibold">Yêu cầu đặc biệt</h2>
 			<p className="mt-2 text-sm">
 				<em className="font-semibold ">Lưu ý:</em> Cơ sở lưu trú sẽ cố gắng đáp
@@ -128,7 +152,7 @@ const SpecialRequest = () => {
 					})}
 				</motion.div>
 			</ResizablePanel>
-		</div>
+		</motion.div>
 	);
 };
 

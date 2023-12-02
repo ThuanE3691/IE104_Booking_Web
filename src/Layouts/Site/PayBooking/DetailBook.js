@@ -4,7 +4,7 @@ import { BsPeopleFill } from "react-icons/bs";
 
 const DetailBook = ({ room, block }) => {
 	return (
-		<div className="flex flex-col w-full border-2 rounded-lg border-slate-200 gap-y-2 h-fit ">
+		<div className="relative flex flex-col gap-y-2">
 			<h2 className="px-4 py-3 text-lg font-semibold">Chi tiết đặt phòng</h2>
 			<div className="grid grid-cols-[0.75fr,1.25fr] px-4 py-2 bg-slate-200 gap-x-2 gap-y-2">
 				<span className=" text-[#5D5B5B]">Ngày nhận phòng</span>

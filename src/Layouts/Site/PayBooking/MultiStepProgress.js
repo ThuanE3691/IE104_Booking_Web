@@ -31,12 +31,13 @@ const Circle = ({
 	return (
 		<div {...props} className="flex flex-col items-center gap-y-2">
 			<motion.div
-				className=" w-[48px] h-[48px] flex items-center justify-center text-lg font-semibold  rounded-full z-10 cursor-pointer "
+				className=" w-[48px] h-[48px] flex items-center justify-center text-lg font-semibold  rounded-full z-10 cursor-pointer border-4 "
 				initial={false}
 				animate={{
 					backgroundColor:
 						!complete && !current ? "rgb(226 232 240)" : "rgb(36 146 183)",
 					color: !complete && !current ? "#000" : "#fff",
+					borderColor: !complete ? "rgb(252, 252, 253)" : "rgb(191 219 254)",
 				}}
 				transition={{ delay: 0.1 }}
 				onClick={() => handleOnClick(order - 1)}

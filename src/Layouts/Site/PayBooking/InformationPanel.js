@@ -2,7 +2,6 @@ import { FaUser } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { TbWorld } from "react-icons/tb";
-import { motion } from "framer-motion";
 
 const InformationPanel = ({ information }) => {
 	const informationRender = [
@@ -27,10 +26,7 @@ const InformationPanel = ({ information }) => {
 	];
 
 	return (
-		<motion.div
-			className="flex flex-col w-full px-4 py-3 border-2 rounded-lg border-slate-200 gap-y-4 h-fit"
-			layoutId="input-form"
-		>
+		<div className="flex flex-col w-full px-4 py-3 gap-y-4">
 			<h2 className="text-lg font-semibold">Thông tin của bạn</h2>
 			{informationRender.map((info, index) => {
 				return (
@@ -40,7 +36,7 @@ const InformationPanel = ({ information }) => {
 					</div>
 				);
 			})}
-		</motion.div>
+		</div>
 	);
 };
 

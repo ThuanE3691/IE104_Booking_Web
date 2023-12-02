@@ -8,7 +8,11 @@ import SpecialRequest from "@/Layouts/Site/PayBooking/SpecialRequest";
 import MultiStepProgress from "@/Layouts/Site/PayBooking/MultiStepProgress";
 import { FaArrowRightLong, FaArrowLeftLong } from "react-icons/fa6";
 import InformationPanel from "@/Layouts/Site/PayBooking/InformationPanel";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import ResizablePanel from "@/Components/Feature/Layout/ResizablePanel";
+import PaymentPanel from "@/Layouts/Site/PayBooking/PaymentPanel";
+import PricePanel from "@/Layouts/Site/PayBooking/PricePanel";
+import Panel from "@/Components/Feature/Layout/Panel";
 
 const PayBooking = () => {
 	const { hotelId, blockId } = useParams();
@@ -24,7 +28,7 @@ const PayBooking = () => {
 
 	const block = useMemo(
 		() => hotel.rooms.block.find((b) => b.block_id === blockId),
-		[blockId]
+		[blockId, hotel.rooms.block]
 	);
 
 	const steps = ["Chi tiết về bạn", "Thanh toán", "Xác nhận"];
@@ -49,7 +53,7 @@ const PayBooking = () => {
 	const handleChangeStep = (direction) => {
 		if (current + direction >= steps.length || current + direction < 0) return;
 
-		// window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+		window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
 		let new_complete = [...complete];
 
 		if (direction > 0) {
@@ -64,6 +68,34 @@ const PayBooking = () => {
 		setProgress([new_complete, current + direction]);
 	};
 
+	const asidePanel = [
+		{
+			panel: <InformationPanel information={information}></InformationPanel>,
+			name: "infoPanel",
+			condition: current >= 1,
+		},
+		{
+			panel: <PricePanel price={block.product_price_breakdown}></PricePanel>,
+			name: "pricePanel",
+			condition: current >= 1,
+		},
+		{
+			panel: <HotelBook hotel={hotel} startAnimate={current >= 1}></HotelBook>,
+			name: "HotelPanel",
+			condition: true,
+		},
+		{
+			panel: (
+				<DetailBook
+					block={block}
+					room={hotel.rooms.rooms[block.room_id]}
+				></DetailBook>
+			),
+			name: "DetailPanel",
+			condition: true,
+		},
+	];
+
 	return (
 		<div className="flex flex-col w-full min-h-full px-32 mb-32 bg-main-bg font-vietnam-pro">
 			<MultiStepProgress
@@ -72,24 +104,30 @@ const PayBooking = () => {
 				handleChangeStep={handleChangeStep}
 			></MultiStepProgress>
 			<section className="grid grid-cols-[1.05fr,1.95fr] mt-16 gap-x-5">
-				<motion.aside className="flex flex-col w-full gap-y-4" layout>
-					{current >= 1 && (
-						<InformationPanel information={information}></InformationPanel>
-					)}
-					<HotelBook hotel={hotel}></HotelBook>
-					<DetailBook
-						block={block}
-						room={hotel.rooms.rooms[block.room_id]}
-					></DetailBook>
+				<motion.aside className="flex flex-col w-full gap-y-4 will-change-contents">
+					<AnimatePresence>
+						{asidePanel.map((panel) => {
+							return (
+								panel.condition && <Panel key={panel.name}>{panel.panel}</Panel>
+							);
+						})}
+					</AnimatePresence>
 				</motion.aside>
 				<div className="flex flex-col gap-y-4">
-					{current === 0 && (
-						<InputForm
-							information={information}
-							onChangeInformationForm={onChangeInformationForm}
-						></InputForm>
-					)}
-					<SpecialRequest></SpecialRequest>
+					<ResizablePanel className="border-2 rounded-lg border-slate-200 ">
+						<AnimatePresence>
+							{current === 0 && (
+								<InputForm
+									information={information}
+									onChangeInformationForm={onChangeInformationForm}
+								></InputForm>
+							)}
+							{current === 1 && <PaymentPanel></PaymentPanel>}
+						</AnimatePresence>
+					</ResizablePanel>
+					<AnimatePresence>
+						{current === 0 && <SpecialRequest></SpecialRequest>}
+					</AnimatePresence>
 				</div>
 			</section>
 			<div className="flex items-center mt-4 ml-auto gap-x-4">

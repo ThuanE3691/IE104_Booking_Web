@@ -13,15 +13,19 @@ const SearchArea = () => {
 				initial={{ opacity: 0 }}
 				animate={{ opacity: 1 }}
 				exit={{ opacity: 0 }}
+				layoutId="main-bg"
 			></motion.div>
-			<div className="absolute z-10 font-semibold text-white select-none font-vietnam-pro inset-y-40 inset-x-16">
+			<motion.div
+				className="absolute z-10 font-semibold text-white select-none font-vietnam-pro inset-y-40 inset-x-16"
+				layoutId="bg-caption"
+			>
 				<p className="text-[56px] ">
 					Khám phá, <br /> Trải nghiệm
 				</p>
 				<p className="text-[20px] font-medium ml-3">
 					Chọn đúng nơi, trải nghiệm tốt
 				</p>
-			</div>
+			</motion.div>
 			<SearchBar
 				overrides={{
 					container: "absolute -bottom-16 inset-x-16",

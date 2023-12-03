@@ -3,6 +3,8 @@ import { LuBedSingle } from "react-icons/lu";
 import { BsPeopleFill } from "react-icons/bs";
 import { useContext } from "react";
 import { QueryContext } from "@/Context/QueryContext";
+import { format } from "date-fns";
+import viLocale from "date-fns/locale/vi";
 
 const DetailBook = ({ room, block, checkIn, checkOut }) => {
 	const { selectedDate } = useContext(QueryContext);
@@ -15,7 +17,9 @@ const DetailBook = ({ room, block, checkIn, checkOut }) => {
 				<div className="flex flex-col gap-y-0.5">
 					<time className="font-semibold">
 						{selectedDate.checkIn
-							? selectedDate.checkIn
+							? format(selectedDate.checkIn, "dd MMMM, yyyy", {
+									locale: viLocale,
+							  })
 							: "Thứ 5, ngày 07 tháng 12, 2023"}
 					</time>
 					<span className="text-sm">Từ {checkIn.from}</span>
@@ -24,7 +28,9 @@ const DetailBook = ({ room, block, checkIn, checkOut }) => {
 				<div className="flex flex-col gap-y-0.5">
 					<time className="font-semibold">
 						{selectedDate.checkOut
-							? selectedDate.checkOut
+							? format(selectedDate.checkOut, "dd MMMM, yyyy", {
+									locale: viLocale,
+							  })
 							: "Thứ 7, ngày 09 tháng 12, 2023"}
 					</time>
 					<span className="text-sm">Từ {checkOut.until}</span>

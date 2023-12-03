@@ -16,15 +16,15 @@ import CompleteMessage from "@/Layouts/Site/PayBooking/CompleteMessage";
 import { useNavigate } from "react-router-dom";
 
 const PayBooking = () => {
-	const { hotelId, blockId } = useParams();
+	const { page, hotelId, blockId } = useParams();
 
 	const hotel = useMemo(
 		() =>
 			findHotel({
-				page: 0,
+				page: page,
 				hotelId: hotelId,
 			}),
-		[hotelId]
+		[page, hotelId]
 	);
 
 	const navigate = useNavigate();
@@ -71,7 +71,8 @@ const PayBooking = () => {
 
 		if (current === steps.length) return;
 
-		if (current + direction === 0) navigate(`/search/hotel/${hotel.hotel_id}`);
+		if (current + direction === 0)
+			navigate(`/search/hotel/${page}/${hotel.hotel_id}`);
 
 		if (current === 1 && !checkFormStatus()) return;
 		window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
@@ -111,6 +112,8 @@ const PayBooking = () => {
 				<DetailBook
 					block={block}
 					room={hotel.rooms.rooms[block.room_id]}
+					checkIn={hotel.checkin}
+					checkOut={hotel.checkout}
 				></DetailBook>
 			),
 			name: "DetailPanel",

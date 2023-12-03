@@ -13,7 +13,7 @@ const PricePanel = ({ price }) => {
 			<h2 className="text-lg font-semibold text-[#5D5B5B]">
 				Thông tin thanh toán
 			</h2>
-			<div>Tổng giá 6 đêm với</div>
+			<div>Tổng giá 2 đêm với</div>
 			<div className="grid grid-cols-2 gap-y-2 justify-items-end">
 				<span className=" justify-self-start text-[#5D5B5B]">Giá gốc</span>
 				<span className="font-semibold place-content-end">

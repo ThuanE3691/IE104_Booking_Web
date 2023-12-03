@@ -127,7 +127,7 @@ const ImageGallery = ({ photos, openRoomModal }) => {
 	);
 };
 
-const RoomCard = ({ room, block, hotelId, ...properties }) => {
+const RoomCard = ({ room, block, hotelId, page, ...properties }) => {
 	const reverseCurrency = (str) => {
 		return str.split(" ").reverse().join(" ");
 	};
@@ -203,7 +203,7 @@ const RoomCard = ({ room, block, hotelId, ...properties }) => {
 					</span>
 				</div>
 				<Link
-					to={`/payment/hotel/${hotelId}/${block.block_id}`}
+					to={`/payment/hotel/${page}/${hotelId}/${block.block_id}`}
 					className="ml-auto"
 				>
 					<button className="px-4 py-1.5 font-semibold text-white transition-colors rounded-xl bg-button-primary hover-button">

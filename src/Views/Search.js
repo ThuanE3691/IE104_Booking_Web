@@ -1,6 +1,6 @@
 import SearchBar from "@/Layouts/Shared/Search/SearchBar";
 // import SideBar from "@/Layouts/Shared/Sidebar/Sidebar";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import FilterModal from "@/Layouts/Shared/Filter/FilterModal";
 import map_bg from "@/Assets/Images/Others/map.png";
 import LocationSVG from "@SVGComponent/Shared/LocationSVG";
@@ -13,6 +13,7 @@ import hotelData from "@/Data/HCM_hotels.json";
 import { AnimatePresence, motion } from "framer-motion";
 import { ConfigContext } from "@/Context/ConfigContext";
 import MapModal from "@/Layouts/Shared/Map/MapModal";
+import { QueryContext } from "@/Context/QueryContext";
 
 const container = {
 	hidden: { opacity: 0 },
@@ -48,6 +49,7 @@ const Search = () => {
 	const [sortOption, setSortOption] = useState("Độ phổ biến");
 	const { filters, filtersMethod } = useContext(SearchContext);
 	const { scrollHistory, saveScrollHistory } = useContext(ConfigContext);
+	const { loadStorage } = useContext(QueryContext);
 
 	const [currentPage, setCurrentPage] = useState(0);
 
@@ -81,6 +83,10 @@ const Search = () => {
 				break;
 		}
 	};
+
+	useEffect(() => {
+		loadStorage();
+	}, []);
 
 	return (
 		<div className="flex flex-col w-full min-h-full px-32 py-8 bg-main-bg mb-96 font-vietnam-pro">

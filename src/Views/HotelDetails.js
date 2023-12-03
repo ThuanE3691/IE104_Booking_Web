@@ -257,7 +257,8 @@ const HotelDetails = () => {
 					></ReviewsArea>
 					<RoomAvailable
 						rooms={hotel.rooms}
-						hotelId={hotel.hotel_id}
+						hotelId={id}
+						page={page}
 					></RoomAvailable>
 					<LocationHotel
 						address={hotel.address}

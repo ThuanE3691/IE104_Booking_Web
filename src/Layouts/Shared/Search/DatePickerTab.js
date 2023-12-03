@@ -1,7 +1,7 @@
 import CalendarSVG from "@SVGComponent/SearchBar/CalendarSVG";
 import DatePicker from "@/Components/SearchBar/DatePicker";
 import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
 	startOfToday,
 	format,
@@ -13,9 +13,11 @@ import {
 	getMonth,
 	isAfter,
 	getWeeksInMonth,
+	parseISO,
 } from "date-fns";
 import viLocale from "date-fns/locale/vi";
 import classNames from "@/Utils/classNames";
+import { QueryContext } from "@/Context/QueryContext";
 
 const getFirstDayOfMonth = (date) => {
 	return parse(format(date, "MMM-yyyy"), "MMM-yyyy", new Date());
@@ -33,13 +35,7 @@ const TimeRender = ({ date }) => {
 };
 
 const DatePickerTab = ({ overrides }) => {
-	const [showDatePicker, setShowDatePicker] = useState(false);
-	const [selectedDate, setSelectedDate] = useState({
-		arrival: null,
-		go: null,
-		temp: null,
-		order: 1,
-	});
+	const { selectedDate, setSelectedDate } = useContext(QueryContext);
 
 	const [isChangeHeight, setIsChangeHeight] = useState(false);
 
@@ -49,12 +45,14 @@ const DatePickerTab = ({ overrides }) => {
 	const [direction, setDirection] = useState(1);
 
 	const handleShowDatePicker = () => {
-		setShowDatePicker((prev) => !prev);
-		if (!showDatePicker && selectedDate.arrival) {
+		setSelectedDate((prev) => {
+			return { ...prev, show: !prev.show };
+		});
+		if (!selectedDate.show && selectedDate.checkIn) {
 			const monthDisplay =
-				getMonth(selectedDate.arrival) % 2 !== 0
-					? selectedDate.arrival
-					: add(selectedDate.arrival, { months: -1 });
+				getMonth(selectedDate.checkIn) % 2 !== 0
+					? selectedDate.checkIn
+					: add(selectedDate.checkIn, { months: -1 });
 			setFirstDayOfMonth(getFirstDayOfMonth(monthDisplay));
 		} else {
 			setFirstDayOfMonth(getFirstDayOfMonth(startOfToday()));
@@ -64,19 +62,21 @@ const DatePickerTab = ({ overrides }) => {
 	const handleSelectDay = (day) => {
 		if (!(isPast(day) && !isToday(day))) {
 			if (
-				(isBefore(day, selectedDate.arrival) || selectedDate.order === 1) &&
-				!(selectedDate.go !== null && isAfter(day, selectedDate.go))
-			)
+				(isBefore(day, selectedDate.checkIn) || selectedDate.order === 1) &&
+				!(selectedDate.checkOut !== null && isAfter(day, selectedDate.checkOut))
+			) {
 				setSelectedDate({
 					...selectedDate,
-					arrival: day,
+					checkIn: day,
 					order: 2,
 				});
-			else {
-				setSelectedDate({
-					...selectedDate,
-					go: day,
-					order: 1,
+			} else {
+				setSelectedDate((prev) => {
+					return {
+						...prev,
+						checkOut: day,
+						order: 1,
+					};
 				});
 			}
 		}
@@ -100,10 +100,18 @@ const DatePickerTab = ({ overrides }) => {
 		}
 	};
 
+	const handleOnBlur = (event) => {
+		if (!event.relatedTarget) {
+			setSelectedDate((prev) => {
+				return { ...prev, show: false };
+			});
+		}
+	};
+
 	const handleHoverDay = (day, action) => {
 		if (
-			selectedDate.go === null &&
-			selectedDate.arrival !== null &&
+			selectedDate.checkOut === null &&
+			selectedDate.checkIn !== null &&
 			action === "enter"
 		) {
 			setSelectedDate({
@@ -134,12 +142,13 @@ const DatePickerTab = ({ overrides }) => {
 	return (
 		<>
 			<AnimatePresence>
-				{showDatePicker && (
+				{selectedDate.show && (
 					<motion.div
 						className={classNames(
 							"absolute bg-main-bg px-8 gap-x-10 shadow-xl rounded-2xl py-8 font-poppins grid grid-cols-2 z-10",
 							overrides?.defaultPosition
 						)}
+						onBlur={handleOnBlur}
 						initial={{
 							scale: 0,
 							opacity: 0,
@@ -167,6 +176,7 @@ const DatePickerTab = ({ overrides }) => {
 							bounce: 0.2,
 							duration: 0.5,
 						}}
+						onClick={(e) => e.stopPropagation()}
 					>
 						<DatePicker
 							selectedDate={selectedDate}
@@ -197,8 +207,8 @@ const DatePickerTab = ({ overrides }) => {
 			>
 				<CalendarSVG className="w-6 h-6 mt-1 cursor-pointer fill-current text-sub-text"></CalendarSVG>
 				<div className="cursor-pointer">
-					{selectedDate.arrival !== null ? (
-						<TimeRender date={selectedDate.arrival}></TimeRender>
+					{selectedDate.checkIn !== null ? (
+						<TimeRender date={selectedDate.checkIn}></TimeRender>
 					) : (
 						<p className="text-xl font-bold">Nhận phòng</p>
 					)}
@@ -211,8 +221,8 @@ const DatePickerTab = ({ overrides }) => {
 			>
 				<CalendarSVG className="w-6 h-6 mt-1 cursor-pointer fill-current text-sub-text"></CalendarSVG>
 				<div className="cursor-pointer">
-					{selectedDate.go !== null ? (
-						<TimeRender date={selectedDate.go}></TimeRender>
+					{selectedDate.checkOut !== null ? (
+						<TimeRender date={selectedDate.checkOut}></TimeRender>
 					) : (
 						<p className="text-xl font-bold">Trả phòng</p>
 					)}

@@ -6,7 +6,7 @@ import LeftArrowSVG from "@/Assets/Icons/SVGComponent/Shared/LeftArrowSVG";
 import { useState } from "react";
 import DotSlider from "@/Components/Feature/Slider/DotSlider";
 
-const RoomAvailable = ({ rooms, hotelId }) => {
+const RoomAvailable = ({ rooms, hotelId, page }) => {
 	const [sliderIndex, setSliderIndex] = useState(0);
 	const [isAnimate, setAnimate] = useState(false);
 
@@ -61,6 +61,7 @@ const RoomAvailable = ({ rooms, hotelId }) => {
 										block={block}
 										key={block.block_id}
 										hotelId={hotelId}
+										page={page}
 									></RoomCard>
 								);
 							})}

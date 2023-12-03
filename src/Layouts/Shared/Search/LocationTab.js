@@ -1,19 +1,18 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import NavigationSVG from "@SVGComponent/SearchBar/NavigationSVG";
 import Selector from "@/Components/SearchBar/Selector";
 import getVietNamProvinces from "@/Utils/getVietNamProvinces";
 import changeLocationName from "@/Utils/changeLocationName";
 import classNames from "@/Utils/classNames";
+import { QueryContext } from "@/Context/QueryContext";
 
 const LocationTab = ({ overrides }) => {
 	const NUM_LOCATION_DISPLAY = 4;
 	const ref = useRef(null);
 	const [indexSelection, SetIndexSelection] = useState(null);
-	const [location, setLocation] = useState({
-		active: false,
-		content: "",
-	});
+	const { location, setLocation } = useContext(QueryContext);
+
 	const [locationOptions, setLocationOptions] = useState(
 		getVietNamProvinces(location.content, NUM_LOCATION_DISPLAY)
 	);

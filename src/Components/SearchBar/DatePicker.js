@@ -22,18 +22,6 @@ const removeImmediately = {
 	exit: { visibility: "hidden" },
 };
 
-// const Header = ({
-// 	isFirstDatePicker,
-// 	handleChangeMonth,
-// 	firstDayOfMonth,
-// 	variants,
-// 	direction,
-// }) => {
-// 	return (
-
-// 	);
-// };
-
 const Day = ({
 	day,
 	dayIdx,
@@ -47,18 +35,18 @@ const Day = ({
 	const _isToday =
 		isToday(day) &&
 		(selectedDate !== null ? !isEqual(day, selectedDate) : true);
-	const isSelectedDateArrival =
-		selectedDate.arrival && isEqual(day, selectedDate.arrival);
-	const isSelectedDateGo =
-		(selectedDate.go && isEqual(day, selectedDate.go)) ||
+	const isSelectedDateCheckIn =
+		selectedDate.checkIn && isEqual(day, selectedDate.checkIn);
+	const isSelectedDateCheckOut =
+		(selectedDate.checkOut && isEqual(day, selectedDate.checkOut)) ||
 		(selectedDate.temp && isEqual(day, selectedDate.temp));
 
 	const isBetweenMode =
-		selectedDate.arrival && (selectedDate.go || selectedDate.temp);
+		selectedDate.checkIn && (selectedDate.checkOut || selectedDate.temp);
 	const isBetween =
 		isBetweenMode &&
-		isAfter(day, selectedDate.arrival) &&
-		(isBefore(day, selectedDate.go) || isBefore(day, selectedDate.temp));
+		isAfter(day, selectedDate.checkIn) &&
+		(isBefore(day, selectedDate.checkOut) || isBefore(day, selectedDate.temp));
 
 	const style = {
 		base: " flex w-[52px] h-10 items-center font-semibold justify-center before:rounded-full before:absolute before:w-10 before:h-10 before:transition-colors transition-colors relative z-10",
@@ -93,13 +81,13 @@ const Day = ({
 					!(
 						isInPast ||
 						_isToday ||
-						isSelectedDateGo ||
-						isSelectedDateArrival
+						isSelectedDateCheckOut ||
+						isSelectedDateCheckIn
 					) && style.normalHover,
 					isBetween && style.inBetween,
-					(isSelectedDateArrival || isSelectedDateGo) && style.selected,
-					isBetweenMode && isSelectedDateArrival && style.startRange,
-					isBetweenMode && isSelectedDateGo && style.endRange,
+					(isSelectedDateCheckIn || isSelectedDateCheckOut) && style.selected,
+					isBetweenMode && isSelectedDateCheckIn && style.startRange,
+					isBetweenMode && isSelectedDateCheckOut && style.endRange,
 					style.base
 				)}
 				key={format(day, "yyyy-MM-dd")}

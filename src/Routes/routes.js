@@ -6,7 +6,6 @@ import Home from "@/Views/Home";
 import HotelDetails from "@/Views/HotelDetails";
 import PayBooking from "@/Views/PayBooking";
 import Search from "@/Views/Search";
-
 import { Fragment } from "react";
 
 const routes = [
@@ -20,7 +19,11 @@ const routes = [
 			y: 244,
 		},
 	},
-	{ path: config.routes.payment, component: PayBooking },
+	{
+		path: config.routes.payment,
+		component: PayBooking,
+		showNav: false,
+	},
 	{ path: config.routes.about, component: Fragment },
 	{ path: config.routes.contact, component: Fragment },
 ];

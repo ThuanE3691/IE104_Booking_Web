@@ -129,7 +129,7 @@ const UserService = ({ handleLogOut }) => {
 	);
 };
 
-const Navbar = () => {
+const Navbar = ({ showNav = true }) => {
 	const [showLogin, setShowLogin] = useState(false);
 	const [isLogin, setLogin] = useState(false);
 	const [showService, setShowService] = useState(false);
@@ -164,17 +164,19 @@ const Navbar = () => {
 			>
 				<Logo></Logo>
 				<nav className="flex items-center w-full">
-					<div className="flex items-center gap-12 ml-auto">
-						<span className="text-lg font-medium transition-colors cursor-pointer hover:text-text-primary">
-							Dịch vụ
-						</span>
-						<span className="text-lg font-medium transition-colors cursor-pointer hover:text-text-primary">
-							Về chúng tôi
-						</span>
-						<span className="text-lg font-medium transition-colors cursor-pointer hover:text-text-primary">
-							Liên hệ
-						</span>
-					</div>
+					{showNav && (
+						<div className="flex items-center gap-12 ml-auto">
+							<span className="text-lg font-medium transition-colors cursor-pointer hover:text-text-primary">
+								Dịch vụ
+							</span>
+							<span className="text-lg font-medium transition-colors cursor-pointer hover:text-text-primary">
+								Về chúng tôi
+							</span>
+							<span className="text-lg font-medium transition-colors cursor-pointer hover:text-text-primary">
+								Liên hệ
+							</span>
+						</div>
+					)}
 					<div className="flex items-center ml-auto gap-7">
 						<div className="flex items-center gap-2">
 							<div className="flex items-center gap-2 px-2 py-2 transition-colors rounded-full cursor-pointer hover:bg-slate-200">

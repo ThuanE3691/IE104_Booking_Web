@@ -29,15 +29,23 @@ const PaymentPanel = () => {
 			<ul className="flex flex-col mt-8 gap-y-6">
 				{forms.map((name, index) => {
 					return (
-						<li className="flex flex-col gap-y-1 [&:nth-child(1)_label]:after:content-['(viết_in_hoa_không_dấu)'] [&:nth-child(1)_label]:after:ml-4 [&:nth-child(1)_label]:after:font-normal [&:nth-child(1)_input]:uppercase">
+						<li
+							className="flex flex-col gap-y-1 [&:nth-child(1)_label]:after:content-['(viết_in_hoa_không_dấu)'] [&:nth-child(1)_label]:after:ml-4 [&:nth-child(1)_label]:after:font-normal [&:nth-child(1)_input]:uppercase"
+							key={index}
+						>
 							<label htmlFor={name} className="font-semibold ">
 								{name}
 							</label>
-							{index !== 1 ? (
+							{index !== 1 && index !== 3 ? (
 								<input
 									type="text"
 									className="px-2 py-2 outline-button-primary bg-slate-200 w-[40%] rounded-sm"
 								/>
+							) : index === 3 ? (
+								<div className="flex items-center gap-x-2">
+									<input className="flex items-center justify-center w-10 px-3 rounded-md h-9 bg-slate-200 outline-button-primary"></input>
+									<input className="flex items-center justify-center w-10 px-3 rounded-md h-9 bg-slate-200 outline-button-primary"></input>
+								</div>
 							) : (
 								<select className="px-2 py-2 outline-button-primary bg-slate-200 w-[40%] rounded-sm">
 									<option>VISA</option>

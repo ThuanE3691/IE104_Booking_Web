@@ -145,7 +145,7 @@ const PayBooking = () => {
 		"Chọn phòng",
 		"Chi tiết về bạn",
 		"Thanh toán",
-		"Hoàn tất đặt chổ",
+		"Hoàn tất đặt chỗ",
 	];
 
 	return (

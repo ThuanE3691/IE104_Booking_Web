@@ -9,7 +9,7 @@ import SelectorSearch from "@/Layouts/Site/Search/SelectorSearch";
 import { SearchContext } from "@/Context/SearchContext";
 import FiltersArea from "@/Layouts/Site/Search/FiltersArea";
 import PropertyCard from "@/Components/Layout/PropertyCard";
-import hotelData from "@/Data/HCM_hotels_search.json";
+import hotelData from "@/Data/HCM_hotels.json";
 import { AnimatePresence, motion } from "framer-motion";
 import { ConfigContext } from "@/Context/ConfigContext";
 import MapModal from "@/Layouts/Shared/Map/MapModal";
@@ -48,6 +48,8 @@ const Search = () => {
 	const [sortOption, setSortOption] = useState("Độ phổ biến");
 	const { filters, filtersMethod } = useContext(SearchContext);
 	const { scrollHistory, saveScrollHistory } = useContext(ConfigContext);
+
+	const [currentPage, setCurrentPage] = useState(0);
 
 	const handleShowFilter = (event) => {
 		event.stopPropagation();
@@ -92,7 +94,7 @@ const Search = () => {
 			<MapModal
 				showMap={showMap}
 				setShowMap={setShowMap}
-				properties={hotelData.result}
+				properties={hotelData[currentPage]}
 			></MapModal>
 
 			<div className="flex items-center mt-8">
@@ -143,13 +145,15 @@ const Search = () => {
 				custom={scrollHistory.y === 0}
 			>
 				<AnimatePresence>
-					{hotelData.result.sort(sorter).map((hotel, index) => {
+					{hotelData[currentPage].sort(sorter).map((hotel, index) => {
 						return (
 							<PropertyCard
 								hotel={hotel}
 								variants={item}
 								key={hotel.hotel_id}
 								saveScrollHistory={saveScrollHistory}
+								index={index}
+								page={currentPage}
 							></PropertyCard>
 						);
 					})}
@@ -160,6 +164,7 @@ const Search = () => {
 					<button
 						className="flex items-center justify-center text-black transition-colors bg-white rounded-md shadow-lg h-9 w-9 hover:bg-button-primary hover:text-white"
 						key={index}
+						onClick={() => setCurrentPage(index % hotelData.length)}
 					>
 						{index + 1}
 					</button>

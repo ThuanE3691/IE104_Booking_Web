@@ -4,16 +4,23 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import { FaLocationDot } from "react-icons/fa6";
 import formatNumber from "@/Utils/formatNumber";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const SmallPropertyCard = ({
 	hotel,
 	isInView,
 	setInView,
 	id,
-	index,
+	page,
 	AnimateMarker,
 }) => {
 	// const facilities = hotel.unit_configuration_label.split("</b>: ")[1];
+
+	const navigate = useNavigate();
+
+	const handleOnClick = () => {
+		navigate(`/search/hotel/${page}/${hotel.hotel_id}`);
+	};
 
 	const handleInView = (hotel_id) => {
 		setInView(hotel_id);
@@ -42,9 +49,13 @@ const SmallPropertyCard = ({
 				<div className="flex w-full mb-1">
 					<span className="mr-4 font-semibold">{hotel.hotel_name_trans}</span>
 					<div className="flex items-center ml-auto gap-x-2">
-						<div className="p-2 font-semibold text-white rounded-[10px_10px_10px_0px] bg-button-primary w-fit text-sm">
-							{hotel.review_score.toFixed(1)}
-						</div>
+						{hotel.review_score ? (
+							<div className="p-2 font-semibold text-white rounded-[10px_10px_10px_0px] bg-button-primary w-fit text-sm">
+								{hotel.review_score.toFixed(1)}
+							</div>
+						) : (
+							<div className="h-10"></div>
+						)}
 					</div>
 				</div>
 				<div className="flex items-center font-semibold gap-x-1 text-text-primary">
@@ -76,20 +87,27 @@ const SmallPropertyCard = ({
 					</div>
 					<div className="flex flex-col ml-auto text-end gap-y-1">
 						<span className="text-xs text-black">Mỗi đêm, 2 người lớn</span>
-						<span className="text-xs text-red-500 line-through">
-							{formatNumber(
-								hotel.composite_price_breakdown.strikethrough_amount_per_night
-									.value
-							)}{" "}
-							VND
-						</span>
+						{hotel.composite_price_breakdown.strikethrough_amount_per_night ? (
+							<span className="text-xs text-red-500 line-through">
+								{formatNumber(
+									hotel.composite_price_breakdown.strikethrough_amount_per_night
+										.value
+								)}{" "}
+								VND
+							</span>
+						) : (
+							<div className="h-4"></div>
+						)}
 						<span className="font-semibold text-black text">
 							{formatNumber(
 								hotel.composite_price_breakdown.gross_amount_per_night.value
 							)}{" "}
 							VND
 						</span>
-						<button className="flex items-center justify-center py-2 mt-2 text-sm font-semibold text-white transition-colors rounded-xl bg-button-primary hover-button">
+						<button
+							className="flex items-center justify-center py-2 mt-2 text-sm font-semibold text-white transition-colors rounded-xl bg-button-primary hover-button"
+							onClick={handleOnClick}
+						>
 							Xem phòng <FaArrowRightLong className="ml-2"></FaArrowRightLong>
 						</button>
 					</div>

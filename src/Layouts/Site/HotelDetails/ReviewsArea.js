@@ -3,6 +3,14 @@ import { FaRegSmile } from "react-icons/fa";
 import { PiSmileySadBold } from "react-icons/pi";
 
 const ReviewsArea = ({ review_score, review_score_word, hotel_reviews }) => {
+	if (!review_score)
+		return (
+			<section name="review" className="mt-8">
+				<h2 className="text-xl font-semibold">Đánh giá của khách</h2>
+				<span>Khách sạn này hiện tại chưa có đánh giá</span>
+			</section>
+		);
+
 	return (
 		<section className="mt-8" name="review">
 			<h2 className="text-xl font-semibold">Đánh giá của khách</h2>

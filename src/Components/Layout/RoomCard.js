@@ -185,11 +185,16 @@ const RoomCard = ({ room, block, ...properties }) => {
 			</section>
 			<section className="flex items-center px-3 py-4 bg-white border-2 border-t-0 rounded-b-xl border-slate-200">
 				<div className="flex flex-col">
-					<span className="text-xs text-red-400 line-through">
-						{reverseCurrency(
-							block.product_price_breakdown.strikethrough_amount.amount_rounded
-						)}
-					</span>
+					{block.product_price_breakdown.strikethrough_amount ? (
+						<span className="text-xs text-red-400 line-through">
+							{reverseCurrency(
+								block.product_price_breakdown.strikethrough_amount
+									.amount_rounded
+							)}
+						</span>
+					) : (
+						<div className="h-4"></div>
+					)}
 					<span className="text-lg font-semibold">
 						{reverseCurrency(
 							block.product_price_breakdown.gross_amount.amount_rounded

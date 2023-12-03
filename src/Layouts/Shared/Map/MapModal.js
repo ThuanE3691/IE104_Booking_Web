@@ -91,7 +91,7 @@ const MapModal = ({ showMap, setShowMap, properties }) => {
 									key={hotel.hotel_id}
 									isInView={isInView}
 									setInView={setInView}
-									index={index}
+									page={1}
 									id={"properties-" + hotel.hotel_id}
 									AnimateMarker={AnimateMarker}
 								></SmallPropertyCard>

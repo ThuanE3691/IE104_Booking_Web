@@ -6,12 +6,18 @@ import { FaPerson } from "react-icons/fa6";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { FaLocationDot } from "react-icons/fa6";
 import formatNumber from "@/Utils/formatNumber";
-import { motion, usePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
 const transition = { type: "spring", stiffness: 500, damping: 50, mass: 1 };
 
-const HotelCard = ({ hotel, saveScrollHistory, ...properties }) => {
+const HotelCard = ({
+	hotel,
+	saveScrollHistory,
+	page,
+	index,
+	...properties
+}) => {
 	const navigate = useNavigate();
 
 	const handleOnClick = () => {
@@ -19,7 +25,7 @@ const HotelCard = ({ hotel, saveScrollHistory, ...properties }) => {
 			x: 0,
 			y: document.documentElement.scrollTop,
 		});
-		navigate(`/search/hotel/${hotel.hotel_id}`);
+		navigate(`/search/hotel/${page}/${hotel.hotel_id}`);
 	};
 
 	return (
@@ -46,17 +52,21 @@ const HotelCard = ({ hotel, saveScrollHistory, ...properties }) => {
 					>
 						{hotel.hotel_name_trans}
 					</motion.h2>
-					<div className="flex items-center ml-auto gap-x-2">
-						<div className="flex flex-col">
-							<span className="font-semibold text-end">
-								{hotel.review_score_word}
-							</span>
-							<span className="text-sm">{hotel.review_nr} đánh giá</span>
+					{hotel.review_score ? (
+						<div className="flex items-center ml-auto gap-x-2">
+							<div className="flex flex-col">
+								<span className="font-semibold text-end">
+									{hotel.review_score_word}
+								</span>
+								<span className="text-sm">{hotel.review_nr} đánh giá</span>
+							</div>
+							<div className="font-semibold text-white rounded-[10px_10px_10px_0px] bg-button-primary w-[43px] h-[38px] flex justify-center items-center">
+								{hotel.review_score.toFixed(1)}
+							</div>
 						</div>
-						<div className="font-semibold text-white rounded-[10px_10px_10px_0px] bg-button-primary w-[43px] h-[38px] flex justify-center items-center">
-							{hotel.review_score.toFixed(1)}
-						</div>
-					</div>
+					) : (
+						<div className="h-10"></div>
+					)}
 				</div>
 				<motion.div
 					className="flex items-center font-semibold gap-x-1 text-text-primary"
@@ -113,13 +123,17 @@ const HotelCard = ({ hotel, saveScrollHistory, ...properties }) => {
 					</div>
 					<div className="flex flex-col ml-auto text-end gap-y-1">
 						<span className="text-black">Mỗi đêm, 2 người lớn</span>
-						<span className="text-sm text-red-500 line-through">
-							{formatNumber(
-								hotel.composite_price_breakdown.strikethrough_amount_per_night
-									.value
-							)}{" "}
-							VND
-						</span>
+						{hotel.composite_price_breakdown.strikethrough_amount_per_night ? (
+							<span className="text-sm text-red-500 line-through">
+								{formatNumber(
+									hotel.composite_price_breakdown.strikethrough_amount_per_night
+										.value
+								)}{" "}
+								VND
+							</span>
+						) : (
+							<div className="h-5"></div>
+						)}
 						<span className="text-xl font-semibold text-black">
 							{formatNumber(
 								hotel.composite_price_breakdown.gross_amount_per_night.value

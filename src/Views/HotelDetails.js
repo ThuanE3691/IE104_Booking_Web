@@ -60,15 +60,15 @@ const normalVariants = {
 };
 
 const HotelDetails = () => {
-	const { id } = useParams();
+	const { page, id } = useParams();
 
 	const hotel = useMemo(
 		() =>
 			findHotel({
-				page: 0,
+				page: page,
 				hotelId: id,
 			}),
-		[id]
+		[page, id]
 	);
 
 	const [showHeader, setShowHeader] = useState(false);

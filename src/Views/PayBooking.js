@@ -13,6 +13,7 @@ import PaymentPanel from "@/Layouts/Site/PayBooking/PaymentPanel";
 import PricePanel from "@/Layouts/Site/PayBooking/PricePanel";
 import Panel from "@/Components/Feature/Layout/Panel";
 import CompleteMessage from "@/Layouts/Site/PayBooking/CompleteMessage";
+import { useNavigate } from "react-router-dom";
 
 const PayBooking = () => {
 	const { hotelId, blockId } = useParams();
@@ -26,16 +27,18 @@ const PayBooking = () => {
 		[hotelId]
 	);
 
+	const navigate = useNavigate();
+
 	const block = useMemo(
 		() => hotel.rooms.block.find((b) => b.block_id === blockId),
 		[blockId, hotel.rooms.block]
 	);
 
-	const steps = ["Chi tiết về bạn", "Thanh toán", "Xác nhận"];
+	const steps = ["Chọn phòng", "Chi tiết về bạn", "Thanh toán"];
 
 	const [[complete, current], setProgress] = useState([
-		[false, false, false],
-		0,
+		[true, false, false],
+		1,
 	]);
 
 	const [information, setInformation] = useState({
@@ -66,9 +69,11 @@ const PayBooking = () => {
 	const handleChangeStep = (direction) => {
 		if (current + direction < 0) return;
 
-		// if (current === steps.length) return;
+		if (current === steps.length) return;
 
-		if (current === 0 && !checkFormStatus()) return;
+		if (current + direction === 0) navigate(`/search/hotel/${hotel.hotel_id}`);
+
+		if (current === 1 && !checkFormStatus()) return;
 		window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
 		let new_complete = [...complete];
 
@@ -89,12 +94,12 @@ const PayBooking = () => {
 		{
 			panel: <InformationPanel information={information}></InformationPanel>,
 			name: "infoPanel",
-			show: current >= 1,
+			show: current >= 2,
 		},
 		{
 			panel: <PricePanel price={block.product_price_breakdown}></PricePanel>,
 			name: "pricePanel",
-			show: current >= 1,
+			show: current >= 2,
 		},
 		{
 			panel: <HotelBook hotel={hotel} startAnimate={current >= 1}></HotelBook>,
@@ -122,25 +127,24 @@ const PayBooking = () => {
 				></InputForm>
 			),
 			name: "inputPanel",
-			show: current === 0,
+			show: current === 1,
 		},
 		{
 			panel: <PaymentPanel></PaymentPanel>,
 			name: "paymentPanel",
-			show: current === 1,
+			show: current === 2,
 		},
 		{
 			panel: <SpecialRequest></SpecialRequest>,
 			name: "SpecialPanel",
-			show: current === 0,
+			show: current === 1,
 		},
 	];
 
 	const buttonContent = [
-		"Quay lại",
+		"Chọn phòng",
 		"Chi tiết về bạn",
 		"Thanh toán",
-		"Xác nhận",
 		"Hoàn tất đặt chổ",
 	];
 
@@ -189,13 +193,14 @@ const PayBooking = () => {
 									className="flex items-center px-3 py-2 font-semibold text-black transition-colors rounded-md hover:bg-button-primary bg-slate-200 hover:text-white gap-x-2"
 									onClick={() => handleChangeStep(-1)}
 								>
-									<FaArrowLeftLong></FaArrowLeftLong> {buttonContent[current]}
+									<FaArrowLeftLong></FaArrowLeftLong>{" "}
+									{buttonContent[current - 1]}
 								</button>
 								<button
 									className="flex items-center px-3 py-2 font-semibold text-white transition-colors rounded-md bg-button-primary hover:bg-slate-200 hover:text-black gap-x-2"
 									onClick={() => handleChangeStep(1)}
 								>
-									{buttonContent[current + 2]}{" "}
+									{buttonContent[current + 1]}{" "}
 									<FaArrowRightLong></FaArrowRightLong>
 								</button>
 							</div>

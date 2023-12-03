@@ -89,7 +89,7 @@ const Circle = ({
 };
 
 const MultiStepProgress = ({ steps, progress, handleChangeStep }) => {
-	const lengthProgress = ["0", "50%", "90%", "90%"];
+	const lengthProgress = ["0", "40%", "90%", "90%"];
 
 	const handleOnClick = (index) => {
 		if (index === progress.current) return;

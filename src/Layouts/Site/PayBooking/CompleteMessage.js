@@ -1,4 +1,7 @@
 import { motion } from "framer-motion";
+import { FaArrowRightLong } from "react-icons/fa6";
+import { Link } from "react-router-dom";
+
 const checkedVariants = {
 	uncheck: {
 		opacity: 0,
@@ -54,9 +57,15 @@ const CompleteMessage = () => {
 				<p className=" w-[885px] text-justify">
 					Thông tin chi tiết về đơn đặt phòng của bạn đã được gửi qua email. Cảm
 					ơn bạn đã sử dụng dịch vụ của chúng tôi. Mọi chi tiết vui lòng liên hệ
-					qua email hoặc hotline để Travor có thể giải đáp cho quý khách hàng
-					sớm nhất có thể.
+					qua email hoặc hotline để{" "}
+					<span className="font-semibold text-button-primary">Travor</span> có
+					thể giải đáp cho quý khách hàng sớm nhất có thể.
 				</p>
+				<Link to="/" className="ml-auto">
+					<button className="relative flex items-center font-semibold text-button-primary gap-x-2 underline_element hover:after:w-full after:bg-button-primary">
+						Trở về trang chủ <FaArrowRightLong></FaArrowRightLong>
+					</button>
+				</Link>
 			</div>
 		</motion.div>
 	);

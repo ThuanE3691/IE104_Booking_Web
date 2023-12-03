@@ -15,8 +15,13 @@ const checkedVariants = {
 	},
 };
 
-const CheckBox = ({ value, ...props }) => {
+const CheckBox = ({ value, onChange, ...props }) => {
 	const [isChecked, setIsChecked] = useState(false);
+
+	const onTicked = (e) => {
+		if (onChange) onChange(e, props.index);
+		setIsChecked(!isChecked);
+	};
 
 	return (
 		<div className="flex items-center gap-2" {...props}>
@@ -25,7 +30,7 @@ const CheckBox = ({ value, ...props }) => {
 				id={value}
 				className="relative w-5 h-5 transition-colors border-2 rounded-[5px] appearance-none cursor-pointer peer checked:bg-search-button checked:border-0 shrink-0 hover:bg-slate-200 checked:hover:bg-search-button"
 				checked={isChecked}
-				onChange={() => setIsChecked(!isChecked)}
+				onChange={onTicked}
 			></input>
 			<label className="flex items-center gap-2 " key={value} htmlFor={value}>
 				{value}

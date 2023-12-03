@@ -9,6 +9,7 @@ import { LuBedSingle } from "react-icons/lu";
 import LeftArrowSVG from "@/Assets/Icons/SVGComponent/Shared/LeftArrowSVG";
 import RightArrowSVG from "@/Assets/Icons/SVGComponent/Shared/RightArrowSVG";
 import { FaImages } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const summary_services = [
 	{
@@ -126,7 +127,7 @@ const ImageGallery = ({ photos, openRoomModal }) => {
 	);
 };
 
-const RoomCard = ({ room, block, ...properties }) => {
+const RoomCard = ({ room, block, hotelId, ...properties }) => {
 	const reverseCurrency = (str) => {
 		return str.split(" ").reverse().join(" ");
 	};
@@ -201,9 +202,14 @@ const RoomCard = ({ room, block, ...properties }) => {
 						)}
 					</span>
 				</div>
-				<button className="px-4 py-1.5 ml-auto font-semibold text-white transition-colors rounded-xl bg-button-primary hover-button">
-					Đặt ngay
-				</button>
+				<Link
+					to={`/payment/hotel/${hotelId}/${block.block_id}`}
+					className="ml-auto"
+				>
+					<button className="px-4 py-1.5 font-semibold text-white transition-colors rounded-xl bg-button-primary hover-button">
+						Đặt ngay
+					</button>
+				</Link>
 			</section>
 		</li>
 	);

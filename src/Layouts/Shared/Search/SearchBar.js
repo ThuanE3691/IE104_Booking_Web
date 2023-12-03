@@ -24,7 +24,7 @@ const SearchBar = ({ overrides }) => {
 			<div className=" w-[1.5px] h-16 bg-sub-text"></div>
 			<DatePickerTab overrides={overrides?.dateTab}></DatePickerTab>
 			<div className="flex items-start gap-3 px-3 py-4 transition-all duration-300 cursor-pointer hover:shadow-2xl rounded-2xl">
-				<TravelerSVG className="cursor-pointer fill-current w-7 h-7 text-sub-text"></TravelerSVG>
+				<TravelerSVG className="fill-current  w-7 h-7 text-sub-text"></TravelerSVG>
 				<div className="cursor-pointer">
 					<p className="text-xl font-bold">Hành khách</p>
 					<p className="text-sm text-sub-text">Thêm số lượng hành khách</p>

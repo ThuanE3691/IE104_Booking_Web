@@ -169,9 +169,11 @@ const Navbar = ({ showNav = true }) => {
 							<span className="text-lg font-medium transition-colors cursor-pointer hover:text-text-primary">
 								Dịch vụ
 							</span>
-							<span className="text-lg font-medium transition-colors cursor-pointer hover:text-text-primary">
-								Về chúng tôi
-							</span>
+							<Link to="/about">
+								<span className="text-lg font-medium transition-colors cursor-pointer hover:text-text-primary">
+									Về chúng tôi
+								</span>
+							</Link>
 							<span className="text-lg font-medium transition-colors cursor-pointer hover:text-text-primary">
 								Liên hệ
 							</span>

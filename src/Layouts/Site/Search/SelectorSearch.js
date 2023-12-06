@@ -14,7 +14,7 @@ const SelectorSearch = ({ sortOption, setSortOption }) => {
 
 	return (
 		<div
-			className="relative flex items-center px-4 py-2 font-semibold bg-white rounded-lg outline-none cursor-pointer select-none text-text-primary w-52 drop-shadow-lg"
+			className="relative z-50 flex items-center px-4 py-2 font-semibold bg-white rounded-lg outline-none cursor-pointer select-none text-text-primary w-52 drop-shadow-lg"
 			onClick={() => setShowOptions((prevState) => !prevState)}
 		>
 			{sortOption}

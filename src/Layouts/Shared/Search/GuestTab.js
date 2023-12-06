@@ -55,7 +55,7 @@ const GuestTab = () => {
 
 	const handleOnBlur = (event) => {
 		if (!event.relatedTarget) {
-			setHotelOptions({ ...hotelOptions, show: !hotelOptions.show });
+			setHotelOptions({ ...hotelOptions, show: false });
 		}
 	};
 

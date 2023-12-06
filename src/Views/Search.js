@@ -14,6 +14,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ConfigContext } from "@/Context/ConfigContext";
 import MapModal from "@/Layouts/Shared/Map/MapModal";
 import { QueryContext } from "@/Context/QueryContext";
+import SmallPropertyCard from "@/Components/Layout/SmallPropertyCard";
+import { LuLayoutGrid } from "react-icons/lu";
 
 const container = {
 	hidden: { opacity: 0 },
@@ -46,6 +48,7 @@ const Search = () => {
 
 	const [isShowFilter, setShowFilter] = useState(false);
 	const [showMap, setShowMap] = useState(false);
+	const [isLayoutChange, setLayoutChange] = useState(false);
 	const [sortOption, setSortOption] = useState("Độ phổ biến");
 	const { filters, filtersMethod } = useContext(SearchContext);
 	const { scrollHistory, saveScrollHistory } = useContext(ConfigContext);
@@ -136,6 +139,12 @@ const Search = () => {
 						>
 							<img src={filter} alt="" className="w-5 h-5" />
 						</button>
+						<button
+							className="px-2 py-2 ml-4 bg-white border-2 rounded-lg border-slate-200 drop-shadow-lg"
+							onClick={() => setLayoutChange((prev) => !prev)}
+						>
+							<LuLayoutGrid size={20} />
+						</button>
 					</div>
 					<FiltersArea
 						filters={filters}
@@ -144,15 +153,26 @@ const Search = () => {
 				</div>
 			</div>
 			<motion.section
-				className="flex flex-col mt-8 gap-y-8"
+				className="grid data-[changelayout=true]:grid-cols-2 grid-cols-1 mt-8 gap-y-8 gap-x-8"
+				data-changelayout={isLayoutChange}
 				variants={container}
 				initial="hidden"
 				animate="show"
 				custom={scrollHistory.y === 0}
+				layout
 			>
 				<AnimatePresence>
 					{hotelData[currentPage].sort(sorter).map((hotel, index) => {
-						return (
+						return isLayoutChange ? (
+							<SmallPropertyCard
+								hotel={hotel}
+								variants={item}
+								key={hotel.hotel_id}
+								saveScrollHistory={saveScrollHistory}
+								index={index}
+								page={currentPage}
+							></SmallPropertyCard>
+						) : (
 							<PropertyCard
 								hotel={hotel}
 								variants={item}

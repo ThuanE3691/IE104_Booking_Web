@@ -23,8 +23,10 @@ const SmallPropertyCard = ({
 	};
 
 	const handleInView = (hotel_id) => {
-		setInView(hotel_id);
-		AnimateMarker();
+		if (setInView) {
+			setInView(hotel_id);
+			AnimateMarker();
+		}
 	};
 
 	return (

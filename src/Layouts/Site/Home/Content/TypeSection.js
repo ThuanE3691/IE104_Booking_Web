@@ -38,6 +38,12 @@ const ImageCard = ({
 }) => {
 	const [isHover, setIsHover] = useState(false);
 
+	const handleClick = () => {
+		if (window.confirm(`Giá tiền thấp nhất của ${type} là ${minPrice}`)) {
+		} else {
+		}
+	};
+
 	return (
 		<motion.div
 			className={
@@ -45,6 +51,7 @@ const ImageCard = ({
 			}
 			onMouseEnter={() => setIsHover(true)}
 			onMouseLeave={() => setIsHover(false)}
+			onClick={handleClick}
 			initial={{ opacity: 0, scale: 0 }}
 			whileInView={{ opacity: 1, scale: 1 }}
 			viewport={{ once: true, margin: "200px" }}

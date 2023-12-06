@@ -23,8 +23,10 @@ const SmallPropertyCard = ({
 	};
 
 	const handleInView = (hotel_id) => {
-		setInView(hotel_id);
-		AnimateMarker();
+		if (setInView) {
+			setInView(hotel_id);
+			AnimateMarker();
+		}
 	};
 
 	return (
@@ -32,11 +34,12 @@ const SmallPropertyCard = ({
 			className={`flex relative bg-white rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] scroll-m-8 transition ease-in-out ${
 				isInView === hotel.hotel_id && " ring-2 ring-text-primary"
 			}`}
-			key={hotel.hotel_id}
 			onViewportEnter={() => handleInView(hotel.hotel_id)}
 			viewport={{ amount: 1, margin: "0px 0px -252px 0px" }}
 			id={id}
 			name={"small" + id}
+			layoutId={"property-" + hotel.hotel_id}
+			transition={{ type: "spring", bounce: 0, duration: 0.2 }}
 			layout
 		>
 			<img

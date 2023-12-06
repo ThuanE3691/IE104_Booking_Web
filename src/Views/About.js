@@ -118,7 +118,7 @@ const About = () => {
 					<span className="text-2xl font-semibold justify-self-start">
 						Framework
 					</span>
-					<img src={reactLogo} alt="" className="col-span-6 bg-white w-72" />
+					<img src={tailwindLogo} alt="" className="col-span-6 bg-white w-72" />
 					<span className="text-2xl font-semibold justify-self-start">
 						Công cụ
 					</span>
@@ -127,7 +127,7 @@ const About = () => {
 					<span className="text-2xl font-semibold justify-self-start">
 						Thư viện
 					</span>
-					<img src={tailwindLogo} alt="" className="w-64 col-span-2 bg-white" />
+					<img src={reactLogo} alt="" className="col-span-2 bg-white w-72" />
 					<div className="flex flex-col items-center col-span-2 gap-y-4">
 						<svg viewBox="0 0 14 21" className="w-16 ">
 							<path d="M0 0h14v7H7zm0 7h7l7 7H7v7l-7-7z"></path>

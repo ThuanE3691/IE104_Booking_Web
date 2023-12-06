@@ -14,6 +14,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ConfigContext } from "@/Context/ConfigContext";
 import MapModal from "@/Layouts/Shared/Map/MapModal";
 import { QueryContext } from "@/Context/QueryContext";
+import SmallPropertyCard from "@/Components/Layout/SmallPropertyCard";
+import { LuLayoutGrid, LuLayoutList } from "react-icons/lu";
+import Tooltip from "@/Components/Layout/Tooltip";
 
 const container = {
 	hidden: { opacity: 0 },
@@ -28,6 +31,7 @@ const container = {
 const item = {
 	hidden: { opacity: 0 },
 	show: { opacity: 1 },
+	exit: { opacity: 0 },
 	duration: 0.2,
 };
 
@@ -46,6 +50,7 @@ const Search = () => {
 
 	const [isShowFilter, setShowFilter] = useState(false);
 	const [showMap, setShowMap] = useState(false);
+	const [isLayoutChange, setLayoutChange] = useState(false);
 	const [sortOption, setSortOption] = useState("Độ phổ biến");
 	const { filters, filtersMethod } = useContext(SearchContext);
 	const { scrollHistory, saveScrollHistory } = useContext(ConfigContext);
@@ -130,12 +135,26 @@ const Search = () => {
 								setSortOption={setSortOption}
 							></SelectorSearch>
 						</div>
-						<button
-							className="px-2 py-2 bg-white border-2 rounded-lg border-slate-200 h-fit drop-shadow-lg "
-							onClick={handleShowFilter}
-						>
-							<img src={filter} alt="" className="w-5 h-5" />
-						</button>
+						<Tooltip text="Bộ lọc">
+							<button
+								className="relative px-2 py-2 bg-white border-2 rounded-lg border-slate-200 h-fit drop-shadow-lg group"
+								onClick={handleShowFilter}
+							>
+								<img src={filter} alt="" className="w-5 h-5" />
+							</button>
+						</Tooltip>
+						<Tooltip text="Đổi giao diện" position="67%">
+							<button
+								className="px-2 py-2 ml-4 bg-white border-2 rounded-lg border-slate-200 drop-shadow-lg"
+								onClick={() => setLayoutChange((prev) => !prev)}
+							>
+								{!isLayoutChange ? (
+									<LuLayoutGrid size={20} />
+								) : (
+									<LuLayoutList size={20}></LuLayoutList>
+								)}
+							</button>
+						</Tooltip>
 					</div>
 					<FiltersArea
 						filters={filters}
@@ -144,7 +163,8 @@ const Search = () => {
 				</div>
 			</div>
 			<motion.section
-				className="flex flex-col mt-8 gap-y-8"
+				className="grid data-[changelayout=true]:grid-cols-2 grid-cols-1 mt-8 gap-y-8 gap-x-8"
+				data-changelayout={isLayoutChange}
 				variants={container}
 				initial="hidden"
 				animate="show"
@@ -152,7 +172,7 @@ const Search = () => {
 			>
 				<AnimatePresence>
 					{hotelData[currentPage].sort(sorter).map((hotel, index) => {
-						return (
+						return !isLayoutChange ? (
 							<PropertyCard
 								hotel={hotel}
 								variants={item}
@@ -161,6 +181,16 @@ const Search = () => {
 								index={index}
 								page={currentPage}
 							></PropertyCard>
+						) : (
+							<SmallPropertyCard
+								hotel={hotel}
+								variants={item}
+								key={hotel.hotel_id}
+								saveScrollHistory={saveScrollHistory}
+								index={index}
+								page={currentPage}
+								isLayoutChange={isLayoutChange}
+							></SmallPropertyCard>
 						);
 					})}
 				</AnimatePresence>
@@ -168,7 +198,8 @@ const Search = () => {
 			<div className="flex items-center justify-center mt-8 gap-x-6">
 				{[...Array(10)].map((v, index) => (
 					<button
-						className="flex items-center justify-center text-black transition-colors bg-white rounded-md shadow-lg h-9 w-9 hover:bg-button-primary hover:text-white"
+						className="flex items-center justify-center text-black transition-colors bg-white rounded-md shadow-lg h-9 w-9 hover:bg-button-primary hover:text-white data-[isactive=true]:bg-button-primary data-[isactive=true]:text-white"
+						data-isactive={currentPage === index}
 						key={index}
 						onClick={() => setCurrentPage(index % hotelData.length)}
 					>

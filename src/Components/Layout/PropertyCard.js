@@ -32,7 +32,6 @@ const HotelCard = ({
 		<motion.section
 			className="flex bg-white  rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)]"
 			{...properties}
-			key={hotel.hotel_id}
 			layoutId={`property-${hotel.hotel_id}`}
 			layout
 			transition={transition}

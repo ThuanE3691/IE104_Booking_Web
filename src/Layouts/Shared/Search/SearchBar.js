@@ -3,21 +3,38 @@ import LocationTab from "./LocationTab";
 import DatePickerTab from "./DatePickerTab";
 import classNames from "@/Utils/classNames";
 import config from "@/Config";
-import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ConfigContext } from "@/Context/ConfigContext";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import GuestTab from "./GuestTab";
 import { QueryContext } from "@/Context/QueryContext";
+import Tooltip from "@/Components/Layout/Tooltip";
+import { useNavigate } from "react-router-dom";
 
 const SearchBar = ({ overrides }) => {
+	const navigate = useNavigate();
 	const { saveScrollHistory } = useContext(ConfigContext);
-	const { saveToStorage } = useContext(QueryContext);
+	const { saveToStorage, showOffAll, checkFillForm } = useContext(QueryContext);
+
+	const [notFillForm, setFillForm] = useState(false);
 
 	const handleOnClick = () => {
+		setFillForm(true);
+
+		if (!checkFillForm()) return;
+
+		setFillForm(false);
+
+		showOffAll();
 		saveToStorage();
 		saveScrollHistory({ x: 0, y: 0 });
+
+		navigate(config.routes.search);
 	};
+
+	useEffect(() => {
+		setFillForm(false);
+	}, []);
 
 	return (
 		<motion.div
@@ -27,15 +44,24 @@ const SearchBar = ({ overrides }) => {
 			)}
 			layoutId="search-bar"
 		>
-			<LocationTab overrides={overrides?.locationTab}></LocationTab>
+			<LocationTab
+				overrides={overrides?.locationTab}
+				notFillForm={notFillForm}
+			></LocationTab>
 			<div className=" w-[1.5px] h-16 bg-sub-text"></div>
-			<DatePickerTab overrides={overrides?.dateTab}></DatePickerTab>
+			<DatePickerTab
+				overrides={overrides?.dateTab}
+				notFillForm={notFillForm}
+			></DatePickerTab>
 			<GuestTab></GuestTab>
-			<Link to={config.routes.search} onClick={handleOnClick}>
-				<button className="p-4 transition-colors duration-200 rounded-full group bg-button-primary hover-button">
+			<Tooltip text="Tìm kiếm ngay">
+				<button
+					className="p-4 transition-colors duration-200 rounded-full group bg-button-primary hover-button"
+					onClick={handleOnClick}
+				>
 					<SearchIconSVG className="w-5 h-5 text-white fill-current group-hover:text-black"></SearchIconSVG>
 				</button>
-			</Link>
+			</Tooltip>
 		</motion.div>
 	);
 };

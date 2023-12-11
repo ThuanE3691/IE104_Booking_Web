@@ -21,7 +21,8 @@ const CountBox = ({ name, value, handleChangeValue }) => {
 };
 
 const GuestTab = () => {
-	const { hotelOptions, setHotelOptions } = useContext(QueryContext);
+	const { hotelOptions, setHotelOptions, showOffAll } =
+		useContext(QueryContext);
 
 	const handleChangeValue = (name, valueChange) => {
 		if (hotelOptions[name] === 0 && valueChange < 0) return;
@@ -60,6 +61,7 @@ const GuestTab = () => {
 	};
 
 	const handleShow = (e) => {
+		showOffAll();
 		setHotelOptions({ ...hotelOptions, show: !hotelOptions.show });
 	};
 

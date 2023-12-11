@@ -1,5 +1,6 @@
 import { useParams } from "react-router";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useContext, useEffect } from "react";
+import { QueryContext } from "@/Context/QueryContext";
 import findHotel from "@/Utils/findHotel";
 import InputForm from "@/Layouts/Site/PayBooking/InputForm";
 import HotelBook from "@/Layouts/Site/PayBooking/HotelBook";
@@ -26,6 +27,8 @@ const PayBooking = () => {
 			}),
 		[page, hotelId]
 	);
+
+	const { loadStorage } = useContext(QueryContext);
 
 	const navigate = useNavigate();
 
@@ -150,6 +153,10 @@ const PayBooking = () => {
 		"Thanh toán",
 		"Hoàn tất đặt chỗ",
 	];
+
+	useEffect(() => {
+		loadStorage();
+	}, []);
 
 	return (
 		<div className="flex flex-col w-full min-h-full px-32 mb-32 bg-main-bg font-vietnam-pro">

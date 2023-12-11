@@ -7,11 +7,11 @@ import changeLocationName from "@/Utils/changeLocationName";
 import classNames from "@/Utils/classNames";
 import { QueryContext } from "@/Context/QueryContext";
 
-const LocationTab = ({ overrides }) => {
+const LocationTab = ({ overrides, notFillForm }) => {
 	const NUM_LOCATION_DISPLAY = 4;
 	const ref = useRef(null);
 	const [indexSelection, SetIndexSelection] = useState(null);
-	const { location, setLocation } = useContext(QueryContext);
+	const { location, setLocation, showOffAll } = useContext(QueryContext);
 
 	const [locationOptions, setLocationOptions] = useState(
 		getVietNamProvinces(location.content, NUM_LOCATION_DISPLAY)
@@ -50,6 +50,7 @@ const LocationTab = ({ overrides }) => {
 	};
 
 	const handleOnClick = () => {
+		showOffAll();
 		setLocation({ ...location, active: true });
 		const current_index = locationOptions.findIndex(
 			(option) =>
@@ -126,6 +127,17 @@ const LocationTab = ({ overrides }) => {
 				></input>
 				<p className="text-sm text-sub-text">Nơi bạn muốn đến </p>
 			</motion.div>
+
+			<AnimatePresence>
+				{!location.content.length > 0 && notFillForm && (
+					<motion.div
+						className="absolute bottom-0 w-[210px] h-1 translate-y-6 bg-red-500 rounded-md cursor-default"
+						initial={{ opacity: 0 }}
+						animate={{ opacity: 1 }}
+						exit={{ opacity: 0 }}
+					></motion.div>
+				)}
+			</AnimatePresence>
 		</div>
 	);
 };

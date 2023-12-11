@@ -33,7 +33,7 @@ const TimeRender = ({ date }) => {
 	);
 };
 
-const DatePickerTab = ({ overrides }) => {
+const DatePickerTab = ({ overrides, notFillForm }) => {
 	const { selectedDate, setSelectedDate } = useContext(QueryContext);
 
 	const [isChangeHeight, setIsChangeHeight] = useState(false);
@@ -175,7 +175,7 @@ const DatePickerTab = ({ overrides }) => {
 							bounce: 0.2,
 							duration: 0.5,
 						}}
-						onClick={(e) => e.stopPropagation()}
+						tabIndex="-1"
 					>
 						<DatePicker
 							selectedDate={selectedDate}
@@ -213,9 +213,19 @@ const DatePickerTab = ({ overrides }) => {
 					)}
 					<p className="text-sm text-sub-text">Thời gian nhận phòng</p>
 				</div>
+				<AnimatePresence>
+					{selectedDate.checkIn === null && notFillForm && (
+						<motion.div
+							className="absolute bottom-0 w-[210px] h-1 translate-y-6 bg-red-500 rounded-md cursor-default"
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							exit={{ opacity: 0 }}
+						></motion.div>
+					)}
+				</AnimatePresence>
 			</div>
 			<div
-				className="flex items-start gap-3 px-3 py-4 transition-all duration-300 cursor-pointer rounded-2xl"
+				className="relative flex items-start gap-3 px-3 py-4 transition-all duration-300 cursor-pointer rounded-2xl"
 				onClick={handleShowDatePicker}
 			>
 				<CalendarSVG className="w-6 h-6 mt-1 cursor-pointer fill-current text-sub-text"></CalendarSVG>
@@ -227,6 +237,16 @@ const DatePickerTab = ({ overrides }) => {
 					)}
 					<p className="text-sm text-sub-text">Thời gian trả phòng</p>
 				</div>
+				<AnimatePresence>
+					{selectedDate.checkOut === null && notFillForm && (
+						<motion.div
+							className="absolute bottom-0 w-[210px] h-1 translate-y-6 bg-red-500 rounded-md cursor-default"
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							exit={{ opacity: 0 }}
+						></motion.div>
+					)}
+				</AnimatePresence>
 			</div>
 		</>
 	);
